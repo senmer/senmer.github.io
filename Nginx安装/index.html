@@ -1,0 +1,1248 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="qingyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="编译安装nginx和yum安装Nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx安装">
+<meta property="og:url" content="https://senmer.github.io/Nginx%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="编译安装nginx和yum安装Nginx">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-19T07:44:57.000Z">
+<meta property="article:modified_time" content="2022-07-21T08:55:29.216Z">
+<meta property="article:author" content="qingyu">
+<meta property="article:tag" content="软件安装">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Nginx安装 - </title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"senmer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Idd6DzhEmG8il7jJuyr8p8J3-gzGzoHsz","app_key":"aL7ICJcfsXv3YTeThGdDBtVi","server_url":"https://idd6dzhe.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>深夜是学习的酒</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Nginx安装"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-19 15:44" pubdate>
+          2022年7月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          18k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          154 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Nginx安装</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：1 小时前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="编译安装nginx和yum安装Nginx"><a href="#编译安装nginx和yum安装Nginx" class="headerlink" title="编译安装nginx和yum安装Nginx"></a>编译安装nginx和yum安装Nginx</h1><span id="more"></span>
+
+<h1 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h1><h2 id="Nginx版本和安装方式"><a href="#Nginx版本和安装方式" class="headerlink" title="Nginx版本和安装方式"></a>Nginx版本和安装方式</h2><p>Nginx版本</p>
+<ul>
+<li>Mainline version 主要开发版本,一般为奇数版本号,比如1.19</li>
+<li>Stable version 当前最新稳定版,一般为偶数版本,如:1.20</li>
+<li>Legacy versions 旧的稳定版,一般为偶数版本,如:1.18</li>
+</ul>
+<p>Nginx安装可以使用yum或源码安装，但是推荐使用源码编译安装，原因如下：</p>
+<ul>
+<li>yum的版本比较旧</li>
+<li>编译安装可以更方便自定义相关路径</li>
+<li>使用源码编译可以自定义相关功能，更方便业务的上的使用</li>
+</ul>
+<h3 id="查看当前系统中的nginx版本"><a href="#查看当前系统中的nginx版本" class="headerlink" title="查看当前系统中的nginx版本"></a>查看当前系统中的nginx版本</h3><p>范例：查看系统镜像源和epel源的nginx版本</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># centos7 已将nginx集成在系统镜像源</span>
+[root@centos7 ~]<span class="hljs-comment">#dnf info nginx</span>
+Last metadata expiration check: 0:53:10 ago on Tue 22 Sep 2020 11:01:33 AM CST.
+Available Packages
+Name         : nginx
+Epoch       : 1
+Version     : 1.14.1  		 <span class="hljs-comment">#版本较老</span>
+Release     : 9.module_el8.0.0+184+e34fea82
+Architecture : x86_64
+Size         : 570 k
+Source       : nginx-1.14.1-9.module_el8.0.0+184+e34fea82.src.rpm
+Repository   : AppStream  	 <span class="hljs-comment">#系统镜像源</span>
+Summary     : A high performance web server and reverse proxy server
+URL         : http://nginx.org/
+License     : BSD
+Description : Nginx is a web server and a reverse proxy server <span class="hljs-keyword">for</span> HTTP, SMTP, 
+POP3 and
+             : IMAP protocols, with a strong focus on high concurrency, 
+performance and low
+             : memory usage.</code></pre></div>
+
+<h2 id="yum-安装nginx"><a href="#yum-安装nginx" class="headerlink" title="yum 安装nginx"></a>yum 安装nginx</h2><div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#CentOS7 需提前配置epel源  # yum install -y epel-release</span>
+[root@centos7 ~]<span class="hljs-comment"># yum info nginx</span>
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.aliyun.com
+ * epel: mirrors.bfsu.edu.cn
+ * extras: mirrors.aliyun.com
+ * updates: mirrors.aliyun.com
+Available Packages
+Name        : nginx
+Arch        : x86_64
+Epoch       : 1
+Version     : 1.20.1		<span class="hljs-comment">#版本较新</span>
+Release     : 9.el7
+Size        : 587 k
+Repo        : epel/x86_64	<span class="hljs-comment">#epel源</span>
+Summary     : A high performance web server and reverse proxy server
+URL         : https://nginx.org
+License     : BSD
+Description : Nginx is a web server and a reverse proxy server <span class="hljs-keyword">for</span> HTTP, SMTP, POP3 and
+            : IMAP protocols, with a strong focus on high concurrency, performance and low
+            : memory usage.</code></pre></div>
+
+<p>官方包下载地址： <a target="_blank" rel="noopener" href="http://nginx.org/en/linux_packages.html">http://nginx.org/en/linux_packages.html</a></p>
+<p>官方yum源：<a target="_blank" rel="noopener" href="http://nginx.org/en/linux_packages.html#RHEL-CentOS">http://nginx.org/en/linux_packages.html#RHEL-CentOS</a></p>
+<p>范例：通过官方yum源安装nginx</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#配置yum源</span>
+[root@centos7 ~]<span class="hljs-comment"># cat &gt; /etc/yum.repos.d/nginx.repo &lt;&lt;EOF</span>
+[nginx-stable]
+name=nginx stable repo
+baseurl=http://nginx.org/packages/centos/\<span class="hljs-variable">$releasever</span>/\<span class="hljs-variable">$basearch</span>/
+gpgcheck=1
+enabled=1
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=<span class="hljs-literal">true</span>
+
+[nginx-mainline]
+name=nginx mainline repo
+baseurl=http://nginx.org/packages/mainline/centos/\<span class="hljs-variable">$releasever</span>/\<span class="hljs-variable">$basearch</span>/
+gpgcheck=1
+enabled=0
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=<span class="hljs-literal">true</span>
+EOF
+
+<span class="hljs-comment">#查看所有nginx版本</span>
+[root@centos7 ~]<span class="hljs-comment"># yum list nginx --showduplicates</span>
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.aliyun.com
+ * epel: hkg.mirror.rackspace.com
+ * extras: mirrors.aliyun.com
+ * updates: mirrors.aliyun.com
+Available Packages
+nginx.x86_64                                        1:1.16.1-1.el7.ngx                                          nginx-stable
+nginx.x86_64                                        1:1.18.0-1.el7.ngx                                          nginx-stable
+nginx.x86_64                                        1:1.18.0-2.el7.ngx                                          nginx-stable
+nginx.x86_64                                        1:1.20.0-1.el7.ngx                                          nginx-stable
+nginx.x86_64                                        1:1.20.1-1.el7.ngx                                          nginx-stable
+nginx.x86_64                                        1:1.20.1-9.el7                                              epel      
+nginx.x86_64                                        1:1.20.2-1.el7.ngx                                          nginx-stable
+nginx.x86_64                                        1:1.22.0-1.el7.ngx                                          nginx-stable
+
+<span class="hljs-comment">#查看版本信息（默认查看最新版本）</span>
+[root@centos7 ~]<span class="hljs-comment"># yum info nginx</span>
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.aliyun.com
+ * epel: hkg.mirror.rackspace.com
+ * extras: mirrors.aliyun.com
+ * updates: mirrors.aliyun.com
+Available Packages
+Name        : nginx
+Arch        : x86_64
+Epoch       : 1
+Version     : 1.22.0
+Release     : 1.el7.ngx
+Size        : 796 k
+Repo        : nginx-stable
+Summary     : High performance web server
+URL         : https://nginx.org/
+License     : 2-clause BSD-like license
+Description : nginx [engine x] is an HTTP and reverse proxy server, as well as
+            : a mail proxy server.
+<span class="hljs-comment">#安装nginx</span>
+[root@centos7 ~]<span class="hljs-comment"># yum install -y nginx</span></code></pre></div>
+
+<h3 id="检查安装结果"><a href="#检查安装结果" class="headerlink" title="检查安装结果"></a>检查安装结果</h3><div class="code-wrapper"><pre><code class="hljs bash">[root@centos7 ~]<span class="hljs-comment"># rpm -q nginx</span>
+nginx-1.22.0-1.el7.ngx.x86_64
+
+<span class="hljs-comment">#查看日志轮转配置文件路径</span>
+[root@centos7 ~]<span class="hljs-comment"># rpm -ql nginx |grep log</span>
+/etc/logrotate.d/nginx
+/var/log/nginx
+
+<span class="hljs-comment">#默认已配置日志轮转功能</span>
+[root@centos7 ~]<span class="hljs-comment"># cat /etc/logrotate.d/nginx </span>
+/var/log/nginx/*.<span class="hljs-built_in">log</span> &#123;
+        daily
+        missingok
+        rotate 52
+        compress
+        delaycompress
+        notifempty
+        create 640 nginx adm
+        sharedscripts
+        postrotate
+                <span class="hljs-keyword">if</span> [ -f /var/run/nginx.pid ]; <span class="hljs-keyword">then</span>
+                        <span class="hljs-built_in">kill</span> -USR1 `<span class="hljs-built_in">cat</span> /var/run/nginx.pid`
+                <span class="hljs-keyword">fi</span>
+        endscript
+&#125;
+</code></pre></div>
+
+<h3 id="查看nginx使用帮助"><a href="#查看nginx使用帮助" class="headerlink" title="查看nginx使用帮助"></a>查看nginx使用帮助</h3><div class="code-wrapper"><pre><code class="hljs bash">[root@centos7 ~]<span class="hljs-comment"># nginx -h</span>
+nginx version: nginx/1.22.0
+Usage: nginx [-?hvVtTq] [-s signal] [-p prefix]
+             [-e filename] [-c filename] [-g directives]
+
+Options:
+  -?,-h         : this <span class="hljs-built_in">help</span>
+  -v            : show version and <span class="hljs-built_in">exit</span>
+  -V            : show version and configure options <span class="hljs-keyword">then</span> <span class="hljs-built_in">exit</span>  <span class="hljs-comment">#显示详细版本信息和编译参数</span>
+  -t            : <span class="hljs-built_in">test</span> configuration and <span class="hljs-built_in">exit</span>  <span class="hljs-comment">#检测配置文件是否有语法错误</span>
+  -T            : <span class="hljs-built_in">test</span> configuration, dump it and <span class="hljs-built_in">exit</span>  <span class="hljs-comment">#检测配置文件语法并打印结果</span>
+  -q            : suppress non-error messages during configuration testing  
+  -s signal     : send signal to a master process: stop, quit, reopen, reload <span class="hljs-comment">#向nginx发送相关信号</span>
+  -p prefix     : <span class="hljs-built_in">set</span> prefix path (default: /etc/nginx/)
+  -e filename   : <span class="hljs-built_in">set</span> error <span class="hljs-built_in">log</span> file (default: /var/log/nginx/error.log)
+  -c filename   : <span class="hljs-built_in">set</span> configuration file (default: /etc/nginx/nginx.conf)
+  -g directives : <span class="hljs-built_in">set</span> global directives out of configuration file<span class="hljs-comment">#设置全局指令,注意和配置文件不要同时配置,否则冲突</span></code></pre></div>
+
+<p>范例：nginx命令的使用</p>
+<div class="code-wrapper"><pre><code class="hljs bash">[root@centos7 ~]<span class="hljs-comment"># nginx -g &quot;worker_processes 6;&quot;  # 启动并配置nginx进程数，与配置文件冲突</span>
+nginx: [emerg] <span class="hljs-string">&quot;worker_processes&quot;</span> directive is duplicate <span class="hljs-keyword">in</span> /etc/nginx/nginx.conf:3
+[root@centos7 ~]<span class="hljs-comment"># cat /etc/nginx/nginx.conf |grep processes  #配置文件中已有配置项</span>
+worker_processes  auto;
+
+[root@centos7 ~]<span class="hljs-comment"># cat /etc/nginx/nginx.conf |grep processes  #注释此配置项</span>
+<span class="hljs-comment">#worker_processes  auto;</span>
+
+[root@centos7 ~]<span class="hljs-comment"># nginx -g &quot;worker_processes 6;&quot;  #启动nginx，开启6个worker进程。默认后台执行</span>
+[root@centos7 ~]<span class="hljs-comment"># ps aux | grep nginx  #验证结果</span>
+root       2233  0.0  0.1  49056  1156 ?        Ss   17:23   0:00 nginx: master process nginx -g worker_processes 6;
+nginx      2234  0.0  0.1  49444  1896 ?        S    17:23   0:00 nginx: worker process
+nginx      2235  0.0  0.1  49444  1896 ?        S    17:23   0:00 nginx: worker process
+nginx      2236  0.0  0.1  49444  1896 ?        S    17:23   0:00 nginx: worker process
+nginx      2237  0.0  0.1  49444  1896 ?        S    17:23   0:00 nginx: worker process
+nginx      2238  0.0  0.1  49444  1896 ?        S    17:23   0:00 nginx: worker process
+nginx      2239  0.0  0.1  49444  1896 ?        S    17:23   0:00 nginx: worker process
+root       2242  0.0  0.0 112812   980 pts/1    R+   17:24   0:00 grep --color=auto nginx
+
+[root@centos7 ~]<span class="hljs-comment"># nginx -s quit  #关闭nginx（进程结束当前任务后自动关闭）</span>
+
+[root@centos7 ~]<span class="hljs-comment"># ps aux | grep nginx  </span>
+root       2246  0.0  0.0 112812   980 pts/1    R+   17:26   0:00 grep --color=auto nginx
+
+[root@centos7 ~]<span class="hljs-comment"># nginx -g &#x27;daemon off;&#x27;  #前台启动nginx，在docker中启动时有用。</span>
+^C[root@centos7 ~]<span class="hljs-comment">#</span>
+
+[root@centos7 ~]<span class="hljs-comment"># nginx -t  #nginx语法检查成功</span>
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf <span class="hljs-built_in">test</span> is successful</code></pre></div>
+
+<h3 id="nginx-自启动service文件"><a href="#nginx-自启动service文件" class="headerlink" title="nginx 自启动service文件"></a>nginx 自启动service文件</h3><div class="code-wrapper"><pre><code class="hljs bash">[root@centos7 ~]<span class="hljs-comment"># rpm -ql nginx | grep service</span>
+/usr/lib/systemd/system/nginx-debug.service
+/usr/lib/systemd/system/nginx.service
+[root@centos7 ~]<span class="hljs-comment"># cat /usr/lib/systemd/system/nginx.service </span>
+[Unit]
+Description=nginx - high performance web server
+Documentation=http://nginx.org/en/docs/
+After=network-online.target remote-fs.target nss-lookup.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/nginx.pid
+ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf
+ExecReload=/bin/sh -c <span class="hljs-string">&quot;/bin/kill -s HUP <span class="hljs-subst">$(/bin/cat /var/run/nginx.pid)</span>&quot;</span>
+ExecStop=/bin/sh -c <span class="hljs-string">&quot;/bin/kill -s TERM <span class="hljs-subst">$(/bin/cat /var/run/nginx.pid)</span>&quot;</span>
+
+[Install]
+WantedBy=multi-user.target</code></pre></div>
+
+<h3 id="nginx-配置文件"><a href="#nginx-配置文件" class="headerlink" title="nginx 配置文件"></a>nginx 配置文件</h3><div class="code-wrapper"><pre><code class="hljs bash">[root@centos7 ~]<span class="hljs-comment"># rpm -qc nginx</span>
+/etc/logrotate.d/nginx
+/etc/nginx/conf.d/default.conf
+/etc/nginx/fastcgi_params
+/etc/nginx/mime.types
+/etc/nginx/nginx.conf
+/etc/nginx/scgi_params
+/etc/nginx/uwsgi_params
+
+<span class="hljs-comment">#nginx安装目录结果</span>
+[root@centos7 ~]<span class="hljs-comment"># tree /etc/nginx/</span>
+/etc/nginx/
+├── conf.d
+│   └── default.conf
+├── fastcgi_params
+├── mime.types
+├── modules -&gt; ../../usr/lib64/nginx/modules
+├── nginx.conf
+├── scgi_params
+└── uwsgi_params
+
+2 directories, 6 files
+
+<span class="hljs-comment">#nginx默认配置</span>
+[root@centos7 ~]<span class="hljs-comment"># egrep -v &quot;^ *#|^$&quot; /etc/nginx/nginx.conf </span>
+user  nginx;
+error_log  /var/log/nginx/error.log notice;
+pid        /var/run/nginx.pid;
+events &#123;
+    worker_connections  1024;
+&#125;
+http &#123;
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+    log_format  main  <span class="hljs-string">&#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span>
+                      <span class="hljs-string">&#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span>
+                      <span class="hljs-string">&#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;</span>;
+    access_log  /var/log/nginx/access.log  main;
+    sendfile        on;
+    keepalive_timeout  65;
+    include /etc/nginx/conf.d/*.conf;
+&#125;</code></pre></div>
+
+<h3 id="nginx-启动管理"><a href="#nginx-启动管理" class="headerlink" title="nginx 启动管理"></a>nginx 启动管理</h3><div class="code-wrapper"><pre><code class="hljs bash">[root@centos7 ~]<span class="hljs-comment"># systemctl enable --now nginx #启动nginx并设置开机自启动 --利用service文件管理</span>
+Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service to /usr/lib/systemd/system/nginx.service.
+[root@centos7 ~]<span class="hljs-comment"># systemctl status nginx  #nginx成功运行</span>
+● nginx.service - nginx - high performance web server
+   Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2022-07-20 17:42:56 CST; 7s ago
+     Docs: http://nginx.org/en/docs/
+  Process: 2327 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
+ Main PID: 2328 (nginx)
+   CGroup: /system.slice/nginx.service
+           ├─2328 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+           └─2329 nginx: worker process
+
+Jul 20 17:42:56 centos7 systemd[1]: Starting nginx - high performance web server...
+Jul 20 17:42:56 centos7 systemd[1]: Failed to parse PID from file /var/run/nginx.pid: Invalid argument
+Jul 20 17:42:56 centos7 systemd[1]: Started nginx - high performance web server.
+[root@centos7 ~]<span class="hljs-comment"># nginx -s quit   #使用nginx命令关闭</span>
+[root@centos7 ~]<span class="hljs-comment"># ps aux | grep nginx  #关闭成功</span>
+root       2338  0.0  0.0 112812   980 pts/1    R+   17:43   0:00 grep --color=auto nginx
+[root@centos7 ~]<span class="hljs-comment"># systemctl status nginx  #nginx状态为 failed</span>
+● nginx.service - nginx - high performance web server
+   Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled)
+   Active: failed (Result: exit-code) since Wed 2022-07-20 17:43:12 CST; 24s ago
+     Docs: http://nginx.org/en/docs/
+  Process: 2333 ExecStop=/bin/sh -c /bin/kill -s TERM $(/bin/cat /var/run/nginx.pid) (code=exited, status=1/FAILURE)
+  Process: 2327 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
+ Main PID: 2328 (code=exited, status=0/SUCCESS)
+
+Jul 20 17:43:12 centos7 sh[2333]: -s, --signal &lt;sig&gt;     send specified signal
+Jul 20 17:43:12 centos7 sh[2333]: -q, --queue &lt;sig&gt;      use sigqueue(2) rather than <span class="hljs-built_in">kill</span>(2)
+Jul 20 17:43:12 centos7 sh[2333]: -p, --pid              <span class="hljs-built_in">print</span> pids without signaling them
+Jul 20 17:43:12 centos7 sh[2333]: -l, --list [=&lt;signal&gt;] list signal names, or convert one to a name
+Jul 20 17:43:12 centos7 sh[2333]: -L, --table            list signal names and numbers
+Jul 20 17:43:12 centos7 sh[2333]: -h, --<span class="hljs-built_in">help</span>     display this <span class="hljs-built_in">help</span> and <span class="hljs-built_in">exit</span>
+Jul 20 17:43:12 centos7 sh[2333]: -V, --version  output version information and <span class="hljs-built_in">exit</span>
+Jul 20 17:43:12 centos7 sh[2333]: For more details see <span class="hljs-built_in">kill</span>(1).
+Jul 20 17:43:12 centos7 systemd[1]: Unit nginx.service entered failed state.
+Jul 20 17:43:12 centos7 systemd[1]: nginx.service failed.
+
+[root@centos7 ~]<span class="hljs-comment"># systemctl stop nginx  #使用systemctl 关闭nginx</span>
+[root@centos7 ~]<span class="hljs-comment"># systemctl status nginx</span>
+● nginx.service - nginx - high performance web server
+   Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled)
+   Active: inactive (dead) since Wed 2022-07-20 17:47:47 CST; 1min 28s ago
+     Docs: http://nginx.org/en/docs/
+  Process: 2378 ExecStop=/bin/sh -c /bin/kill -s TERM $(/bin/cat /var/run/nginx.pid) (code=exited, status=0/SUCCESS)
+  Process: 2361 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
+ Main PID: 2362 (code=exited, status=0/SUCCESS)
+
+Jul 20 17:43:51 centos7 systemd[1]: Starting nginx - high performance web server...
+Jul 20 17:43:51 centos7 systemd[1]: Can<span class="hljs-string">&#x27;t open PID file /var/run/nginx.pid (yet?) after start: No such file or directory</span>
+<span class="hljs-string">Jul 20 17:43:51 centos7 systemd[1]: Started nginx - high performance web server.</span>
+<span class="hljs-string">Jul 20 17:47:47 centos7 systemd[1]: Stopping nginx - high performance web server...</span>
+<span class="hljs-string">Jul 20 17:47:47 centos7 systemd[1]: Stopped nginx - high performance web server.</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">[root@centos7 ~]# nginx  #启动nginx</span>
+<span class="hljs-string">[root@centos7 ~]# ps -ef|grep nginx   #查看nginx进程已启动</span>
+<span class="hljs-string">root       2403      1  0 17:49 ?        00:00:00 nginx: master process nginx</span>
+<span class="hljs-string">nginx      2404   2403  0 17:49 ?        00:00:00 nginx: worker process</span>
+<span class="hljs-string">root       2407   2204  0 17:49 pts/1    00:00:00 grep --color=auto nginx</span>
+<span class="hljs-string">[root@centos7 ~]# systemctl stop nginx #使用systemctl停止nginx</span>
+<span class="hljs-string">[root@centos7 ~]# ps -ef|grep nginx    #发现并未成功停止nginx进程</span>
+<span class="hljs-string">root       2403      1  0 17:49 ?        00:00:00 nginx: master process nginx</span>
+<span class="hljs-string">nginx      2404   2403  0 17:49 ?        00:00:00 nginx: worker process</span>
+<span class="hljs-string">root       2416   2204  0 17:49 pts/1    00:00:00 grep --color=auto nginx</span>
+<span class="hljs-string">[root@centos7 ~]# systemctl status nginx #systemctl显示nginx进程并未启动</span>
+<span class="hljs-string">● nginx.service - nginx - high performance web server</span>
+<span class="hljs-string">   Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled)</span>
+<span class="hljs-string">   Active: inactive (dead) since Wed 2022-07-20 17:47:47 CST; 2min 15s ago</span>
+<span class="hljs-string">     Docs: http://nginx.org/en/docs/</span>
+<span class="hljs-string">  Process: 2378 ExecStop=/bin/sh -c /bin/kill -s TERM $(/bin/cat /var/run/nginx.pid) (code=exited, status=0/SUCCESS)</span>
+<span class="hljs-string">  Process: 2361 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)</span>
+<span class="hljs-string"> Main PID: 2362 (code=exited, status=0/SUCCESS)</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">Jul 20 17:43:51 centos7 systemd[1]: Starting nginx - high performance web server...</span>
+<span class="hljs-string">Jul 20 17:43:51 centos7 systemd[1]: Can&#x27;</span>t open PID file /var/run/nginx.pid (yet?) after start: No such file or directory
+Jul 20 17:43:51 centos7 systemd[1]: Started nginx - high performance web server.
+Jul 20 17:47:47 centos7 systemd[1]: Stopping nginx - high performance web server...
+Jul 20 17:47:47 centos7 systemd[1]: Stopped nginx - high performance web server.
+
+[root@centos7 ~]<span class="hljs-comment"># curl localhost #访问nginx成功，nginx是正常运行状态</span>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;<span class="hljs-built_in">head</span>&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+html &#123; color-scheme: light dark; &#125;
+body &#123; width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; &#125;
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a href=<span class="hljs-string">&quot;http://nginx.org/&quot;</span>&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+Commercial support is available at
+&lt;a href=<span class="hljs-string">&quot;http://nginx.com/&quot;</span>&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you <span class="hljs-keyword">for</span> using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+<span class="hljs-comment">#原因分析</span>
+systemctl 使用service文件管理nginx进程。当执行systemctl start nginx时，会将nginx进程的pid记录并存放在指定路径下的pid文件中（具体由service文件定义）。当执行systemctl stop nginx时，通过pid文件向对应的nginx进程发送信号使nginx进程中止运行。如果并未通过执行systemctl start nginx启动nginx，那么systemctl stop nginx命令是无法关闭nginx进程的。因此上文执行nginx命令启动了nginx进程，是无法通过systemctl stop 关闭nginx进程的。</code></pre></div>
+
+<h2 id="编译安装-nginx"><a href="#编译安装-nginx" class="headerlink" title="编译安装 nginx"></a>编译安装 nginx</h2><p><strong>编译器介绍</strong></p>
+<div class="code-wrapper"><pre><code class="hljs tex">源码安装需要提前准备标准的编译器，GCC的全称是（GNU Compiler collection），其有GNU开发，并以GPL即LGPL许可，是自由的类UNIX即苹果电脑Mac OS X操作系统的标准编译器，因为GCC原本只能处理C语言，所以原名为GNU C语言编译器，后来得到快速发展，可以处理C++,Fortran，pascal，objectiveC，java以及Ada等其他语言，此外还需要Automake工具，以完成自动创建Makefile的工作，Nginx的一些模块需要依赖第三方库，比如: pcre（支持rewrite），zlib（支持gzip模块）和openssl（支持ssl模块）等。</code></pre></div>
+
+<h3 id="使用官方源编译安装"><a href="#使用官方源编译安装" class="headerlink" title="使用官方源编译安装"></a>使用官方源编译安装</h3><p>官方源码包地址：<a target="_blank" rel="noopener" href="https://nginx.org/en/download.html">https://nginx.org/en/download.html</a></p>
+<p>范例：编译安装nginx</p>
+<div class="code-wrapper"><pre><code class="hljs bash">[root@centos7 ~]<span class="hljs-comment">#yum -y install gcc pcre-devel openssl-devel zlib-devel  #安装工具包和依赖</span>
+[root@centos7 ~]<span class="hljs-comment">#useradd -s /sbin/nologin nginx   #添加nginx账号并配置不可登录</span>
+[root@centos7 ~]<span class="hljs-comment">#cd /usr/local/src/</span>
+[root@centos7 src]<span class="hljs-comment">#wget http://nginx.org/download/nginx-1.18.0.tar.gz #下载源码包</span>
+[root@centos7 src]<span class="hljs-comment">#tar xf nginx-1.18.0.tar.gz </span>
+[root@centos7 src]<span class="hljs-comment">#cd nginx-1.18.0/</span>
+
+<span class="hljs-comment">#配置编译参数并检查环境依赖（如上文提到的gcc，pcre等依赖未安装则会报错）</span>
+[root@centos7 nginx-1.18.0]<span class="hljs-comment">#./configure --prefix=/apps/nginx \</span>
+--user=nginx \
+--group=nginx \
+--with-http_ssl_module \
+--with-http_v2_module \
+--with-http_realip_module \
+--with-http_stub_status_module \
+--with-http_gzip_static_module \
+--with-pcre \
+--with-stream \
+--with-stream_ssl_module \
+--with-stream_realip_module
+[root@centos7 nginx-1.18.0]<span class="hljs-comment">#make &amp;&amp; make install</span>
+[root@centos7 nginx-1.18.0]<span class="hljs-comment">#chown -R nginx.nginx /apps/nginx</span></code></pre></div>
+
+<p>nginx安装完成后，有四个主要目录</p>
+<div class="code-wrapper"><pre><code class="hljs tex">[root@centos7 ~]<span class="hljs-params">#</span> tree /apps/nginx/
+/apps/nginx/
+├── conf
+│   ├── fastcgi.conf
+│   ├── fastcgi.conf.default
+│   ├── fastcgi<span class="hljs-built_in">_</span>params
+│   ├── fastcgi<span class="hljs-built_in">_</span>params.default
+│   ├── koi-utf
+│   ├── koi-win
+│   ├── mime.types
+│   ├── mime.types.default
+│   ├── nginx.conf
+│   ├── nginx.conf.default
+│   ├── scgi<span class="hljs-built_in">_</span>params
+│   ├── scgi<span class="hljs-built_in">_</span>params.default
+│   ├── uwsgi<span class="hljs-built_in">_</span>params
+│   ├── uwsgi<span class="hljs-built_in">_</span>params.default
+│   └── win-utf
+├── html
+│   ├── 50x.html
+│   └── index.html
+├── logs
+└── sbin
+    └── nginx
+
+conf：保存nginx所有的配置文件，其中nginx.conf是nginx服务器的最核心最主要的配置文件，其他的.conf则是用来配置nginx相关的功能的，例如fastcgi功能使用的是fastcgi.conf和fastcgi<span class="hljs-built_in">_</span>params两个文件，配置文件一般都有个模板配置文件，是文件名.default结尾，使用的时候将其复制为并将后缀default去掉即可。
+html目录中保存了nginx服务器的web文件，但是可以更改为其他目录保存web文件,另外还有一个50x的web文件是默认的错误页面提示页面。
+logs：用来保存nginx服务器的访问日志错误日志等日志，logs目录可以放在其他路径，比如/var/logs/nginx里面。
+sbin：保存nginx二进制启动脚本，可以接受不同的参数以实现不同的功能。</code></pre></div>
+
+<h3 id="验证版本及编译参数"><a href="#验证版本及编译参数" class="headerlink" title="验证版本及编译参数"></a>验证版本及编译参数</h3><div class="code-wrapper"><pre><code class="hljs bash">[root@centos7 ~]<span class="hljs-comment"># ls /apps/nginx/sbin/  #nginx二进制程序路径</span>
+nginx
+
+[root@centos7 ~]<span class="hljs-comment"># ln -s /apps/nginx/sbin/nginx /usr/sbin/  #创建软链接到PATH路径</span>
+
+<span class="hljs-built_in">ln</span>: failed to create symbolic <span class="hljs-built_in">link</span> ‘/usr/sbin/nginx’: File exists  <span class="hljs-comment">#注意之前yum安装nginx已生成该文件，因此软连接创建失败</span>
+
+[root@centos7 ~]<span class="hljs-comment"># nginx -v    #查看到的是yum安装的版本</span>
+nginx version: nginx/1.22.0
+
+<span class="hljs-comment">#使用绝对路径查看源码安装的nginx版本（如果要使用相对路径，可自行配置环境变量PATH）</span>
+[root@centos7 ~]<span class="hljs-comment"># /apps/nginx/sbin/nginx -v</span>
+
+nginx version: nginx/1.18.0
+[root@centos7 ~]<span class="hljs-comment"># /apps/nginx/sbin/nginx -V</span>
+nginx version: nginx/1.18.0
+built by gcc 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) 
+built with OpenSSL 1.0.2k-fips  26 Jan 2017
+TLS SNI support enabled
+configure arguments: --prefix=/apps/nginx --user=nginx --group=nginx --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_stub_status_module --with-http_gzip_static_module --with-pcre --with-stream --with-stream_ssl_module --with-stream_realip_module
+
+[root@centos7 ~]<span class="hljs-comment"># echo $PATH</span>
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+
+<span class="hljs-comment">#重新创建软连接到PATH变量指向的路径下（越靠左，优先级越高）</span>
+[root@centos7 ~]<span class="hljs-comment"># ln -s /apps/nginx/sbin/nginx /usr/local/sbin/</span>
+
+[root@centos7 ~]<span class="hljs-comment"># exec bash  #重新加载bash程序（目的是删除上文执行nginx命令后生成的缓存）</span>
+[root@centos7 ~]<span class="hljs-comment"># nginx -v   #观察到已经是源码安装的nginx版本</span>
+nginx version: nginx/1.18.0</code></pre></div>
+
+<h3 id="验证安装结果"><a href="#验证安装结果" class="headerlink" title="验证安装结果"></a>验证安装结果</h3><div class="code-wrapper"><pre><code class="hljs bash">[root@centos7 ~]<span class="hljs-comment"># nginx  #启动nginx</span>
+[root@centos7 ~]<span class="hljs-comment"># ps -ef|grep nginx  #进程已启动</span>
+root       5692      1  0 19:08 ?        00:00:00 nginx: master process nginx
+nginx      5693   5692  0 19:08 ?        00:00:00 nginx: worker process
+root       5695   2204  0 19:08 pts/1    00:00:00 grep --color=auto nginx
+[root@centos7 ~]<span class="hljs-comment"># curl localhost     #访问测试</span>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;<span class="hljs-built_in">head</span>&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+    body &#123;
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    &#125;
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a href=<span class="hljs-string">&quot;http://nginx.org/&quot;</span>&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+Commercial support is available at
+&lt;a href=<span class="hljs-string">&quot;http://nginx.com/&quot;</span>&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you <span class="hljs-keyword">for</span> using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+<span class="hljs-comment">#关闭nginx</span>
+[root@centos7 ~]<span class="hljs-comment"># nginx -s stop</span>
+[root@centos7 ~]<span class="hljs-comment"># ps -ef|grep nginx</span>
+root       5701   2204  0 19:10 pts/1    00:00:00 grep --color=auto nginx</code></pre></div>
+
+<h3 id="创建nginx的service文件以实现开机自启动"><a href="#创建nginx的service文件以实现开机自启动" class="headerlink" title="创建nginx的service文件以实现开机自启动"></a>创建nginx的service文件以实现开机自启动</h3><div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#注意ExecStart和ExecReload的路径要和实际安装路径匹配</span>
+[root@centos7 ~]<span class="hljs-comment"># cat &gt; /usr/lib/systemd/system/nginx.service &lt;&lt;EOF</span>
+[Unit]
+Description=nginx - high performance web server
+Documentation=http://nginx.org/en/docs/
+After=network-online.target remote-fs.target nss-lookup.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+PIDFile=/apps/nginx/run/nginx.pid
+ExecStart=/apps/nginx/sbin/nginx -c /apps/nginx/conf/nginx.conf
+ExecReload=/bin/kill -s HUP \<span class="hljs-variable">$MAINPID</span>
+ExecStop=/bin/kill -s TERM \<span class="hljs-variable">$MAINPID</span>
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+<span class="hljs-comment">#创建缺少的目录</span>
+[root@centos7 ~]<span class="hljs-comment"># mkdir /apps/nginx/run </span>
+<span class="hljs-comment">#修改pid文件指向的路径</span>
+[root@centos7 ~]<span class="hljs-comment"># cat /apps/nginx/conf/nginx.conf | grep pid</span>
+pid        run/nginx.pid;
+
+<span class="hljs-comment">#重新加载service文件配置</span>
+[root@centos7 ~]<span class="hljs-comment"># systemctl daemon-reload</span>
+
+<span class="hljs-comment">#成功使用service文件管理nginx进程</span>
+[root@centos7 ~]<span class="hljs-comment"># systemctl start nginx</span>
+[root@centos7 ~]<span class="hljs-comment"># systemctl status  nginx</span>
+● nginx.service - nginx - high performance web server
+   Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2022-07-20 19:22:30 CST; 1min 10s ago
+     Docs: http://nginx.org/en/docs/
+ Main PID: 5769 (nginx)
+   CGroup: /system.slice/nginx.service
+           ├─5769 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+           └─5770 nginx: worker process
+
+Jul 20 19:22:30 centos7 systemd[1]: Starting nginx - high performance web server...
+Jul 20 19:22:30 centos7 systemd[1]: Can<span class="hljs-string">&#x27;t open PID file /var/run/nginx.pid (yet?) after start: No such file or directory   #此报错可能是nginx自身的bug造成的，服务本身正常。</span>
+<span class="hljs-string">Jul 20 19:22:30 centos7 systemd[1]: Started nginx - high performance web server.</span></code></pre></div>
+
+<p>nginx服务正常，但查看状态报错：Can’t open PID file &#x2F;var&#x2F;run&#x2F;nginx.pid (yet?) after start: No such file or directory</p>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/XY0918ZWQ/article/details/114165979">https://blog.csdn.net/XY0918ZWQ/article/details/114165979</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Nginx/" class="category-chain-item">Nginx</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/">#软件安装</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Nginx安装</div>
+      <div>https://senmer.github.io/Nginx安装/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>qingyu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月19日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/" title="Nginx安装脚本">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Nginx安装脚本</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Nginx%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/" title="Nginx架构简介">
+                        <span class="hidden-mobile">Nginx架构简介</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Idd6DzhEmG8il7jJuyr8p8J3-gzGzoHsz","appKey":"aL7ICJcfsXv3YTeThGdDBtVi","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
