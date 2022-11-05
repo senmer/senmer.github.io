@@ -1,3 +1,4 @@
+<!-- 评论 -->
 {{ if .Site.Params.utteranc.enable }}
 <script src="https://utteranc.es/client.js"
 repo="{{ .Site.Params.utteranc.repo }}"
@@ -8,9 +9,6 @@ async>
 </script>
 {{ end }}
 
-<!-- 不蒜子 -->
-{{- /* busuanzi plugin */ -}}
-{{- partial "plugin/busuanzi.html" (dict "params" .Site.Params.xwi88Cfg.busuanzi "bsz_type" "footer") -}}
 
 {{- if ne .Site.Params.footer.enable false -}}
     <footer class="footer">
@@ -22,6 +20,10 @@ async>
                 </div>
             {{- end -}}
 
+	    <!-- 不蒜子 -->
+	    {{- /* busuanzi plugin */ -}}
+	    {{- partial "plugin/busuanzi.html" (dict "params" .Site.Params.xwi88Cfg.busuanzi "bsz_type" "footer") -}}
+
             {{- /* Hugo and LoveIt */ -}}
             {{- if ne .Site.Params.footer.hugo false -}}
                 <div class="footer-line">
@@ -30,6 +32,7 @@ async>
                     {{- dict "Hugo" $hugo "Theme" $theme | T "poweredBySome" | safeHTML }}
                 </div>
             {{- end -}}
+
 
             <div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork">
                 {{- /* Copyright year */ -}}
