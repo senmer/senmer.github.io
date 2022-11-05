@@ -60,3 +60,7 @@ async>
 </script>
 {{ end }}
 
+<!-- 不蒜子 -->
+{{- /* busuanzi plugin */ -}}
+{{- partial "plugin/busuanzi.html" (dict "params" .Site.Params.xwi88Cfg.busuanzi "bsz_type" "footer") -}}
+
