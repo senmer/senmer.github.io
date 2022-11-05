@@ -1,3 +1,17 @@
+{{ if .Site.Params.utteranc.enable }}
+<script src="https://utteranc.es/client.js"
+repo="{{ .Site.Params.utteranc.repo }}"
+issue-term="{{ .Site.Params.utteranc.issueTerm }}"
+theme="{{ .Site.Params.utteranc.theme }}"
+crossorigin="anonymous"
+async>
+</script>
+{{ end }}
+
+<!-- 不蒜子 -->
+{{- /* busuanzi plugin */ -}}
+{{- partial "plugin/busuanzi.html" (dict "params" .Site.Params.xwi88Cfg.busuanzi "bsz_type" "footer") -}}
+
 {{- if ne .Site.Params.footer.enable false -}}
     <footer class="footer">
         <div class="footer-container">
@@ -50,17 +64,4 @@
     </footer>
 {{- end -}}
 
-{{ if .Site.Params.utteranc.enable }}
-<script src="https://utteranc.es/client.js"
-repo="{{ .Site.Params.utteranc.repo }}"
-issue-term="{{ .Site.Params.utteranc.issueTerm }}"
-theme="{{ .Site.Params.utteranc.theme }}"
-crossorigin="anonymous"
-async>
-</script>
-{{ end }}
-
-<!-- 不蒜子 -->
-{{- /* busuanzi plugin */ -}}
-{{- partial "plugin/busuanzi.html" (dict "params" .Site.Params.xwi88Cfg.busuanzi "bsz_type" "footer") -}}
 
