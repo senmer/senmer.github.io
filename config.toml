@@ -75,7 +75,7 @@ theme = "LoveIt"
   [params.page.comment.gitalk]
     enable = true
     owner = "senmer"  #Github用户名
-    repo = "hugo-talk" # 用来存放评论的repo名称
+    repo = "senmer.github.io" # 用来存放评论的repo名称
     clientId = "3d3d171e72d1532a0e40" #申请好的OAuth的ClientId
     clientSecret = "3cf37dc6656f6b89339ad34d25450c8707fe5d19" #申请好的OAuth的ClientSecret
 
