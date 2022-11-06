@@ -11,6 +11,11 @@ title = "wz's blog"
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "LoveIt"
 
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.62.0"
+
 #Author config
 [author]
   name = "wangzheng"
@@ -20,17 +25,25 @@ theme = "LoveIt"
 [params]
   # LoveIt 主题版本
   version = "0.105.0"
-
+  defaultTheme = "auto"
+  description = "一个年轻人的博客"
   [params.header]
     #title name
     [params.header.title] 
       #标题名称
       name = "WangZheng's Blog"
+
   [params.footer]
     #whether to show the author
     author = true
+    copyright = true
     #site creation time 
     since = 2022
+  [params.home.profile]
+    enable = true
+    title = "一个年轻人的博客"
+    typeit = false
+    subtitle = ""
 [menu]
   [[menu.main]]
     identifier = "posts"
