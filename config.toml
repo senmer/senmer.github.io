@@ -82,7 +82,7 @@ theme = "LoveIt"
 
 #
 [params.search]
-  enable = true
+  enable = false 
   # [lunr algolia]
   type = "lunr"
 #评论功能
