@@ -22,14 +22,6 @@
     <description><![CDATA[<p>了解如何在 <strong>LoveIt</strong> 主题中快速, 直观地创建和组织内容.</p>]]></description>
 </item>
 <item>
-    <title>主题文档 - 内置 Shortcodes</title>
-    <link>http://example.org/posts/theme-documentation-built-in-shortcodes/</link>
-    <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate>
-    <author>Dillon</author>
-    <guid>http://example.org/posts/theme-documentation-built-in-shortcodes/</guid>
-    <description><![CDATA[<p><strong>Hugo</strong> 提供了多个内置的 Shortcodes, 以方便作者保持 Markdown 内容的整洁.</p>]]></description>
-</item>
-<item>
     <title>主题文档 - 扩展 Shortcodes</title>
     <link>http://example.org/posts/theme-documentation-extended-shortcodes/</link>
     <pubDate>Tue, 03 Mar 2020 16:29:59 &#43;0800</pubDate>
@@ -86,6 +78,15 @@
     <author>Dillon</author>
     <guid>http://example.org/posts/theme-documentation-music-shortcode/</guid>
     <description><![CDATA[<p><code>music</code> shortcode 基于 <a href="https://github.com/MoePlayer/APlayer" target="_blank" rel="noopener noreffer ">APlayer</a> 和 <a href="https://github.com/metowolf/MetingJS" target="_blank" rel="noopener noreffer ">MetingJS</a> 库提供了一个内嵌的响应式音乐播放器.</p>]]></description>
+</item>
+<item>
+    <title>主题文档 - bilibili Shortcode</title>
+    <link>http://example.org/posts/theme-documentation-bilibili-shortcode/</link>
+    <pubDate>Tue, 03 Mar 2020 11:29:41 &#43;0800</pubDate>
+    <author>Dillon</author>
+    <guid>http://example.org/posts/theme-documentation-bilibili-shortcode/</guid>
+    <description><![CDATA[<a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"></a>
+<p><code>bilibili</code> shortcode 提供了一个内嵌的用来播放 bilibili 视频的响应式播放器.</p>]]></description>
 </item>
 </channel>
 </rss>
