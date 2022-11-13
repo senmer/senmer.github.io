@@ -1,0 +1,136 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Nginx安装脚本 - 我的全新 Hugo 网站</title><meta name=Description content="This is my cool site"><meta property="og:title" content="Nginx安装脚本"><meta property="og:description" content="使用源码包一键安装Nginx"><meta property="og:type" content="article"><meta property="og:url" content="http://example.org/posts/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-07-20T16:27:22+00:00"><meta property="article:modified_time" content="2022-07-20T16:27:22+00:00"><meta property="og:site_name" content="My cool site"><meta name=twitter:card content="summary"><meta name=twitter:title content="Nginx安装脚本"><meta name=twitter:description content="使用源码包一键安装Nginx"><meta name=application-name content="My cool site"><meta name=apple-mobile-web-app-title content="My cool site"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/posts/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/><link rel=prev href=http://example.org/posts/nginx%E5%AE%89%E8%A3%85/><link rel=next href=http://example.org/posts/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css></noscript><link rel=preload href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Nginx安装脚本","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC\/"},"genre":"posts","keywords":"shell","wordcount":762,"url":"http:\/\/example.org\/posts\/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC\/","datePublished":"2022-07-20T16:27:22+00:00","dateModified":"2022-07-20T16:27:22+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="我的全新 Hugo 网站">My cool site</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="我的全新 Hugo 网站">My cool site</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Nginx安装脚本</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>作者</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/%E8%84%9A%E6%9C%AC/><i class="far fa-folder fa-fw" aria-hidden=true></i>脚本</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2022-07-20>2022-07-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;约 762 字&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div></div><div class=content id=content><h1 id=使用源码包一键安装nginx>使用源码包一键安装Nginx</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=c1>#该脚本适用于centos和ubuntu操作系统</span>
+</span></span><span class=line><span class=cl><span class=c1>#Nginx安装成功后默认配置开机自启</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>###########自定义参数#############</span>
+</span></span><span class=line><span class=cl><span class=nv>SRC_DIR</span><span class=o>=</span>/usr/local/src  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#安装路径</span>
+</span></span><span class=line><span class=cl><span class=nv>NGINX_INSTALL_DIR</span><span class=o>=</span>/apps/nginx
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#软件版本，可提前将软件包拷贝到/usr/local/src目录下</span>
+</span></span><span class=line><span class=cl><span class=nv>NGINX_FILE</span><span class=o>=</span>nginx-1.18.0
+</span></span><span class=line><span class=cl><span class=nv>TAR</span><span class=o>=</span>.tar.gz
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#下载路径</span>
+</span></span><span class=line><span class=cl><span class=nv>NGINX_URL</span><span class=o>=</span>http://nginx.org/download/
+</span></span><span class=line><span class=cl><span class=c1>####################################</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#获取cpu核心数</span>
+</span></span><span class=line><span class=cl><span class=nv>CPUS</span><span class=o>=</span><span class=sb>`</span>lscpu <span class=p>|</span>awk <span class=s1>&#39;/^CPU\(s\)/{print $2}&#39;</span><span class=sb>`</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#格式化输出函数，自定义输出颜色和打印宽度</span>
+</span></span><span class=line><span class=cl>color <span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=nv>RES_COL</span><span class=o>=</span><span class=m>60</span>
+</span></span><span class=line><span class=cl>    <span class=nv>MOVE_TO_COL</span><span class=o>=</span><span class=s2>&#34;echo -en \E[</span><span class=si>${</span><span class=nv>RES_COL</span><span class=si>}</span><span class=s2>G&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nv>SETCOLOR_SUCCESS</span><span class=o>=</span><span class=s2>&#34;echo -en \E[1;32m&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nv>SETCOLOR_FAILURE</span><span class=o>=</span><span class=s2>&#34;echo -en \E[1;31m&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nv>SETCOLOR_WARNING</span><span class=o>=</span><span class=s2>&#34;echo -en \E[1;33m&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nv>SETCOLOR_NORMAL</span><span class=o>=</span><span class=s2>&#34;echo -en \E[0m&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -n <span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span> <span class=o>&amp;&amp;</span> <span class=nv>$MOVE_TO_COL</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -n <span class=s2>&#34;[&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>[</span> <span class=nv>$2</span> <span class=o>=</span> <span class=s2>&#34;success&#34;</span> -o <span class=nv>$2</span> <span class=o>=</span> <span class=s2>&#34;0&#34;</span> <span class=o>]</span> <span class=p>;</span><span class=k>then</span>
+</span></span><span class=line><span class=cl>        <span class=si>${</span><span class=nv>SETCOLOR_SUCCESS</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -n <span class=s2>$&#34;  OK  &#34;</span>    
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=o>[</span> <span class=nv>$2</span> <span class=o>=</span> <span class=s2>&#34;failure&#34;</span> -o <span class=nv>$2</span> <span class=o>=</span> <span class=s2>&#34;1&#34;</span>  <span class=o>]</span> <span class=p>;</span><span class=k>then</span> 
+</span></span><span class=line><span class=cl>        <span class=si>${</span><span class=nv>SETCOLOR_FAILURE</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -n <span class=s2>$&#34;FAILED&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>        <span class=si>${</span><span class=nv>SETCOLOR_WARNING</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> -n <span class=s2>$&#34;WARNING&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl>    <span class=si>${</span><span class=nv>SETCOLOR_NORMAL</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -n <span class=s2>&#34;]&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> 
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#操作系统类型：CentOS/Ubuntu</span>
+</span></span><span class=line><span class=cl>os_type <span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>   awk -F<span class=s1>&#39;[ &#34;]&#39;</span> <span class=s1>&#39;/^NAME/{print $2}&#39;</span> /etc/os-release
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#操作系统版本：6/7/8</span>
+</span></span><span class=line><span class=cl>os_version <span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>   awk -F<span class=s1>&#39;&#34;&#39;</span> <span class=s1>&#39;/^VERSION_ID/{print $2}&#39;</span> /etc/os-release
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#检查nginx是否已安装以及是否需要下载源码包</span>
+</span></span><span class=line><span class=cl>check <span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>[</span> -e <span class=si>${</span><span class=nv>NGINX_INSTALL_DIR</span><span class=si>}</span> <span class=o>]</span> <span class=o>&amp;&amp;</span> <span class=o>{</span> color <span class=s2>&#34;nginx 已安装,请卸载后再安装&#34;</span> 1<span class=p>;</span> exit<span class=p>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=nb>cd</span>  <span class=si>${</span><span class=nv>SRC_DIR</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>[</span>  -e <span class=si>${</span><span class=nv>NGINX_FILE</span><span class=si>}${</span><span class=nv>TAR</span><span class=si>}</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
+</span></span><span class=line><span class=cl>        color <span class=s2>&#34;相关文件已准备好&#34;</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>        color <span class=s1>&#39;开始下载 nginx 源码包&#39;</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>        wget <span class=si>${</span><span class=nv>NGINX_URL</span><span class=si>}${</span><span class=nv>NGINX_FILE</span><span class=si>}${</span><span class=nv>TAR</span><span class=si>}</span> 
+</span></span><span class=line><span class=cl>        <span class=o>[</span> <span class=nv>$?</span> -ne <span class=m>0</span> <span class=o>]</span> <span class=o>&amp;&amp;</span> <span class=o>{</span> color <span class=s2>&#34;下载 </span><span class=si>${</span><span class=nv>NGINX_FILE</span><span class=si>}${</span><span class=nv>TAR</span><span class=si>}</span><span class=s2>文件失败&#34;</span> 1<span class=p>;</span> exit<span class=p>;</span> <span class=o>}</span> 
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=o>}</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#安装nginx</span>
+</span></span><span class=line><span class=cl>install <span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    color <span class=s2>&#34;开始安装 nginx&#34;</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> id nginx  <span class=p>&amp;</span>&gt; /dev/null<span class=p>;</span><span class=k>then</span>
+</span></span><span class=line><span class=cl>        color <span class=s2>&#34;nginx 用户已存在&#34;</span> <span class=m>3</span> 
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>        useradd -s /sbin/nologin -r  nginx
+</span></span><span class=line><span class=cl>        color <span class=s2>&#34;创建 nginx 用户&#34;</span> <span class=m>0</span> 
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl>    color <span class=s2>&#34;开始安装 nginx 依赖包&#34;</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>[</span> <span class=sb>`</span>os_type<span class=sb>`</span> <span class=o>==</span> <span class=s2>&#34;CentOS&#34;</span> -a <span class=sb>`</span>os_version<span class=sb>`</span> <span class=o>==</span> <span class=s1>&#39;8&#39;</span> <span class=o>]</span> <span class=p>;</span><span class=k>then</span>
+</span></span><span class=line><span class=cl>        yum -y -q install make gcc-c++ libtool pcre pcre-devel zlib zlib-devel openssl openssl-devel perl-ExtUtils-Embed 
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=o>[</span> <span class=sb>`</span>os_type<span class=sb>`</span> <span class=o>==</span> <span class=s2>&#34;CentOS&#34;</span> -a <span class=sb>`</span>os_version<span class=sb>`</span> <span class=o>==</span> <span class=s1>&#39;7&#39;</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
+</span></span><span class=line><span class=cl>        yum -y -q  install make gcc pcre-devel openssl-devel zlib-devel perl-ExtUtils-Embed
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>        apt update <span class=p>&amp;</span>&gt; /dev/null
+</span></span><span class=line><span class=cl>        apt -y install make gcc libpcre3 libpcre3-dev openssl libssl-dev zlib1g-dev <span class=p>&amp;</span>&gt; /dev/null
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>cd</span> <span class=nv>$SRC_DIR</span>
+</span></span><span class=line><span class=cl>    tar xf <span class=si>${</span><span class=nv>NGINX_FILE</span><span class=si>}${</span><span class=nv>TAR</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    <span class=nv>NGINX_DIR</span><span class=o>=</span><span class=sb>`</span><span class=nb>echo</span> <span class=si>${</span><span class=nv>NGINX_FILE</span><span class=si>}${</span><span class=nv>TAR</span><span class=si>}</span><span class=p>|</span> sed -nr <span class=s1>&#39;s/^(.*[0-9]).*/\1/p&#39;</span><span class=sb>`</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>cd</span> <span class=si>${</span><span class=nv>NGINX_DIR</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    ./configure --prefix<span class=o>=</span><span class=si>${</span><span class=nv>NGINX_INSTALL_DIR</span><span class=si>}</span> --user<span class=o>=</span>nginx --group<span class=o>=</span>nginx --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_stub_status_module --with-http_gzip_static_module --with-pcre --with-stream --with-stream_ssl_module --with-stream_realip_module 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    make -j <span class=nv>$CPUS</span> <span class=o>&amp;&amp;</span> make install 
+</span></span><span class=line><span class=cl>    <span class=o>[</span> <span class=nv>$?</span> -eq <span class=m>0</span> <span class=o>]</span> <span class=o>&amp;&amp;</span> chown -R nginx.nginx <span class=si>${</span><span class=nv>NGINX_INSTALL_DIR</span><span class=si>}</span> <span class=o>&amp;&amp;</span> color <span class=s2>&#34;nginx 编译安装成功&#34;</span> <span class=m>0</span> <span class=o>||</span>  <span class=o>{</span> color <span class=s2>&#34;nginx 编译安装失败,退出!&#34;</span> <span class=m>1</span> <span class=p>;</span>exit<span class=p>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;PATH=</span><span class=si>${</span><span class=nv>NGINX_INSTALL_DIR</span><span class=si>}</span><span class=s2>/sbin:</span><span class=si>${</span><span class=nv>PATH</span><span class=si>}</span><span class=s2>&#34;</span> &gt; /etc/profile.d/nginx.sh
+</span></span><span class=line><span class=cl>    . /etc/profile.d/nginx.sh
+</span></span><span class=line><span class=cl>    cat &gt; /lib/systemd/system/nginx.service <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s>[Unit]
+</span></span></span><span class=line><span class=cl><span class=s>Description=The nginx HTTP and reverse proxy server
+</span></span></span><span class=line><span class=cl><span class=s>After=network.target remote-fs.target nss-lookup.target
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>[Service]
+</span></span></span><span class=line><span class=cl><span class=s>Type=forking
+</span></span></span><span class=line><span class=cl><span class=s>PIDFile=${NGINX_INSTALL_DIR}/logs/nginx.pid
+</span></span></span><span class=line><span class=cl><span class=s>ExecStartPre=/bin/rm -f ${NGINX_INSTALL_DIR}/logs/nginx.pid
+</span></span></span><span class=line><span class=cl><span class=s>ExecStartPre=${NGINX_INSTALL_DIR}/sbin/nginx -t
+</span></span></span><span class=line><span class=cl><span class=s>ExecStart=${NGINX_INSTALL_DIR}/sbin/nginx
+</span></span></span><span class=line><span class=cl><span class=s>ExecReload=/bin/kill -s HUP \$MAINPID
+</span></span></span><span class=line><span class=cl><span class=s>KillSignal=SIGQUIT
+</span></span></span><span class=line><span class=cl><span class=s>TimeoutStopSec=5
+</span></span></span><span class=line><span class=cl><span class=s>KillMode=process
+</span></span></span><span class=line><span class=cl><span class=s>PrivateTmp=true
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>[Install]
+</span></span></span><span class=line><span class=cl><span class=s>WantedBy=multi-user.target
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>    systemctl daemon-reload
+</span></span><span class=line><span class=cl>    systemctl <span class=nb>enable</span> --now nginx <span class=p>&amp;</span>&gt; /dev/null 
+</span></span><span class=line><span class=cl>    systemctl is-active nginx <span class=p>&amp;</span>&gt; /dev/null <span class=o>||</span>  <span class=o>{</span> color <span class=s2>&#34;nginx 启动失败,退出!&#34;</span> <span class=m>1</span> <span class=p>;</span> exit<span class=p>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    color <span class=s2>&#34;nginx 安装完成&#34;</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>check
+</span></span><span class=line><span class=cl>install
+</span></span></code></pre></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-07-20</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=http://example.org/posts/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/ data-title=Nginx安装脚本 data-hashtags=shell><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=http://example.org/posts/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/ data-hashtag=shell><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=http://example.org/posts/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/ data-title=Nginx安装脚本><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=http://example.org/posts/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/ data-title=Nginx安装脚本><i data-svg-src=https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=http://example.org/posts/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/ data-title=Nginx安装脚本><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/shell/>shell</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/nginx%E5%AE%89%E8%A3%85/ class=prev rel=prev title=Nginx安装><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>Nginx安装</a>
+<a href=/posts/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/ class=next rel=next title=Nginx平滑升级和回滚>Nginx平滑升级和回滚<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank></a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:50},comment:{}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
