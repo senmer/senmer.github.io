@@ -11,7 +11,7 @@
 <i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;预计阅读 22 分钟&nbsp;<span id=/posts/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/ class=leancloud_visitors data-flag-title=Nginx核心配置>
 <i class="far fa-eye fa-fw" aria-hidden=true></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
 </span>&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#nginx-配置文件组成>nginx 配置文件组成：</a></li><li><a href=#nginx-配置文件格式说明>nginx 配置文件格式说明：</a></li><li><a href=#nginx-主配置文件指令格式>nginx 主配置文件指令格式：</a></li><li><a href=#主配置文件结构四部分>主配置文件结构：四部分</a></li></ul><ul><li><a href=#全局配置说明>全局配置说明</a></li></ul><ul><li><ul><li><a href=#mime>MIME</a></li><li><a href=#指定响应报文>指定响应报文</a></li></ul></li></ul><ul><li><ul><li><a href=#虚拟主机的实现>虚拟主机的实现</a></li><li><a href=#localtion-的匹配规则>localtion 的匹配规则</a></li><li><a href=#匹配案例-精确匹配>匹配案例-精确匹配</a></li><li><a href=#匹配案例-区分大小写>匹配案例-区分大小写</a></li><li><a href=#匹配案例-不区分大小写>匹配案例-不区分大小写</a></li><li><a href=#nginx-四层访问控制>nginx 四层访问控制</a></li><li><a href=#nginx-账户认证功能>nginx 账户认证功能</a></li><li><a href=#自定义错误页面>自定义错误页面</a></li><li><a href=#自定义错误日志>自定义错误日志</a></li><li><a href=#检测文件是否存在>检测文件是否存在</a></li><li><a href=#长连接配置>长连接配置</a></li><li><a href=#作为下载服务器>作为下载服务器</a></li><li><a href=#作为上传服务器>作为上传服务器</a></li><li><a href=#其他配置>其他配置</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=主要介绍nginx核心配置文件>主要介绍Nginx核心配置文件</h1><h1 id=配置文件说明>配置文件说明</h1><p>nginx 官方文档：http://nginx.org/en/docs/</p><h2 id=nginx-配置文件组成>nginx 配置文件组成：</h2><ul><li>主配置文件： nginx.conf</li><li>子配置文件： conf.d/*.conf</li><li>fastcgi,， uwsgi，scgi 等协议的相关配置文件</li><li>mime.types：支持的mime类型，MIME（Multipurpose Internet Mail Extensions）多用途互联网邮件扩展类型，MIME消息能包含文本、图像、音频、视频以及其他应用程序专用的数据，是设定某种扩展名的文件用指定应用程序来打开的方式类型，当带有某种扩展名的文件被访问的时候，浏览器会自动使用指定应用程序打开（比如：应用程序会被下载，文本文件会直接显示内容）。简单来说，MIME就是利用扩展名标识文件类型，然后根据文件的类型做响应的处理。MIME 参考文档：https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_Types</li></ul><h2 id=nginx-配置文件格式说明>nginx 配置文件格式说明：</h2><ul><li>配置文件由指令和指令块构成</li><li>每条指令以分号；结束，指令和值之间以空格分隔</li><li>多条指令可以放在同一行，以分号分隔。但可读性差，不推荐这样配置</li><li>指令块以{ } 括号作为开始和结束的标识，将多条指令组织在一起，且支持嵌套</li><li>可通过include引入其他配置文件内容，提升配置文件的可维护性（如子配置文件conf.d/*.conf)</li><li>配置文件使用# 作为注释符，使用$引用变量</li><li>部分指令的参数支持正则表达式</li></ul><h2 id=nginx-主配置文件指令格式>nginx 主配置文件指令格式：</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-tex data-lang=tex><span class=line><span class=cl>directive value [value1 ...];
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#nginx-配置文件组成>nginx 配置文件组成：</a></li><li><a href=#nginx-配置文件格式说明>nginx 配置文件格式说明：</a></li><li><a href=#nginx-主配置文件指令格式>nginx 主配置文件指令格式：</a></li><li><a href=#主配置文件结构四部分>主配置文件结构：四部分</a></li></ul><ul><li><a href=#全局配置说明>全局配置说明</a></li></ul><ul><li><ul><li><a href=#mime>MIME</a></li><li><a href=#指定响应报文>指定响应报文</a></li></ul></li></ul><ul><li><ul><li><a href=#虚拟主机的实现>虚拟主机的实现</a></li><li><a href=#localtion-的匹配规则>localtion 的匹配规则</a></li><li><a href=#匹配案例-精确匹配>匹配案例-精确匹配</a></li><li><a href=#匹配案例-区分大小写>匹配案例-区分大小写</a></li><li><a href=#匹配案例-不区分大小写>匹配案例-不区分大小写</a></li><li><a href=#nginx-四层访问控制>nginx 四层访问控制</a></li><li><a href=#nginx-账户认证功能>nginx 账户认证功能</a></li><li><a href=#自定义错误页面>自定义错误页面</a></li><li><a href=#自定义错误日志>自定义错误日志</a></li><li><a href=#检测文件是否存在>检测文件是否存在</a></li><li><a href=#长连接配置>长连接配置</a></li><li><a href=#作为下载服务器>作为下载服务器</a></li><li><a href=#作为上传服务器>作为上传服务器</a></li><li><a href=#其他配置>其他配置</a></li></ul></li></ul></nav></div></div><div class=content id=content><p>主要介绍Nginx核心配置文件</p><h1 id=配置文件说明>配置文件说明</h1><p>nginx 官方文档：http://nginx.org/en/docs/</p><h2 id=nginx-配置文件组成>nginx 配置文件组成：</h2><ul><li>主配置文件： nginx.conf</li><li>子配置文件： conf.d/*.conf</li><li>fastcgi,， uwsgi，scgi 等协议的相关配置文件</li><li>mime.types：支持的mime类型，MIME（Multipurpose Internet Mail Extensions）多用途互联网邮件扩展类型，MIME消息能包含文本、图像、音频、视频以及其他应用程序专用的数据，是设定某种扩展名的文件用指定应用程序来打开的方式类型，当带有某种扩展名的文件被访问的时候，浏览器会自动使用指定应用程序打开（比如：应用程序会被下载，文本文件会直接显示内容）。简单来说，MIME就是利用扩展名标识文件类型，然后根据文件的类型做响应的处理。MIME 参考文档：https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_Types</li></ul><h2 id=nginx-配置文件格式说明>nginx 配置文件格式说明：</h2><ul><li>配置文件由指令和指令块构成</li><li>每条指令以分号；结束，指令和值之间以空格分隔</li><li>多条指令可以放在同一行，以分号分隔。但可读性差，不推荐这样配置</li><li>指令块以{ } 括号作为开始和结束的标识，将多条指令组织在一起，且支持嵌套</li><li>可通过include引入其他配置文件内容，提升配置文件的可维护性（如子配置文件conf.d/*.conf)</li><li>配置文件使用# 作为注释符，使用$引用变量</li><li>部分指令的参数支持正则表达式</li></ul><h2 id=nginx-主配置文件指令格式>nginx 主配置文件指令格式：</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-tex data-lang=tex><span class=line><span class=cl>directive value [value1 ...];
 </span></span><span class=line><span class=cl>说明：
 </span></span><span class=line><span class=cl>1、指令必须以分号；结束
 </span></span><span class=line><span class=cl>2、支持变量：
@@ -142,8 +142,8 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1>#通过pam限制文件打开数量上限</span>
 </span></span><span class=line><span class=cl><span class=o>[</span>root@centos8 ~<span class=o>]</span><span class=c1>#cat /etc/security/limits.conf</span>
-</span></span><span class=line><span class=cl>*               soft   nofile          <span class=m>1000000</span>
-</span></span><span class=line><span class=cl>*               hard   nofile          <span class=m>1000000</span>
+</span></span><span class=line><span class=cl>*               soft   nofile          1000000
+</span></span><span class=line><span class=cl>*               hard   nofile          1000000
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1>#worker进程优先级</span>
 </span></span><span class=line><span class=cl><span class=o>[</span>root@test conf<span class=o>]</span><span class=c1># grep priority nginx.conf</span>
@@ -154,10 +154,10 @@
 </span></span><span class=line><span class=cl>  <span class=m>1392</span> nginx: worker process         <span class=m>0</span>
 </span></span><span class=line><span class=cl>  <span class=m>1449</span> grep --color<span class=o>=</span>auto nginx       <span class=m>0</span>
 </span></span><span class=line><span class=cl>  
-</span></span><span class=line><span class=cl>daemon off<span class=p>;</span>  <span class=c1>#前台运行Nginx服务，通常在测试环境或者docker环境中使用</span>
+</span></span><span class=line><span class=cl>daemon off<span class=p>;</span>  #前台运行Nginx服务，通常在测试环境或者docker环境中使用
 </span></span><span class=line><span class=cl>master_process off<span class=p>|</span>on<span class=p>;</span> <span class=c1>#是否开启Nginx的master-worker工作模式，仅用于开发调试场景,默认为on</span>
 </span></span><span class=line><span class=cl>events <span class=o>{</span>
-</span></span><span class=line><span class=cl>   worker_connections  65536<span class=p>;</span>  <span class=c1>#设置单个工作进程的最大并发连接数</span>
+</span></span><span class=line><span class=cl>   worker_connections  65536<span class=p>;</span>  #设置单个工作进程的最大并发连接数
 </span></span><span class=line><span class=cl>   use epoll<span class=p>;</span> <span class=c1>#使用epoll事件驱动，Nginx支持众多的事件驱动，比如:select、poll、epoll，只能设置在events模块中设置。</span>
 </span></span><span class=line><span class=cl>   accept_mutex on<span class=p>;</span> <span class=c1>#on为同一时刻一个请求轮流由work进程处理,而防止被同时唤醒所有worker,避免多个睡眠进程被唤醒的设置，默认为off，新请求会唤醒所有worker进程,此过程也称为&#34;惊群&#34;，因此nginx刚安装完以后要进行适当的优化。建议设置为on</span>
 </span></span><span class=line><span class=cl>   multi_accept on<span class=p>;</span> <span class=c1>#on时Nginx服务器的每个工作进程可以同时接受多个新的网络连接，此指令默认为off，即默认为一个工作进程只能一次接受一个新的网络连接，打开后几个同时接受多个。建议设置为on</span>
@@ -177,7 +177,7 @@
 </span></span></code></pre></div><h1 id=http-配置块>http 配置块</h1><p>http 协议相关的配置结构</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>http <span class=o>{</span>
 </span></span><span class=line><span class=cl>	...
 </span></span><span class=line><span class=cl> 	...  
-</span></span><span class=line><span class=cl> 	server <span class=o>{</span>    <span class=c1>#每个server用于定义一个虚拟主机,第一个server为默认虚拟服务器</span>
+</span></span><span class=line><span class=cl> 	server <span class=o>{</span>    #每个server用于定义一个虚拟主机,第一个server为默认虚拟服务器
 </span></span><span class=line><span class=cl> 		...
 </span></span><span class=line><span class=cl>	<span class=o>}</span>
 </span></span><span class=line><span class=cl> 	server <span class=o>{</span>     
@@ -197,17 +197,17 @@
 </span></span><span class=line><span class=cl>   include       mime.types<span class=p>;</span> <span class=c1>#导入支持的文件类型,是相对于/apps/nginx/conf目录</span>
 </span></span><span class=line><span class=cl>   default_type  application/octet-stream<span class=p>;</span> <span class=c1>#除mime.types中文件类型外,设置其它文件默认类型，访问其它类型时会提示下载不匹配的类型文件</span>
 </span></span><span class=line><span class=cl><span class=c1>#日志配置部分</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#log_format main  &#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#                 &#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#                 &#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#access_log logs/access.log main;</span>
+</span></span><span class=line><span class=cl>    #log_format main  <span class=s1>&#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;</span>
+</span></span><span class=line><span class=cl>    #                 <span class=s1>&#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;</span>
+</span></span><span class=line><span class=cl>    #                 <span class=s1>&#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    #access_log logs/access.log main<span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=c1>#自定义优化参数</span>
 </span></span><span class=line><span class=cl>   	sendfile       on<span class=p>;</span> 
-</span></span><span class=line><span class=cl>    <span class=c1>#tcp_nopush    on; #在开启了sendfile的情况下，合并请求后统一发送给客户端,必须开启sendfile</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#tcp_nodelay   off; #在开启了keepalived模式下的连接是否启用TCP_NODELAY选项，当为off时，延迟0.2s发送，默认On时，不延迟发送，立即发送用户响应报文。</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#keepalive_timeout 0;</span>
-</span></span><span class=line><span class=cl>  	keepalive_timeout  <span class=m>65</span> 66<span class=p>;</span> <span class=c1>#设置会话保持时间,第二个值为响应首部:keep-Alived:timeout=65,可以和第一个值不同</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#gzip on; #开启文件压缩</span>
+</span></span><span class=line><span class=cl>    #tcp_nopush    on<span class=p>;</span> <span class=c1>#在开启了sendfile的情况下，合并请求后统一发送给客户端,必须开启sendfile</span>
+</span></span><span class=line><span class=cl>    #tcp_nodelay   off<span class=p>;</span> <span class=c1>#在开启了keepalived模式下的连接是否启用TCP_NODELAY选项，当为off时，延迟0.2s发送，默认On时，不延迟发送，立即发送用户响应报文。</span>
+</span></span><span class=line><span class=cl>    #keepalive_timeout 0<span class=p>;</span>
+</span></span><span class=line><span class=cl>  	keepalive_timeout  65 66<span class=p>;</span> <span class=c1>#设置会话保持时间,第二个值为响应首部:keep-Alived:timeout=65,可以和第一个值不同</span>
+</span></span><span class=line><span class=cl>    #gzip on<span class=p>;</span> <span class=c1>#开启文件压缩</span>
 </span></span><span class=line><span class=cl>    server <span class=o>{</span>
 </span></span><span class=line><span class=cl>    	listen       80<span class=p>;</span> <span class=c1>#设置监听地址和端口</span>
 </span></span><span class=line><span class=cl>       	server_name localhost<span class=p>;</span> <span class=c1>#设置server name，可以以空格隔开写多个并支持正则表达式，如:*.magedu.com www.magedu.* ~^www\d+\.magedu\.com$ default_server </span>
@@ -217,64 +217,64 @@
 </span></span><span class=line><span class=cl>           root   html<span class=p>;</span>
 </span></span><span class=line><span class=cl>           index index.html index.htm<span class=p>;</span>
 </span></span><span class=line><span class=cl>        <span class=o>}</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#error_page 404             /404.html;</span>
-</span></span><span class=line><span class=cl>        <span class=c1># redirect server error pages to the static page /50x.html</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#</span>
+</span></span><span class=line><span class=cl>        #error_page <span class=m>404</span>             /404.html<span class=p>;</span>
+</span></span><span class=line><span class=cl>        # redirect server error pages to the static page /50x.html
+</span></span><span class=line><span class=cl>        #
 </span></span><span class=line><span class=cl>        error_page   <span class=m>500</span> <span class=m>502</span> <span class=m>503</span> <span class=m>504</span> /50x.html<span class=p>;</span> <span class=c1>#定义错误页面</span>
 </span></span><span class=line><span class=cl>        <span class=nv>location</span> <span class=o>=</span> /50x.html <span class=o>{</span>
 </span></span><span class=line><span class=cl>           root   html<span class=p>;</span>
 </span></span><span class=line><span class=cl>        <span class=o>}</span>
-</span></span><span class=line><span class=cl>        <span class=c1># proxy the PHP scripts to Apache listening on 127.0.0.1:80</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#location ~ \.php$ { #以http的方式转发php请求到指定web服务器</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#   proxy_pass   http://127.0.0.1;</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#}</span>
-</span></span><span class=line><span class=cl>        <span class=c1># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#location ~ \.php$ { #以fastcgi的方式转发php请求到php处理</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#   root           html;</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#   fastcgi_pass   127.0.0.1:9000;</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#   fastcgi_index index.php;</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#   fastcgi_param SCRIPT_FILENAME /scripts$fastcgi_script_name;</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#   include       fastcgi_params;</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#}</span>
-</span></span><span class=line><span class=cl>        <span class=c1># deny access to .htaccess files, if Apache&#39;s document root</span>
-</span></span><span class=line><span class=cl>        <span class=c1># concurs with nginx&#39;s one</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#location ~ /\.ht { #拒绝web形式访问指定文件，如很多的网站都是通过.htaccess文件来改变自己的重定向等功能。</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#   deny all;</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#}</span>
+</span></span><span class=line><span class=cl>        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+</span></span><span class=line><span class=cl>        #
+</span></span><span class=line><span class=cl>        #location ~ <span class=se>\.</span>php$ <span class=o>{</span> <span class=c1>#以http的方式转发php请求到指定web服务器</span>
+</span></span><span class=line><span class=cl>        #   proxy_pass   http://127.0.0.1<span class=p>;</span>
+</span></span><span class=line><span class=cl>        #<span class=o>}</span>
+</span></span><span class=line><span class=cl>        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+</span></span><span class=line><span class=cl>        #
+</span></span><span class=line><span class=cl>        #location ~ <span class=se>\.</span>php$ <span class=o>{</span> <span class=c1>#以fastcgi的方式转发php请求到php处理</span>
+</span></span><span class=line><span class=cl>        #   root           html<span class=p>;</span>
+</span></span><span class=line><span class=cl>        #   fastcgi_pass   127.0.0.1:9000<span class=p>;</span>
+</span></span><span class=line><span class=cl>        #   fastcgi_index index.php<span class=p>;</span>
+</span></span><span class=line><span class=cl>        #   fastcgi_param SCRIPT_FILENAME /scripts<span class=nv>$fastcgi_script_name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        #   include       fastcgi_params<span class=p>;</span>
+</span></span><span class=line><span class=cl>        #<span class=o>}</span>
+</span></span><span class=line><span class=cl>        # deny access to .htaccess files, <span class=k>if</span> Apache<span class=s1>&#39;s document root
+</span></span></span><span class=line><span class=cl><span class=s1>        # concurs with nginx&#39;</span>s one
+</span></span><span class=line><span class=cl>        #
+</span></span><span class=line><span class=cl>        #location ~ /<span class=se>\.</span>ht <span class=o>{</span> <span class=c1>#拒绝web形式访问指定文件，如很多的网站都是通过.htaccess文件来改变自己的重定向等功能。</span>
+</span></span><span class=line><span class=cl>        #   deny all<span class=p>;</span>
+</span></span><span class=line><span class=cl>        #<span class=o>}</span>
 </span></span><span class=line><span class=cl>       location ~ /passwd.html <span class=o>{</span>
 </span></span><span class=line><span class=cl>           deny all<span class=p>;</span>
 </span></span><span class=line><span class=cl>       <span class=o>}</span>
 </span></span><span class=line><span class=cl>   <span class=o>}</span>
-</span></span><span class=line><span class=cl>    <span class=c1># another virtual host using mix of IP-, name-, and port-based configuration</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#server { #自定义虚拟server</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   listen       8000;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   listen       somename:8080;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   server_name somename alias another.alias;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   location / { </span>
-</span></span><span class=line><span class=cl>    <span class=c1>#       root   html;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#       index index.html index.htm; #指定默认网页文件，此指令由ngx_http_index_module模块提供</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   }</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#}</span>
-</span></span><span class=line><span class=cl>    <span class=c1># HTTPS server</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#server { #https服务器配置</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   listen       443 ssl;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   server_name localhost;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   ssl_certificate     cert.pem;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   ssl_certificate_key cert.key;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   ssl_session_cache   shared:SSL:1m;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   ssl_session_timeout 5m;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   ssl_ciphers HIGH:!aNULL:!MD5;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   ssl_prefer_server_ciphers on;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   location / {</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#       root   html;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#       index index.html index.htm;</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#   }</span>
-</span></span><span class=line><span class=cl>    <span class=c1>#}</span>
+</span></span><span class=line><span class=cl>    # another virtual host using mix of IP-, name-, and port-based configuration
+</span></span><span class=line><span class=cl>    #
+</span></span><span class=line><span class=cl>    #server <span class=o>{</span> <span class=c1>#自定义虚拟server</span>
+</span></span><span class=line><span class=cl>    #   listen       8000<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   listen       somename:8080<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   server_name somename <span class=nb>alias</span> another.alias<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   location / <span class=o>{</span> 
+</span></span><span class=line><span class=cl>    #       root   html<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #       index index.html index.htm<span class=p>;</span> <span class=c1>#指定默认网页文件，此指令由ngx_http_index_module模块提供</span>
+</span></span><span class=line><span class=cl>    #   <span class=o>}</span>
+</span></span><span class=line><span class=cl>    #<span class=o>}</span>
+</span></span><span class=line><span class=cl>    # HTTPS server
+</span></span><span class=line><span class=cl>    #
+</span></span><span class=line><span class=cl>    #server <span class=o>{</span> <span class=c1>#https服务器配置</span>
+</span></span><span class=line><span class=cl>    #   listen       <span class=m>443</span> ssl<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   server_name localhost<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   ssl_certificate     cert.pem<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   ssl_certificate_key cert.key<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   ssl_session_cache   shared:SSL:1m<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   ssl_session_timeout 5m<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   ssl_ciphers HIGH:!aNULL:!MD5<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   ssl_prefer_server_ciphers on<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   location / <span class=o>{</span>
+</span></span><span class=line><span class=cl>    #       root   html<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #       index index.html index.htm<span class=p>;</span>
+</span></span><span class=line><span class=cl>    #   <span class=o>}</span>
+</span></span><span class=line><span class=cl>    #<span class=o>}</span>
 </span></span></code></pre></div><h3 id=mime>MIME</h3><p>MIME参考文档：
 <a href=https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_Types target=_blank rel="noopener noreffer">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_Types</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#在响应报文中将指定的文件扩展名映射至MIME对应的类型</span>
 </span></span><span class=line><span class=cl>include          mime.types<span class=p>;</span>
@@ -405,9 +405,9 @@
 </span></span></code></pre></div><h3 id=localtion-的匹配规则>localtion 的匹配规则</h3><p>在一个server中location配置段可存在多个，用于实现从uri到文件系统的路径映射；ngnix会根据用户请</p><p>求的URI来检查定义的所有location，按一定的优先级找出一个最佳匹配，而后进行处理。</p><p>location 官方帮助: <a href=http://nginx.org/en/docs/http/ngx_http_core_module.html#location target=_blank rel="noopener noreffer">http://nginx.org/en/docs/http/ngx_http_core_module.html#location</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#语法规则：</span>
 </span></span><span class=line><span class=cl>location <span class=o>[</span> <span class=o>=</span> <span class=p>|</span> ~ <span class=p>|</span> ~* <span class=p>|</span> ^~ <span class=o>]</span> uri <span class=o>{</span> ... <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>=</span>   <span class=c1>#用于标准uri前，需要请求字串与uri精确匹配，大小敏感,如果匹配成功就停止向下匹配并立即处理请求</span>
-</span></span><span class=line><span class=cl>^~  <span class=c1>#用于标准uri前，表示包含正则表达式,并且匹配以指定的正则表达式开头,对URI的最左边部分做匹配检查，不区分字符大小写</span>
+</span></span><span class=line><span class=cl>^~  #用于标准uri前，表示包含正则表达式,并且匹配以指定的正则表达式开头,对URI的最左边部分做匹配检查，不区分字符大小写
 </span></span><span class=line><span class=cl>~   <span class=c1>#用于标准uri前，表示包含正则表达式,并且区分大小写</span>
-</span></span><span class=line><span class=cl>~*  <span class=c1>#用于标准uri前，表示包含正则表达式,并且不区分大小写</span>
+</span></span><span class=line><span class=cl>~*  #用于标准uri前，表示包含正则表达式,并且不区分大小写
 </span></span><span class=line><span class=cl>不带符号 <span class=c1>#匹配起始于此uri的所有的uri</span>
 </span></span><span class=line><span class=cl><span class=se>\ </span>  <span class=c1>#用于标准uri前，表示包含正则表达式并且转义字符。可以将 . * ?等转义为普通符号</span>
 </span></span><span class=line><span class=cl>
@@ -553,7 +553,7 @@ request will match configuration E.
 </span></span><span class=line><span class=cl>   allow 192.168.1.0/24<span class=p>;</span>
 </span></span><span class=line><span class=cl>   allow 10.1.1.0/16<span class=p>;</span>
 </span></span><span class=line><span class=cl>   allow 2001:0db8::/32<span class=p>;</span>
-</span></span><span class=line><span class=cl>   deny all<span class=p>;</span>  <span class=c1>#按先小范围到大范围排序</span>
+</span></span><span class=line><span class=cl>   deny all<span class=p>;</span>  #按先小范围到大范围排序
 </span></span><span class=line><span class=cl> <span class=o>}</span>
 </span></span></code></pre></div><h3 id=nginx-账户认证功能>nginx 账户认证功能</h3><p>由 ngx_http_auth_basic_module 模块提供此功能</p><p>官方帮助：http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html</p><p>范例：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#CentOS安装包</span>
 </span></span><span class=line><span class=cl><span class=o>[</span>root@centos8 ~<span class=o>]</span><span class=c1>#yum -y install httpd-tools</span>
@@ -779,7 +779,7 @@ request will match configuration E.
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>hello    <span class=c1>#返回的页面内容    </span>
 </span></span></code></pre></div><h3 id=作为下载服务器>作为下载服务器</h3><p>ngx_http_autoindex_module 模块处理以斜杠字符 &ldquo;/&rdquo; 结尾的请求，并生成目录列表,可以做为下载服务</p><p>配置使用</p><p>官方链接：http://nginx.org/en/docs/http/ngx_http_autoindex_module.html</p><p>相关指令</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>autoindex on <span class=p>|</span> off<span class=p>;</span> <span class=c1>#自动文件索引功能，默为off</span>
-</span></span><span class=line><span class=cl>autoindex_exact_size on <span class=p>|</span> off<span class=p>;</span>  <span class=c1>#计算文件精确大小（单位bytes），off 显示大概大小（单位K、M)，默认on</span>
+</span></span><span class=line><span class=cl>autoindex_exact_size on <span class=p>|</span> off<span class=p>;</span>  #计算文件精确大小（单位bytes），off 显示大概大小（单位K、M<span class=o>)</span>，默认on
 </span></span><span class=line><span class=cl>autoindex_localtime on <span class=p>|</span> off <span class=p>;</span> <span class=c1>#显示本机时间而非GMT(格林威治)时间，默认off</span>
 </span></span><span class=line><span class=cl>autoindex_format html <span class=p>|</span> xml <span class=p>|</span> json <span class=p>|</span> jsonp<span class=p>;</span> <span class=c1>#显示索引的页面文件风格，默认html</span>
 </span></span><span class=line><span class=cl>limit_rate rate<span class=p>;</span> <span class=c1>#限制响应客户端传输速率(除GET和HEAD以外的所有方法)，单位B/s,即bytes/second，默认值0,表示无限制,此指令由ngx_http_core_module提供</span>
@@ -803,7 +803,7 @@ request will match configuration E.
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>[</span>root@centos8 ~<span class=o>]</span><span class=c1># cat /apps/nginx/conf.d/pc.conf</span>
 </span></span><span class=line><span class=cl> location /download <span class=o>{</span>
-</span></span><span class=line><span class=cl>   autoindex on<span class=p>;</span>    <span class=c1>#自动索引功能</span>
+</span></span><span class=line><span class=cl>   autoindex on<span class=p>;</span>    #自动索引功能
 </span></span><span class=line><span class=cl>   autoindex_exact_size   off<span class=p>;</span> <span class=c1>#计算文件确切大小（单位bytes），此为默认值,off只显示大概大</span>
 </span></span><span class=line><span class=cl>小（单位kb、mb、gb）  
 </span></span><span class=line><span class=cl>   autoindex_localtime   off<span class=p>;</span> <span class=c1>#on表示显示本机时间而非GMT(格林威治)时间,默为为off显示GMT</span>
@@ -834,7 +834,7 @@ request will match configuration E.
 </span></span><span class=line><span class=cl>└── <span class=m>6</span>
 </span></span><span class=line><span class=cl>   └── <span class=m>00</span>
 </span></span><span class=line><span class=cl>       └── <span class=m>00</span>
-</span></span></code></pre></div><h3 id=其他配置>其他配置</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>keepalive_disable none <span class=p>|</span> browser ...<span class=p>;</span>  <span class=c1>#对哪种浏览器禁用长连接</span>
+</span></span></code></pre></div><h3 id=其他配置>其他配置</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>keepalive_disable none <span class=p>|</span> browser ...<span class=p>;</span>  #对哪种浏览器禁用长连接
 </span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>limit_except method ... <span class=o>{</span> ... <span class=o>}</span> <span class=c1>#仅用于location语句块，禁止客户端使用除了指定的请求方法之外的其它方法, 如果使用会出现403错误</span>
 </span></span><span class=line><span class=cl>method:GET, HEAD, POST, PUT, DELETE，MKCOL, COPY, MOVE, OPTIONS, PROPFIND, PROPPATCH, LOCK, UNLOCK, PATCH
 </span></span><span class=line><span class=cl>
@@ -891,14 +891,14 @@ request will match configuration E.
 </span></span><span class=line><span class=cl>&lt;hr&gt;&lt;center&gt;nginx/1.18.0&lt;/center&gt;
 </span></span><span class=line><span class=cl>&lt;/body&gt;
 </span></span><span class=line><span class=cl>&lt;/html&gt;
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>aio on <span class=p>|</span> off  <span class=c1>#是否启用asynchronous file I/O(AIO)功能，需要编译时添加参数开启 --with-file-aio</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>aio on <span class=p>|</span> off  #是否启用asynchronous file I/O<span class=o>(</span>AIO<span class=o>)</span>功能，需要编译时添加参数开启 --with-file-aio
 </span></span><span class=line><span class=cl><span class=c1>#linux 2.6以上内核提供以下几个系统调用来支持aio： 1、SYS_io_setup：建立aio 的context</span>
 </span></span><span class=line><span class=cl>2、SYS_io_submit: 提交I/O操作请求
 </span></span><span class=line><span class=cl>3、SYS_io_getevents：获取已完成的I/O事件
 </span></span><span class=line><span class=cl>4、SYS_io_cancel：取消I/O操作请求
 </span></span><span class=line><span class=cl>5、SYS_io_destroy：毁销aio的context
 </span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>directio size <span class=p>|</span> off<span class=p>;</span> <span class=c1>#操作完全和aio相反，aio是读取文件而directio是写文件到磁盘，默认为关闭，当文件大于等于给定大小时，例如:directio 4m，同步（直接）写磁盘，而非写缓存。</span>
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>open_file_cache off<span class=p>;</span>  <span class=c1>#是否缓存打开过的文件信息</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>open_file_cache off<span class=p>;</span>  #是否缓存打开过的文件信息
 </span></span><span class=line><span class=cl>open_file_cache <span class=nv>max</span><span class=o>=</span>N <span class=o>[</span><span class=nv>inactive</span><span class=o>=</span>time<span class=o>]</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1>#nginx可以缓存以下三种信息：</span>
@@ -913,9 +913,9 @@ request will match configuration E.
 </span></span><span class=line><span class=cl>open_file_cache_errors on <span class=p>|</span> off<span class=p>;</span> <span class=c1>#是否缓存查找时发生错误的文件一类的信息,默认值为off</span>
 </span></span><span class=line><span class=cl>open_file_cache_min_uses number<span class=p>;</span> <span class=c1>#open_file_cache指令的inactive参数指定的时长内，至少被命中此处指定的次数方可被归类为活动项,默认值为1</span>
 </span></span></code></pre></div><p>范例：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>open_file_cache <span class=nv>max</span><span class=o>=</span><span class=m>10000</span> <span class=nv>inactive</span><span class=o>=</span>60s<span class=p>;</span> <span class=c1>#最大缓存10000个文件，非活动数据超时时长60s</span>
-</span></span><span class=line><span class=cl>open_file_cache_valid   60s<span class=p>;</span>  <span class=c1>#每间隔60s检查一下缓存数据有效性</span>
+</span></span><span class=line><span class=cl>open_file_cache_valid   60s<span class=p>;</span>  #每间隔60s检查一下缓存数据有效性
 </span></span><span class=line><span class=cl>open_file_cache_min_uses 5<span class=p>;</span> <span class=c1>#60秒内至少被命中访问5次才被标记为活动数据</span>
 </span></span><span class=line><span class=cl>open_file_cache_errors   on<span class=p>;</span> <span class=c1>#缓存错误信息</span>
 </span></span></code></pre></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-07-25</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://senmer.github.io/posts/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/ data-title=Nginx核心配置 data-hashtags=Nginx><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://senmer.github.io/posts/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/ data-hashtag=Nginx><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://senmer.github.io/posts/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/ data-title=Nginx核心配置><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://senmer.github.io/posts/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/ data-title=Nginx核心配置><i data-svg-src=https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://senmer.github.io/posts/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/ data-title=Nginx核心配置><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/nginx/>Nginx</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/ class=prev rel=prev title=Nginx平滑升级和回滚><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>Nginx平滑升级和回滚</a>
-<a href=/posts/nginx/nginx%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE/ class=next rel=next title=Nginx高级配置>Nginx高级配置<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=valine class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://valine.js.org/>Valine</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank></a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+<a href=/posts/nginx/nginx%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE/ class=next rel=next title=Nginx高级配置>Nginx高级配置<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=valine class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://valine.js.org/>Valine</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.111.0">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2022 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank></a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/valine/valine.min.css><script type=text/javascript src=https://cdn.jsdelivr.net/npm/valine@1.5.0/dist/Valine.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:50},comment:{valine:{appId:"5sitvRUskZFsUqZPlR7gPPkX-MdYXbMMI",appKey:"eOOoG9FJyETUTpDnzwzjb8z1",avatar:"mp",el:"#valine",emojiCDN:"https://cdn.jsdelivr.net/npm/emoji-datasource-google@14.0.0/img/google/64/",emojiMaps:{100:"1f4af.png",alien:"1f47d.png",anger:"1f4a2.png",angry:"1f620.png",anguished:"1f627.png",astonished:"1f632.png",black_heart:"1f5a4.png",blue_heart:"1f499.png",blush:"1f60a.png",bomb:"1f4a3.png",boom:"1f4a5.png",broken_heart:"1f494.png",brown_heart:"1f90e.png",clown_face:"1f921.png",cold_face:"1f976.png",cold_sweat:"1f630.png",confounded:"1f616.png",confused:"1f615.png",cry:"1f622.png",crying_cat_face:"1f63f.png",cupid:"1f498.png",dash:"1f4a8.png",disappointed:"1f61e.png",disappointed_relieved:"1f625.png",dizzy:"1f4ab.png",dizzy_face:"1f635.png",drooling_face:"1f924.png",exploding_head:"1f92f.png",expressionless:"1f611.png",face_vomiting:"1f92e.png",face_with_cowboy_hat:"1f920.png",face_with_hand_over_mouth:"1f92d.png",face_with_head_bandage:"1f915.png",face_with_monocle:"1f9d0.png",face_with_raised_eyebrow:"1f928.png",face_with_rolling_eyes:"1f644.png",face_with_symbols_on_mouth:"1f92c.png",face_with_thermometer:"1f912.png",fearful:"1f628.png",flushed:"1f633.png",frowning:"1f626.png",ghost:"1f47b.png",gift_heart:"1f49d.png",green_heart:"1f49a.png",grimacing:"1f62c.png",grin:"1f601.png",grinning:"1f600.png",hankey:"1f4a9.png",hear_no_evil:"1f649.png",heart:"2764-fe0f.png",heart_decoration:"1f49f.png",heart_eyes:"1f60d.png",heart_eyes_cat:"1f63b.png",heartbeat:"1f493.png",heartpulse:"1f497.png",heavy_heart_exclamation_mark_ornament:"2763-fe0f.png",hole:"1f573-fe0f.png",hot_face:"1f975.png",hugging_face:"1f917.png",hushed:"1f62f.png",imp:"1f47f.png",innocent:"1f607.png",japanese_goblin:"1f47a.png",japanese_ogre:"1f479.png",joy:"1f602.png",joy_cat:"1f639.png",kiss:"1f48b.png",kissing:"1f617.png",kissing_cat:"1f63d.png",kissing_closed_eyes:"1f61a.png",kissing_heart:"1f618.png",kissing_smiling_eyes:"1f619.png",laughing:"1f606.png",left_speech_bubble:"1f5e8-fe0f.png",love_letter:"1f48c.png",lying_face:"1f925.png",mask:"1f637.png",money_mouth_face:"1f911.png",nauseated_face:"1f922.png",nerd_face:"1f913.png",neutral_face:"1f610.png",no_mouth:"1f636.png",open_mouth:"1f62e.png",orange_heart:"1f9e1.png",partying_face:"1f973.png",pensive:"1f614.png",persevere:"1f623.png",pleading_face:"1f97a.png",pouting_cat:"1f63e.png",purple_heart:"1f49c.png",rage:"1f621.png",relaxed:"263a-fe0f.png",relieved:"1f60c.png",revolving_hearts:"1f49e.png",right_anger_bubble:"1f5ef-fe0f.png",robot_face:"1f916.png",rolling_on_the_floor_laughing:"1f923.png",scream:"1f631.png",scream_cat:"1f640.png",see_no_evil:"1f648.png",shushing_face:"1f92b.png",skull:"1f480.png",skull_and_crossbones:"2620-fe0f.png",sleeping:"1f634.png",sleepy:"1f62a.png",slightly_frowning_face:"1f641.png",slightly_smiling_face:"1f642.png",smile:"1f604.png",smile_cat:"1f638.png",smiley:"1f603.png",smiley_cat:"1f63a.png",smiling_face_with_3_hearts:"1f970.png",smiling_imp:"1f608.png",smirk:"1f60f.png",smirk_cat:"1f63c.png",sneezing_face:"1f927.png",sob:"1f62d.png",space_invader:"1f47e.png",sparkling_heart:"1f496.png",speak_no_evil:"1f64a.png",speech_balloon:"1f4ac.png","star-struck":"1f929.png",stuck_out_tongue:"1f61b.png",stuck_out_tongue_closed_eyes:"1f61d.png",stuck_out_tongue_winking_eye:"1f61c.png",sunglasses:"1f60e.png",sweat:"1f613.png",sweat_drops:"1f4a6.png",sweat_smile:"1f605.png",thinking_face:"1f914.png",thought_balloon:"1f4ad.png",tired_face:"1f62b.png",triumph:"1f624.png",two_hearts:"1f495.png",unamused:"1f612.png",upside_down_face:"1f643.png",weary:"1f629.png",white_frowning_face:"2639-fe0f.png",white_heart:"1f90d.png",wink:"1f609.png",woozy_face:"1f974.png",worried:"1f61f.png",yawning_face:"1f971.png",yellow_heart:"1f49b.png",yum:"1f60b.png",zany_face:"1f92a.png",zipper_mouth_face:"1f910.png",zzz:"1f4a4.png"},enableQQ:!1,highlight:!0,lang:"zh-CN",pageSize:10,placeholder:"comment",recordIP:!0,serverURLs:"https://5sitvrus.api.lncldglobal.com",visitor:!0}},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:30,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
