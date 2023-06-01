@@ -1,17 +1,408 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Daben's Blog</title><link>https://senmer.github.io/</link><description>This is my cool site</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 30 Apr 2023 11:30:47 +0800</lastBuildDate><atom:link href="https://senmer.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>java-集合</title><link>https://senmer.github.io/posts/java/java-%E9%9B%86%E5%90%88/</link><pubDate>Sun, 30 Apr 2023 11:30:47 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/java/java-%E9%9B%86%E5%90%88/</guid><description><![CDATA[<p>第一题：创建一个List集合的对象，添加几条数据，将1号位和2号位交换；获得最大值，最小值打印出来，最后再遍历该集合并把元素打印出来</p>
-<p>第二题 现在有一个map集合如下：
-Map&lt;Integer,String&gt; map = new HashMap&lt;Integer, String&gt;();
-map.put(1, &ldquo;张三丰&rdquo;);
-map.put(2, &ldquo;周芷若&rdquo;);
-map.put(3, &ldquo;汪峰&rdquo;);
-map.put(4, &ldquo;灭绝师太&rdquo;);
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>WZ&#39;s Blog</title>
+    <link>https://xyming108.github.io/</link>
+    <description>Recent content on WZ&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 30 Apr 2023 11:30:47 +0800</lastBuildDate><atom:link href="https://xyming108.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java-集合</title>
+      <link>https://xyming108.github.io/posts/tech/java/java-%E9%9B%86%E5%90%88/</link>
+      <pubDate>Sun, 30 Apr 2023 11:30:47 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/java/java-%E9%9B%86%E5%90%88/</guid>
+      <description>&lt;p&gt;第一题：创建一个List集合的对象，添加几条数据，将1号位和2号位交换；获得最大值，最小值打印出来，最后再遍历该集合并把元素打印出来&lt;/p&gt;
+&lt;p&gt;第二题 现在有一个map集合如下：
+Map&amp;lt;Integer,String&amp;gt; map = new HashMap&amp;lt;Integer, String&amp;gt;();
+map.put(1, &amp;ldquo;张三丰&amp;rdquo;);
+map.put(2, &amp;ldquo;周芷若&amp;rdquo;);
+map.put(3, &amp;ldquo;汪峰&amp;rdquo;);
+map.put(4, &amp;ldquo;灭绝师太&amp;rdquo;);
 要求：
 1.遍历集合，并将序号与对应人名打印。
 2.向该map集合中插入一个编码为5姓名为李晓红的信息
 3.移除该map中的编号为1的信息
-4.将map集合中编号为2的姓名信息修改为周林</p>]]></description></item><item><title>java-类</title><link>https://senmer.github.io/posts/java/java-%E7%B1%BB/</link><pubDate>Sun, 30 Apr 2023 11:30:47 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/java/java-%E7%B1%BB/</guid><description>&lt;p>1、定义手机类，手机有品牌(brand),价格(price)和颜色(color)三个属性，有打电话call()和sendMessage()两个功能。&lt;/p>
-&lt;p>2、定义一个女朋友类。女朋友的属性包含：姓名，身高，体重。行为包含：洗衣服wash()，做饭cook()。&lt;/p></description></item><item><title>java-循环</title><link>https://senmer.github.io/posts/java/java-%E5%BE%AA%E7%8E%AF/</link><pubDate>Sun, 30 Apr 2023 11:30:47 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/java/java-%E5%BE%AA%E7%8E%AF/</guid><description><![CDATA[<p>1、编写一个 Java 程序，求出从 1 到 100 中所有偶数的和。</p>
-<p>2、编写一个 Java 程序，求出一个给定正整数的所有因数。</p>
-<p>3、给定一个整型数组，编写一个 Java 程序，将该数组中的所有奇数元素存储到一个新数组中，并输出新数组中的元素。</p>]]></description></item><item><title>BurpSuite扫描与爆破</title><link>https://senmer.github.io/posts/burp/burpsuite%E6%89%AB%E6%8F%8F%E4%B8%8E%E7%88%86%E7%A0%B4/</link><pubDate>Mon, 17 Apr 2023 20:41:50 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/burp/burpsuite%E6%89%AB%E6%8F%8F%E4%B8%8E%E7%88%86%E7%A0%B4/</guid><description><![CDATA[<p>1、使用Discover Content功能爬取任意站点的目录，给出爬取过程的说明文档、站点树截图；</p>
-<p>2、分别使用burp Scan的主动扫描和被动扫描功能对DVWA站点进行扫描，输出扫描报告；</p>
-<p>3、分别使用burp的狙击手模式（Sniper）和集束炸弹模式（Cluster bomb） 对DVWA的Brute Force模块进行爆破</p>]]></description></item><item><title>等级保护&amp;风险评估</title><link>https://senmer.github.io/posts/dengbao/%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A4%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0/</link><pubDate>Sun, 09 Apr 2023 10:46:02 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/dengbao/%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A4%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0/</guid><description>&lt;p>等级保护&amp;amp;风险评估：了解基本测评流程，知道各角色岗位在测评工作中的职责，学习国标文件&lt;/p></description></item><item><title>MSF编码器结合shellcode加载器实现免杀</title><link>https://senmer.github.io/posts/anti-virus/msf%E7%BC%96%E7%A0%81%E5%99%A8%E7%BB%93%E5%90%88shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%85%8D%E6%9D%80/</link><pubDate>Fri, 07 Apr 2023 20:57:22 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/anti-virus/msf%E7%BC%96%E7%A0%81%E5%99%A8%E7%BB%93%E5%90%88shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%85%8D%E6%9D%80/</guid><description>&lt;p>MSF编码器结合shellcode加载器进行免杀实验&lt;/p></description></item><item><title>JBoss 5.x&amp;6.x 反序列化漏洞（CVE 2017 12149）复现</title><link>https://senmer.github.io/posts/cve/jboss-5.x6.x-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9Ecve-2017-12149%E5%A4%8D%E7%8E%B0/</link><pubDate>Wed, 05 Apr 2023 15:47:39 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/cve/jboss-5.x6.x-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9Ecve-2017-12149%E5%A4%8D%E7%8E%B0/</guid><description>&lt;p>JBoss 5.x/6.x 反序列化漏洞（CVE-2017-12149）&lt;/p></description></item><item><title>S2-048 远程代码执行漏洞（CVE-2017-9791）</title><link>https://senmer.github.io/posts/cve/apache%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0cve-2017-9791/</link><pubDate>Sat, 01 Apr 2023 22:30:22 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/cve/apache%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0cve-2017-9791/</guid><description>&lt;p>S2-048 远程代码执行漏洞（CVE-2017-9791）&lt;/p></description></item><item><title>Tomcat任意写文件漏洞复现(CVE-2017-12615)</title><link>https://senmer.github.io/posts/cve/tomcat%E4%BB%BB%E6%84%8F%E5%86%99%E6%96%87%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0cve-2017-12615/</link><pubDate>Wed, 29 Mar 2023 21:33:06 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/cve/tomcat%E4%BB%BB%E6%84%8F%E5%86%99%E6%96%87%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0cve-2017-12615/</guid><description>&lt;p>Tomcat PUT方法任意写文件漏洞（CVE-2017-12615）复现&lt;/p></description></item><item><title>SQLmap安装和使用</title><link>https://senmer.github.io/posts/scanning_tools/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</link><pubDate>Sun, 26 Mar 2023 21:17:29 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/scanning_tools/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</guid><description></description></item></channel></rss>
+4.将map集合中编号为2的姓名信息修改为周林&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>java-类</title>
+      <link>https://xyming108.github.io/posts/tech/java/java-%E7%B1%BB/</link>
+      <pubDate>Sun, 30 Apr 2023 11:30:47 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/java/java-%E7%B1%BB/</guid>
+      <description>&lt;p&gt;1、定义手机类，手机有品牌(brand),价格(price)和颜色(color)三个属性，有打电话call()和sendMessage()两个功能。&lt;/p&gt;
+&lt;p&gt;2、定义一个女朋友类。女朋友的属性包含：姓名，身高，体重。行为包含：洗衣服wash()，做饭cook()。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>java-循环</title>
+      <link>https://xyming108.github.io/posts/tech/java/java-%E5%BE%AA%E7%8E%AF/</link>
+      <pubDate>Sun, 30 Apr 2023 11:30:47 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/java/java-%E5%BE%AA%E7%8E%AF/</guid>
+      <description>&lt;p&gt;1、编写一个 Java 程序，求出从 1 到 100 中所有偶数的和。&lt;/p&gt;
+&lt;p&gt;2、编写一个 Java 程序，求出一个给定正整数的所有因数。&lt;/p&gt;
+&lt;p&gt;3、给定一个整型数组，编写一个 Java 程序，将该数组中的所有奇数元素存储到一个新数组中，并输出新数组中的元素。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>BurpSuite扫描与爆破</title>
+      <link>https://xyming108.github.io/posts/tech/burp/burpsuite%E6%89%AB%E6%8F%8F%E4%B8%8E%E7%88%86%E7%A0%B4/</link>
+      <pubDate>Mon, 17 Apr 2023 20:41:50 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/burp/burpsuite%E6%89%AB%E6%8F%8F%E4%B8%8E%E7%88%86%E7%A0%B4/</guid>
+      <description>&lt;p&gt;1、使用Discover Content功能爬取任意站点的目录，给出爬取过程的说明文档、站点树截图；&lt;/p&gt;
+&lt;p&gt;2、分别使用burp Scan的主动扫描和被动扫描功能对DVWA站点进行扫描，输出扫描报告；&lt;/p&gt;
+&lt;p&gt;3、分别使用burp的狙击手模式（Sniper）和集束炸弹模式（Cluster bomb） 对DVWA的Brute Force模块进行爆破&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>等级保护&amp;风险评估</title>
+      <link>https://xyming108.github.io/posts/tech/dengbao/%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A4%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0/</link>
+      <pubDate>Sun, 09 Apr 2023 10:46:02 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/dengbao/%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A4%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0/</guid>
+      <description>&lt;p&gt;等级保护&amp;amp;风险评估：了解基本测评流程，知道各角色岗位在测评工作中的职责，学习国标文件&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MSF编码器结合shellcode加载器实现免杀</title>
+      <link>https://xyming108.github.io/posts/tech/anti-virus/msf%E7%BC%96%E7%A0%81%E5%99%A8%E7%BB%93%E5%90%88shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%85%8D%E6%9D%80/</link>
+      <pubDate>Fri, 07 Apr 2023 20:57:22 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/anti-virus/msf%E7%BC%96%E7%A0%81%E5%99%A8%E7%BB%93%E5%90%88shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%85%8D%E6%9D%80/</guid>
+      <description>&lt;p&gt;MSF编码器结合shellcode加载器进行免杀实验&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>JBoss 5.x&amp;6.x 反序列化漏洞（CVE 2017 12149）复现</title>
+      <link>https://xyming108.github.io/posts/tech/cve/jboss-5.x6.x-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9Ecve-2017-12149%E5%A4%8D%E7%8E%B0/</link>
+      <pubDate>Wed, 05 Apr 2023 15:47:39 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/cve/jboss-5.x6.x-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9Ecve-2017-12149%E5%A4%8D%E7%8E%B0/</guid>
+      <description>&lt;p&gt;JBoss 5.x/6.x 反序列化漏洞（CVE-2017-12149）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>S2-048 远程代码执行漏洞（CVE-2017-9791）</title>
+      <link>https://xyming108.github.io/posts/tech/cve/apache%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0cve-2017-9791/</link>
+      <pubDate>Sat, 01 Apr 2023 22:30:22 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/cve/apache%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0cve-2017-9791/</guid>
+      <description>&lt;p&gt;S2-048 远程代码执行漏洞（CVE-2017-9791）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Tomcat任意写文件漏洞复现(CVE-2017-12615)</title>
+      <link>https://xyming108.github.io/posts/tech/cve/tomcat%E4%BB%BB%E6%84%8F%E5%86%99%E6%96%87%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0cve-2017-12615/</link>
+      <pubDate>Wed, 29 Mar 2023 21:33:06 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/cve/tomcat%E4%BB%BB%E6%84%8F%E5%86%99%E6%96%87%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0cve-2017-12615/</guid>
+      <description>&lt;p&gt;Tomcat PUT方法任意写文件漏洞（CVE-2017-12615）复现&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQLmap安装和使用</title>
+      <link>https://xyming108.github.io/posts/tech/scanning_tools/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sun, 26 Mar 2023 21:17:29 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/scanning_tools/sqlmap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MSF漏洞利用</title>
+      <link>https://xyming108.github.io/posts/tech/msf/msf%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link>
+      <pubDate>Sun, 19 Mar 2023 21:24:47 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/msf/msf%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</guid>
+      <description>&lt;p&gt;（1）MS08-067、MS10-018、MS17-010、CVE-2018-4878漏洞复现&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Safedog_bypass</title>
+      <link>https://xyming108.github.io/posts/tech/waf/safedog_bypass/</link>
+      <pubDate>Sat, 18 Mar 2023 17:20:54 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/waf/safedog_bypass/</guid>
+      <description>&lt;p&gt;（1）实现WAF安装与配置&lt;/p&gt;
+&lt;p&gt;（2）分别在无WAF和有WAF的情况下，利用SQLMap进行注入，提供注入结果截图&lt;/p&gt;
+&lt;p&gt;（3）在有WAF的情况下，手工注入出DVWA数据库中的user和password，提供注入过程说明文档&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>验证码绕过</title>
+      <link>https://xyming108.github.io/posts/tech/brute_force/%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87/</link>
+      <pubDate>Sat, 18 Mar 2023 14:52:22 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/brute_force/%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87/</guid>
+      <description>&lt;p&gt;（1）验证码绕过（on client）+ 验证码绕过（on server）&lt;/p&gt;
+&lt;p&gt;（2）验证码绕过（on server）实验中，为什么burp拦截开启的状态下，通过Repeater进行重放不会刷新验证码，关闭拦截后才会刷新验证码？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>密码修改逻辑漏洞</title>
+      <link>https://xyming108.github.io/posts/tech/logic/%E5%AF%86%E7%A0%81%E4%BF%AE%E6%94%B9%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/</link>
+      <pubDate>Sat, 18 Mar 2023 10:48:46 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/logic/%E5%AF%86%E7%A0%81%E4%BF%AE%E6%94%B9%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/</guid>
+      <description>&lt;p&gt;（1）密码修改逻辑漏洞&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>旁注与跨库</title>
+      <link>https://xyming108.github.io/posts/tech/side/%E6%97%81%E6%B3%A8%E4%B8%8E%E8%B7%A8%E5%BA%93/</link>
+      <pubDate>Sun, 12 Mar 2023 15:36:16 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/side/%E6%97%81%E6%B3%A8%E4%B8%8E%E8%B7%A8%E5%BA%93/</guid>
+      <description>&lt;p&gt;（1）bluecms旁注漏洞练习&lt;/p&gt;
+&lt;p&gt;（2）为什么旁站攻击可以拿下主站？&lt;/p&gt;
+&lt;p&gt;（3）跨库的意思是什么？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Brute_force</title>
+      <link>https://xyming108.github.io/posts/tech/brute_force/brute_force/</link>
+      <pubDate>Fri, 10 Mar 2023 23:40:53 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/brute_force/brute_force/</guid>
+      <description>&lt;p&gt;暴力猜解：hydra实现对ftp、ssh、rdp、mysql的暴力破解&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>BAC</title>
+      <link>https://xyming108.github.io/posts/tech/bac/bac/</link>
+      <pubDate>Fri, 10 Mar 2023 22:59:08 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/bac/bac/</guid>
+      <description>&lt;p&gt;（1）远程代码执行漏洞：DVWA-Low级别，要求把命令的操作方式全部练习一遍；&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>RCE</title>
+      <link>https://xyming108.github.io/posts/tech/rce/rce/</link>
+      <pubDate>Fri, 10 Mar 2023 22:13:17 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/rce/rce/</guid>
+      <description>&lt;p&gt;（1）远程代码执行漏洞：DVWA-Low级别，要求把命令的操作方式全部练习一遍；&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SSRF</title>
+      <link>https://xyming108.github.io/posts/tech/ssrf/ssrf/</link>
+      <pubDate>Fri, 10 Mar 2023 20:55:15 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/ssrf/ssrf/</guid>
+      <description>&lt;p&gt;(1) SSRF（file_get_content），获取ssrf.php的源码；&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CSRF</title>
+      <link>https://xyming108.github.io/posts/tech/csrf/csrf/</link>
+      <pubDate>Thu, 09 Mar 2023 14:50:32 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/csrf/csrf/</guid>
+      <description>&lt;p&gt;（1）DVWA-High等级
+（2）使用Burp生成CSRF利用POC&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>文件包含</title>
+      <link>https://xyming108.github.io/posts/tech/file_inclusion/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
+      <pubDate>Wed, 08 Mar 2023 22:20:13 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/file_inclusion/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
+      <description>&lt;p&gt;（1）DVWA环境下去包含其他目录的任意3个文件，要求使用相对路径
+（2）远程文件包含
+（3）中间件日志包含绕过，要求使用蚁剑连接成功&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>文件上传绕过</title>
+      <link>https://xyming108.github.io/posts/tech/file_upload/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/</link>
+      <pubDate>Fri, 03 Mar 2023 17:14:09 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/file_upload/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/</guid>
+      <description>&lt;p&gt;（1）客户端绕过练习
+（2）服务端黑名单绕过：给出.htaccess文件绕过的具体步骤&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用XSS漏洞获取cookie</title>
+      <link>https://xyming108.github.io/posts/tech/xss/%E5%88%A9%E7%94%A8xss%E6%BC%8F%E6%B4%9E%E8%8E%B7%E5%8F%96cookie/</link>
+      <pubDate>Sat, 25 Feb 2023 22:13:09 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/xss/%E5%88%A9%E7%94%A8xss%E6%BC%8F%E6%B4%9E%E8%8E%B7%E5%8F%96cookie/</guid>
+      <description>&lt;p&gt;（1）使用pikachu平台练习XSS键盘记录、前台XSS盲打攻击获取cookie
+（2）使用beef进行钓鱼，获取用户cookie&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Tech1</title>
+      <link>https://xyming108.github.io/posts/tech/tech1/</link>
+      <pubDate>Tue, 21 Feb 2023 12:20:21 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/tech1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>使用sqlmap注入DVWA数据库</title>
+      <link>https://xyming108.github.io/posts/tech/sql_injection/%E4%BD%BF%E7%94%A8sqlmap%E6%B3%A8%E5%85%A5dvwa%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Sun, 19 Feb 2023 20:30:21 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/sql_injection/%E4%BD%BF%E7%94%A8sqlmap%E6%B3%A8%E5%85%A5dvwa%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>&lt;p&gt;使用Sqlmap工具完成对DVWA数据库的注入过程，要求按照库、表、列、内容的顺序进行注入；&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Keepalived安装脚本</title>
+      <link>https://xyming108.github.io/posts/tech/shell/keepalived%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Sun, 04 Sep 2022 13:10:03 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/shell/keepalived%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</guid>
+      <description>&lt;p&gt;二进制安装Keepalived&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx实现rewrite功能</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E5%AE%9E%E7%8E%B0rewrite%E5%8A%9F%E8%83%BD/</link>
+      <pubDate>Wed, 10 Aug 2022 16:32:07 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E5%AE%9E%E7%8E%B0rewrite%E5%8A%9F%E8%83%BD/</guid>
+      <description>&lt;p&gt;Nginx实现网址重定向&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx高级配置</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Tue, 02 Aug 2022 10:00:16 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;Nginx 高级配置及第三方模块&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx核心配置</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 25 Jul 2022 14:36:53 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;主要介绍Nginx核心配置文件&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx平滑升级和回滚</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/</link>
+      <pubDate>Wed, 20 Jul 2022 16:41:28 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/</guid>
+      <description>&lt;p&gt;利用Nginx信号实现平滑升级&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx安装脚本</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Wed, 20 Jul 2022 16:27:22 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</guid>
+      <description>&lt;p&gt;使用源码包一键安装Nginx&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx安装</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Tue, 19 Jul 2022 15:44:57 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;p&gt;编译安装nginx和yum安装Nginx&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx架构简介</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Tue, 19 Jul 2022 11:54:58 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/</guid>
+      <description>&lt;p&gt;Nginx基础架构和功能简介&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>IO模型与零拷贝</title>
+      <link>https://xyming108.github.io/posts/tech/linux/io%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%9B%B6%E6%8B%B7%E8%B4%9D/</link>
+      <pubDate>Mon, 18 Jul 2022 09:32:22 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/linux/io%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%9B%B6%E6%8B%B7%E8%B4%9D/</guid>
+      <description>&lt;p&gt;本节内容主要用于理解Linux的I/O模型，以便更好地理解Nginx架构。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>windows向linux同步数据</title>
+      <link>https://xyming108.github.io/posts/tech/data_sync/windows%E5%90%91linux%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Mon, 11 Jul 2022 09:43:58 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/data_sync/windows%E5%90%91linux%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE/</guid>
+      <description>&lt;p&gt;利用rsync实现windows定时向linux同步数据（增量同步）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Blog</title>
+      <link>https://xyming108.github.io/posts/blog/blog/</link>
+      <pubDate>Thu, 05 May 2022 00:18:23 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/blog/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Life</title>
+      <link>https://xyming108.github.io/posts/life/life/</link>
+      <pubDate>Thu, 05 May 2022 00:18:15 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/life/life/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Read</title>
+      <link>https://xyming108.github.io/posts/read/read/</link>
+      <pubDate>Thu, 05 May 2022 00:18:06 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/read/read/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tech</title>
+      <link>https://xyming108.github.io/posts/tech/tech/</link>
+      <pubDate>Thu, 05 May 2022 00:17:58 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/tech/</guid>
+      <description>科技代码</description>
+    </item>
+    
+    <item>
+      <title>🤝友链</title>
+      <link>https://xyming108.github.io/links/</link>
+      <pubDate>Sat, 06 Nov 2021 15:15:53 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/links/</guid>
+      <description>Sulv&amp;#39;s Blog 一个记录技术、阅读、生活的博客 👉友链格式 名称： Sulv&amp;rsquo;s Blog 网址： https://www.sulvblog.cn 图标： https://www.sulvblog.cn/img/Q.gif 描述： 一个记录技术、阅读、生活的博客 👉友链申请要求 秉承互换友链原则、文章定期更新、不能有太多广告、个人描述字数控制在15字内 👉Hugo博客交流群 787018782</description>
+    </item>
+    
+    <item>
+      <title>🙋🏻‍♂️关于</title>
+      <link>https://xyming108.github.io/about/</link>
+      <pubDate>Sat, 06 Nov 2021 14:57:28 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/about/</guid>
+      <description>关于我 英文名: Kevin Xu 职业: 程序员 运动: 跑步、乒乓球、爬山</description>
+    </item>
+    
+    
+    
+  </channel>
+</rss>

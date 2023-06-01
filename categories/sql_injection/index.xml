@@ -1,1 +1,20 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Sql_Injection - 分类 - Daben's Blog</title><link>https://senmer.github.io/categories/sql_injection/</link><description>Sql_Injection - 分类 - Daben's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 19 Feb 2023 20:30:21 +0800</lastBuildDate><atom:link href="https://senmer.github.io/categories/sql_injection/" rel="self" type="application/rss+xml"/><item><title>使用sqlmap注入DVWA数据库</title><link>https://senmer.github.io/posts/sql_injection/%E4%BD%BF%E7%94%A8sqlmap%E6%B3%A8%E5%85%A5dvwa%E6%95%B0%E6%8D%AE%E5%BA%93/</link><pubDate>Sun, 19 Feb 2023 20:30:21 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/sql_injection/%E4%BD%BF%E7%94%A8sqlmap%E6%B3%A8%E5%85%A5dvwa%E6%95%B0%E6%8D%AE%E5%BA%93/</guid><description>&lt;p>使用Sqlmap工具完成对DVWA数据库的注入过程，要求按照库、表、列、内容的顺序进行注入；&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Sql_Injection on WZ&#39;s Blog</title>
+    <link>https://xyming108.github.io/categories/sql_injection/</link>
+    <description>Recent content in Sql_Injection on WZ&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 19 Feb 2023 20:30:21 +0800</lastBuildDate><atom:link href="https://xyming108.github.io/categories/sql_injection/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用sqlmap注入DVWA数据库</title>
+      <link>https://xyming108.github.io/posts/tech/sql_injection/%E4%BD%BF%E7%94%A8sqlmap%E6%B3%A8%E5%85%A5dvwa%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Sun, 19 Feb 2023 20:30:21 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/sql_injection/%E4%BD%BF%E7%94%A8sqlmap%E6%B3%A8%E5%85%A5dvwa%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>&lt;p&gt;使用Sqlmap工具完成对DVWA数据库的注入过程，要求按照库、表、列、内容的顺序进行注入；&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,1 +1,20 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>脚本 - 分类 - Daben's Blog</title><link>https://senmer.github.io/categories/%E8%84%9A%E6%9C%AC/</link><description>脚本 - 分类 - Daben's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 20 Jul 2022 16:27:22 +0000</lastBuildDate><atom:link href="https://senmer.github.io/categories/%E8%84%9A%E6%9C%AC/" rel="self" type="application/rss+xml"/><item><title>Nginx安装脚本</title><link>https://senmer.github.io/posts/nginx/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</link><pubDate>Wed, 20 Jul 2022 16:27:22 +0000</pubDate><author>作者</author><guid>https://senmer.github.io/posts/nginx/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</guid><description>&lt;p>使用源码包一键安装Nginx&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>脚本 on WZ&#39;s Blog</title>
+    <link>https://xyming108.github.io/categories/%E8%84%9A%E6%9C%AC/</link>
+    <description>Recent content in 脚本 on WZ&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 20 Jul 2022 16:27:22 +0000</lastBuildDate><atom:link href="https://xyming108.github.io/categories/%E8%84%9A%E6%9C%AC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nginx安装脚本</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Wed, 20 Jul 2022 16:27:22 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</guid>
+      <description>&lt;p&gt;使用源码包一键安装Nginx&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

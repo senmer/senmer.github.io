@@ -1,1 +1,20 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>BAC - 分类 - Daben's Blog</title><link>https://senmer.github.io/categories/bac/</link><description>BAC - 分类 - Daben's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 10 Mar 2023 22:59:08 +0800</lastBuildDate><atom:link href="https://senmer.github.io/categories/bac/" rel="self" type="application/rss+xml"/><item><title>BAC</title><link>https://senmer.github.io/posts/bac/bac/</link><pubDate>Fri, 10 Mar 2023 22:59:08 +0800</pubDate><author>作者</author><guid>https://senmer.github.io/posts/bac/bac/</guid><description>&lt;p>（1）远程代码执行漏洞：DVWA-Low级别，要求把命令的操作方式全部练习一遍；&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>BAC on WZ&#39;s Blog</title>
+    <link>https://xyming108.github.io/categories/bac/</link>
+    <description>Recent content in BAC on WZ&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 10 Mar 2023 22:59:08 +0800</lastBuildDate><atom:link href="https://xyming108.github.io/categories/bac/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>BAC</title>
+      <link>https://xyming108.github.io/posts/tech/bac/bac/</link>
+      <pubDate>Fri, 10 Mar 2023 22:59:08 +0800</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/bac/bac/</guid>
+      <description>&lt;p&gt;（1）远程代码执行漏洞：DVWA-Low级别，要求把命令的操作方式全部练习一遍；&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

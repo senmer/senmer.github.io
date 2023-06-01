@@ -1,1 +1,56 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Nginx - 分类 - Daben's Blog</title><link>https://senmer.github.io/categories/nginx/</link><description>Nginx - 分类 - Daben's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 02 Aug 2022 10:00:16 +0000</lastBuildDate><atom:link href="https://senmer.github.io/categories/nginx/" rel="self" type="application/rss+xml"/><item><title>Nginx高级配置</title><link>https://senmer.github.io/posts/nginx/nginx%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE/</link><pubDate>Tue, 02 Aug 2022 10:00:16 +0000</pubDate><author>作者</author><guid>https://senmer.github.io/posts/nginx/nginx%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE/</guid><description>&lt;p>Nginx 高级配置及第三方模块&lt;/p></description></item><item><title>Nginx核心配置</title><link>https://senmer.github.io/posts/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 25 Jul 2022 14:36:53 +0000</pubDate><author>作者</author><guid>https://senmer.github.io/posts/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/</guid><description>&lt;p>主要介绍Nginx核心配置文件&lt;/p></description></item><item><title>Nginx平滑升级和回滚</title><link>https://senmer.github.io/posts/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/</link><pubDate>Wed, 20 Jul 2022 16:41:28 +0000</pubDate><author>作者</author><guid>https://senmer.github.io/posts/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/</guid><description>&lt;p>利用Nginx信号实现平滑升级&lt;/p></description></item><item><title>Nginx安装</title><link>https://senmer.github.io/posts/nginx/nginx%E5%AE%89%E8%A3%85/</link><pubDate>Tue, 19 Jul 2022 15:44:57 +0000</pubDate><author>作者</author><guid>https://senmer.github.io/posts/nginx/nginx%E5%AE%89%E8%A3%85/</guid><description>&lt;p>编译安装nginx和yum安装Nginx&lt;/p></description></item><item><title>Nginx架构简介</title><link>https://senmer.github.io/posts/nginx/nginx%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/</link><pubDate>Tue, 19 Jul 2022 11:54:58 +0000</pubDate><author>作者</author><guid>https://senmer.github.io/posts/nginx/nginx%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/</guid><description>&lt;p>Nginx基础架构和功能简介&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Nginx on WZ&#39;s Blog</title>
+    <link>https://xyming108.github.io/categories/nginx/</link>
+    <description>Recent content in Nginx on WZ&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 02 Aug 2022 10:00:16 +0000</lastBuildDate><atom:link href="https://xyming108.github.io/categories/nginx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nginx高级配置</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Tue, 02 Aug 2022 10:00:16 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;Nginx 高级配置及第三方模块&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx核心配置</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 25 Jul 2022 14:36:53 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;主要介绍Nginx核心配置文件&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx平滑升级和回滚</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/</link>
+      <pubDate>Wed, 20 Jul 2022 16:41:28 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/</guid>
+      <description>&lt;p&gt;利用Nginx信号实现平滑升级&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx安装</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Tue, 19 Jul 2022 15:44:57 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;p&gt;编译安装nginx和yum安装Nginx&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx架构简介</title>
+      <link>https://xyming108.github.io/posts/tech/nginx/nginx%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Tue, 19 Jul 2022 11:54:58 +0000</pubDate>
+      
+      <guid>https://xyming108.github.io/posts/tech/nginx/nginx%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/</guid>
+      <description>&lt;p&gt;Nginx基础架构和功能简介&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
