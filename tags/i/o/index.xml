@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>I/O on WZ&#39;s Blog</title>
-    <link>https://xyming108.github.io/tags/i/o/</link>
+    <link>https://senmer.github.io/tags/i/o/</link>
     <description>Recent content in I/O on WZ&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh</language><atom:link href="https://xyming108.github.io/tags/i/o/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh</language><atom:link href="https://senmer.github.io/tags/i/o/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>IO模型与零拷贝</title>
-      <link>https://xyming108.github.io/posts/tech/linux/io%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%9B%B6%E6%8B%B7%E8%B4%9D/</link>
+      <link>https://senmer.github.io/posts/tech/linux/io%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%9B%B6%E6%8B%B7%E8%B4%9D/</link>
       <pubDate>Mon, 18 Jul 2022 09:32:22 +0000</pubDate>
       
-      <guid>https://xyming108.github.io/posts/tech/linux/io%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%9B%B6%E6%8B%B7%E8%B4%9D/</guid>
+      <guid>https://senmer.github.io/posts/tech/linux/io%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%9B%B6%E6%8B%B7%E8%B4%9D/</guid>
       <description>&lt;p&gt;本节内容主要用于理解Linux的I/O模型，以便更好地理解Nginx架构。&lt;/p&gt;</description>
     </item>
     

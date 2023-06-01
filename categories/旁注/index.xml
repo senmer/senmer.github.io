@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>旁注 on WZ&#39;s Blog</title>
-    <link>https://xyming108.github.io/categories/%E6%97%81%E6%B3%A8/</link>
+    <link>https://senmer.github.io/categories/%E6%97%81%E6%B3%A8/</link>
     <description>Recent content in 旁注 on WZ&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sun, 12 Mar 2023 15:36:16 +0800</lastBuildDate><atom:link href="https://xyming108.github.io/categories/%E6%97%81%E6%B3%A8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Mar 2023 15:36:16 +0800</lastBuildDate><atom:link href="https://senmer.github.io/categories/%E6%97%81%E6%B3%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>旁注与跨库</title>
-      <link>https://xyming108.github.io/posts/tech/side/%E6%97%81%E6%B3%A8%E4%B8%8E%E8%B7%A8%E5%BA%93/</link>
+      <link>https://senmer.github.io/posts/tech/side/%E6%97%81%E6%B3%A8%E4%B8%8E%E8%B7%A8%E5%BA%93/</link>
       <pubDate>Sun, 12 Mar 2023 15:36:16 +0800</pubDate>
       
-      <guid>https://xyming108.github.io/posts/tech/side/%E6%97%81%E6%B3%A8%E4%B8%8E%E8%B7%A8%E5%BA%93/</guid>
+      <guid>https://senmer.github.io/posts/tech/side/%E6%97%81%E6%B3%A8%E4%B8%8E%E8%B7%A8%E5%BA%93/</guid>
       <description>&lt;p&gt;（1）bluecms旁注漏洞练习&lt;/p&gt;
 &lt;p&gt;（2）为什么旁站攻击可以拿下主站？&lt;/p&gt;
 &lt;p&gt;（3）跨库的意思是什么？&lt;/p&gt;</description>
