@@ -6,7 +6,16 @@
     <description>Recent content on WZ&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sun, 30 Apr 2023 11:30:47 +0800</lastBuildDate><atom:link href="https://senmer.github.io/zh/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 28 Aug 2023 15:39:37 +0800</lastBuildDate><atom:link href="https://senmer.github.io/zh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ansible</title>
+      <link>https://senmer.github.io/zh/posts/tech/ansible/ansible/</link>
+      <pubDate>Mon, 28 Aug 2023 15:39:37 +0800</pubDate>
+      
+      <guid>https://senmer.github.io/zh/posts/tech/ansible/ansible/</guid>
+      <description>1 Ansible 简介 1.1 Ansible 发展史 作者：Michael DeHaan（ Cobbler 与 Func 作者） Ansible 的名称来自科幻小说《安德的游戏》中跨越时空的即时通信工具，使用它可以在相距数光年的距离，远程实时控制前线的舰队战斗。 2012-03-09，发布0.0.1版，2015-10-17，Red Hat宣布1.5亿美元收购An</description>
+    </item>
+    
     <item>
       <title>java-集合</title>
       <link>https://senmer.github.io/zh/posts/tech/java/java-%E9%9B%86%E5%90%88/</link>
@@ -355,15 +364,6 @@ map.put(4, &amp;ldquo;灭绝师太&amp;rdquo;);
       
       <guid>https://senmer.github.io/zh/about/</guid>
       <description>关于我 英文名: nier 职业: 运维 运动: 跑步、乒乓球、爬山</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://senmer.github.io/zh/posts/tech/ansible/ansible/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://senmer.github.io/zh/posts/tech/ansible/ansible/</guid>
-      <description>title: &amp;ldquo;Ansible&amp;rdquo; date: 2023-08-28T14:56:59+08:00 lastmod: 2023-08-28T14:56:59+08:00 author: [&amp;ldquo;wz&amp;rdquo;] keywords: categories: # 没有分类界面可以不填写 tags: # 标签 description: &amp;quot;&amp;quot; weight: slug: &amp;quot;&amp;quot; draft: false # 是否为草稿 comments: true # 本页面是否显示评论 reward: true # 打赏 mermaid: true #是否开启mermaid showToc: true # 显示目录 TocOpen: true # 自动展开目录 hidemeta: false # 是否隐藏文章的元信息，如发布日期、作者等 disableShare: true # 底部不显示分享栏 showbreadcrumbs: true #顶部显示路径 cover: image: &amp;quot;&amp;quot; #图片路径例如：</description>
     </item>
     
     
