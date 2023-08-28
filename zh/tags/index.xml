@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>🧩 标签 on WZ&#39;s Blog</title>
+    <link>https://senmer.github.io/zh/tags/</link>
+    <description>Recent content in 🧩 标签 on WZ&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 01 Apr 2023 22:30:22 +0800</lastBuildDate><atom:link href="https://senmer.github.io/zh/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>APACHE</title>
+      <link>https://senmer.github.io/zh/tags/apache/</link>
+      <pubDate>Sat, 01 Apr 2023 22:30:22 +0800</pubDate>
+      
+      <guid>https://senmer.github.io/zh/tags/apache/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CVE</title>
+      <link>https://senmer.github.io/zh/tags/cve/</link>
+      <pubDate>Sat, 01 Apr 2023 22:30:22 +0800</pubDate>
+      
+      <guid>https://senmer.github.io/zh/tags/cve/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tomcat</title>
+      <link>https://senmer.github.io/zh/tags/tomcat/</link>
+      <pubDate>Wed, 29 Mar 2023 21:33:06 +0800</pubDate>
+      
+      <guid>https://senmer.github.io/zh/tags/tomcat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nginx</title>
+      <link>https://senmer.github.io/zh/tags/nginx/</link>
+      <pubDate>Tue, 02 Aug 2022 10:00:16 +0000</pubDate>
+      
+      <guid>https://senmer.github.io/zh/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>升级、回滚</title>
+      <link>https://senmer.github.io/zh/tags/%E5%8D%87%E7%BA%A7%E5%9B%9E%E6%BB%9A/</link>
+      <pubDate>Wed, 20 Jul 2022 16:41:28 +0000</pubDate>
+      
+      <guid>https://senmer.github.io/zh/tags/%E5%8D%87%E7%BA%A7%E5%9B%9E%E6%BB%9A/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shell</title>
+      <link>https://senmer.github.io/zh/tags/shell/</link>
+      <pubDate>Wed, 20 Jul 2022 16:27:22 +0000</pubDate>
+      
+      <guid>https://senmer.github.io/zh/tags/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>软件安装</title>
+      <link>https://senmer.github.io/zh/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Tue, 19 Jul 2022 15:44:57 +0000</pubDate>
+      
+      <guid>https://senmer.github.io/zh/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rsync</title>
+      <link>https://senmer.github.io/zh/tags/rsync/</link>
+      <pubDate>Mon, 11 Jul 2022 09:43:58 +0000</pubDate>
+      
+      <guid>https://senmer.github.io/zh/tags/rsync/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>I/O</title>
+      <link>https://senmer.github.io/zh/tags/i/o/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://senmer.github.io/zh/tags/i/o/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
