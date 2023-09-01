@@ -6,7 +6,25 @@
     <description>Recent content on WZ&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 28 Aug 2023 15:39:37 +0800</lastBuildDate><atom:link href="https://senmer.github.io/zh/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Sep 2023 10:26:01 +0800</lastBuildDate><atom:link href="https://senmer.github.io/zh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka简介与集群部署</title>
+      <link>https://senmer.github.io/zh/posts/tech/kafka/kafka%E7%AE%80%E4%BB%8B%E4%B8%8E%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Fri, 01 Sep 2023 10:26:01 +0800</pubDate>
+      
+      <guid>https://senmer.github.io/zh/posts/tech/kafka/kafka%E7%AE%80%E4%BB%8B%E4%B8%8E%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/</guid>
+      <description>一、Kafka 简介： Apache Kafka 是一个开源的分布式事件流平台，最初由 LinkedIn 开发，后来成为 Apache 软件基金会的顶级项目。它主要用于处理实时数据流，将数据从一个地方传输到另一个地方。Kafka 的设计理念是基于发布订阅模型，通过使用主题（topics）来组织和分类数据流。 Kafka 具有以下主要组件： Produc</description>
+    </item>
+    
+    <item>
+      <title>Zookeeper</title>
+      <link>https://senmer.github.io/zh/posts/tech/zookeeper/zookeeper/</link>
+      <pubDate>Tue, 29 Aug 2023 12:09:35 +0800</pubDate>
+      
+      <guid>https://senmer.github.io/zh/posts/tech/zookeeper/zookeeper/</guid>
+      <description>一、Zookeeper 简介： Apache ZooKeeper 是一个分布式的开源协调服务，旨在帮助构建分布式应用程序和服务。它提供了一个高度可靠的、层次化的命名空间，类似于文件系统，用于存储和管理分布式应用程序中的配置信息、状态信息、命名服务等。ZooKeeper 的设计目标是为分布式系统提供强大的协调、同步和</description>
+    </item>
+    
     <item>
       <title>Ansible</title>
       <link>https://senmer.github.io/zh/posts/tech/ansible/ansible/</link>
