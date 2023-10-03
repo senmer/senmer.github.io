@@ -6,7 +6,25 @@
     <description>Recent content on WZ&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 02 Oct 2023 22:37:50 +0800</lastBuildDate><atom:link href="https://senmer.github.io/zh/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Oct 2023 14:39:49 +0800</lastBuildDate><atom:link href="https://senmer.github.io/zh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenVPN启用LDAP&#43;GoogleAuthenticator认证</title>
+      <link>https://senmer.github.io/zh/posts/tech/vpn/openvpn%E5%90%AF%E7%94%A8ldap&#43;googleauthenticator%E8%AE%A4%E8%AF%81/</link>
+      <pubDate>Tue, 03 Oct 2023 14:39:49 +0800</pubDate>
+      
+      <guid>https://senmer.github.io/zh/posts/tech/vpn/openvpn%E5%90%AF%E7%94%A8ldap&#43;googleauthenticator%E8%AE%A4%E8%AF%81/</guid>
+      <description>OpenVPN启用LDAP+GoogleAuthenticator认证 一、概述 本节内容开始之前，已经部署好了openVPN以及LDAP认证。 企业环境中，LDAP用户名密码可以说是一号走天下，一旦出现用户名密码泄露(粗心程序员传到github)，那损失是巨大的，因此加上双因子认证，</description>
+    </item>
+    
+    <item>
+      <title>OpenLDAP安装和使用</title>
+      <link>https://senmer.github.io/zh/posts/tech/ldap/openldap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Tue, 03 Oct 2023 14:26:42 +0800</pubDate>
+      
+      <guid>https://senmer.github.io/zh/posts/tech/ldap/openldap%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</guid>
+      <description>一、OpenLDAP简介 LDAP是一款轻量级目录访问协议（Lightweight Directory Access Protocol，简称LDAP），属于开源集中账号管理架构的实现，且支持众多系统版本，被广大互联网公司所采用。 LDAP提供并实现目录服务的信息服务，目录服务是一种特殊的数据库系统，对于数据的读取、</description>
+    </item>
+    
     <item>
       <title>Kubeadm部署k8s集群</title>
       <link>https://senmer.github.io/zh/posts/tech/kubernetes/kubeadm%E9%83%A8%E7%BD%B2k8s%E9%9B%86%E7%BE%A4/</link>
