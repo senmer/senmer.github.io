@@ -6,14 +6,23 @@
     <description>Recent content in 👨🏻‍💻 技术 on WZ&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 03 Oct 2023 14:39:49 +0800</lastBuildDate><atom:link href="https://senmer.github.io/zh/posts/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Oct 2023 17:21:41 +0800</lastBuildDate><atom:link href="https://senmer.github.io/zh/posts/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ELK部署和使用</title>
+      <link>https://senmer.github.io/zh/posts/tech/elk/elk%E9%83%A8%E7%BD%B2%E5%92%8C%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sun, 08 Oct 2023 17:21:41 +0800</pubDate>
+      
+      <guid>https://senmer.github.io/zh/posts/tech/elk/elk%E9%83%A8%E7%BD%B2%E5%92%8C%E4%BD%BF%E7%94%A8/</guid>
+      <description>一、ELK 简介 ELK是一个流行的开源日志管理和分析平台，它由三个核心组件组成：Elasticsearch、Logstash和Kibana。这三个组件协同工作，使用户能够收集、存储、搜索、分析和可视化大量日志数据。ELK被广泛用于实时日志分析、应用性能监控、安全事件检测等领域。 下面</description>
+    </item>
+    
     <item>
       <title>OpenVPN启用LDAP&#43;GoogleAuthenticator认证</title>
       <link>https://senmer.github.io/zh/posts/tech/vpn/openvpn%E5%90%AF%E7%94%A8ldap&#43;googleauthenticator%E8%AE%A4%E8%AF%81/</link>
       <pubDate>Tue, 03 Oct 2023 14:39:49 +0800</pubDate>
       
       <guid>https://senmer.github.io/zh/posts/tech/vpn/openvpn%E5%90%AF%E7%94%A8ldap&#43;googleauthenticator%E8%AE%A4%E8%AF%81/</guid>
-      <description>OpenVPN启用LDAP+GoogleAuthenticator认证 一、概述 本节内容开始之前，已经部署好了openVPN以及LDAP认证。 企业环境中，LDAP用户名密码可以说是一号走天下，一旦出现用户名密码泄露(粗心程序员传到github)，那损失是巨大的，因此加上双因子认证，</description>
+      <description>一、概述 本节内容开始之前，已经部署好了openVPN以及LDAP认证。 企业环境中，LDAP用户名密码可以说是一号走天下，一旦出现用户名密码泄露(粗心程序员传到github)，那损失是巨大的，因此加上双因子认证，也是加上了一层保险。这里我们的双因子认证是通过GoogleAuthen</description>
     </item>
     
     <item>
