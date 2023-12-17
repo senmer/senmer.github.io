@@ -1,0 +1,535 @@
+<!doctype html><html lang=zh dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Nginx安装 | WZ's Blog</title>
+<meta name=keywords content="软件安装"><meta name=description content="编译安装nginx和yum安装Nginx"><meta name=author content="wz"><link rel=canonical href=https://senmer.github.io/zh/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85/><link crossorigin=anonymous href=/assets/css/stylesheet.5a2b6d77cc78ad18bcb4914c5c639c7ce5ab55e956c461d4310747892b3f50c2.css integrity="sha256-Wittd8x4rRi8tJFMXGOcfOWrVelWxGHUMQdHiSs/UMI=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG+9vmJ0cTS+ovo0FeA=" onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://senmer.github.io/img/Q.gif><link rel=icon type=image/png sizes=16x16 href=https://senmer.github.io/img/Q.gif><link rel=icon type=image/png sizes=32x32 href=https://senmer.github.io/img/Q.gif><link rel=apple-touch-icon href=https://senmer.github.io/img/Q.gif><link rel=mask-icon href=https://senmer.github.io/img/Q.gif><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css><script src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js></script><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?4d7c4710a089d70b71310f0e1ec7681b",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script><meta property="og:title" content="Nginx安装"><meta property="og:description" content="编译安装nginx和yum安装Nginx"><meta property="og:type" content="article"><meta property="og:url" content="https://senmer.github.io/zh/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-07-19T15:44:57+00:00"><meta property="article:modified_time" content="2022-07-19T15:44:57+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Nginx安装"><meta name=twitter:description content="编译安装nginx和yum安装Nginx"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"📚文章","item":"https://senmer.github.io/zh/posts/"},{"@type":"ListItem","position":2,"name":"👨🏻‍💻 技术","item":"https://senmer.github.io/zh/posts/tech/"},{"@type":"ListItem","position":3,"name":"Nginx安装","item":"https://senmer.github.io/zh/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Nginx安装","name":"Nginx安装","description":"编译安装nginx和yum安装Nginx\n","keywords":["软件安装"],"articleBody":"编译安装nginx和yum安装Nginx\nNginx 安装 Nginx版本和安装方式 Nginx版本\nMainline version 主要开发版本,一般为奇数版本号,比如1.19 Stable version 当前最新稳定版,一般为偶数版本,如:1.20 Legacy versions 旧的稳定版,一般为偶数版本,如:1.18 Nginx安装可以使用yum或源码安装，但是推荐使用源码编译安装，原因如下：\nyum的版本比较旧 编译安装可以更方便自定义相关路径 使用源码编译可以自定义相关功能，更方便业务的上的使用 查看当前系统中的nginx版本 范例：查看系统镜像源和epel源的nginx版本\n# centos7 已将nginx集成在系统镜像源 [root@centos7 ~]#dnf info nginx Last metadata expiration check: 0:53:10 ago on Tue 22 Sep 2020 11:01:33 AM CST. Available Packages Name : nginx Epoch : 1 Version : 1.14.1 #版本较老 Release : 9.module_el8.0.0+184+e34fea82 Architecture : x86_64 Size : 570 k Source : nginx-1.14.1-9.module_el8.0.0+184+e34fea82.src.rpm Repository : AppStream #系统镜像源 Summary : A high performance web server and reverse proxy server URL : http://nginx.org/ License : BSD Description : Nginx is a web server and a reverse proxy server for HTTP, SMTP, POP3 and : IMAP protocols, with a strong focus on high concurrency, performance and low : memory usage. yum 安装nginx #CentOS7 需提前配置epel源 # yum install -y epel-release [root@centos7 ~]# yum info nginx Loaded plugins: fastestmirror Loading mirror speeds from cached hostfile * base: mirrors.aliyun.com * epel: mirrors.bfsu.edu.cn * extras: mirrors.aliyun.com * updates: mirrors.aliyun.com Available Packages Name : nginx Arch : x86_64 Epoch : 1 Version : 1.20.1\t#版本较新 Release : 9.el7 Size : 587 k Repo : epel/x86_64\t#epel源 Summary : A high performance web server and reverse proxy server URL : https://nginx.org License : BSD Description : Nginx is a web server and a reverse proxy server for HTTP, SMTP, POP3 and : IMAP protocols, with a strong focus on high concurrency, performance and low : memory usage. 官方包下载地址： http://nginx.org/en/linux_packages.html\n官方yum源：http://nginx.org/en/linux_packages.html#RHEL-CentOS\n范例：通过官方yum源安装nginx\n#配置yum源 [root@centos7 ~]# cat \u003e /etc/yum.repos.d/nginx.repo \u003c","wordCount":"4687","inLanguage":"zh","datePublished":"2022-07-19T15:44:57Z","dateModified":"2022-07-19T15:44:57Z","author":{"@type":"Person","name":"wz"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://senmer.github.io/zh/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85/"},"publisher":{"@type":"Organization","name":"WZ's Blog","logo":{"@type":"ImageObject","url":"https://senmer.github.io/img/Q.gif"}}}</script></head><body id=top><script>(function(){let e,t=new RegExp("(^| )change-themes=([^;]*)(;|$)");(e=document.cookie.match(t))||((new Date).getHours()>=19||(new Date).getHours()<6?(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark")):(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")))})(),localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://senmer.github.io/zh/ accesskey=h title="WZ's Blog (Alt + H)"><img src=https://senmer.github.io/img/Q.gif alt=logo aria-label=logo height=35>WZ's Blog</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://senmer.github.io/zh/search title="🔍 搜索 (Alt + /)" accesskey=/><span>🔍 搜索</span></a></li><li><a href=https://senmer.github.io/zh/ title="🏠 主页"><span>🏠 主页</span></a></li><li><a href=https://senmer.github.io/zh/posts/tech title="📚 文章"><span>📚 文章</span></a></li><li><a href=https://senmer.github.io/zh/categories/ title="🧩 分类"><span>🧩 分类</span></a></li><li><a href=https://senmer.github.io/zh/archives/ title="⏱️ 时间轴"><span>⏱️ 时间轴</span></a></li></ul></nav></header><main class="main page"><style>i[id*=post_meta_style]{display:flex;align-items:center;margin:0 0 10px}</style><article class=post-single><div id=single-content><header class=post-header><div class=breadcrumbs><a href=https://senmer.github.io/zh/>🏠 主页</a>&nbsp;»&nbsp;<a href=https://senmer.github.io/zh/posts/>📚文章</a>&nbsp;»&nbsp;<a href=https://senmer.github.io/zh/posts/tech/>👨🏻‍💻 技术</a></div><h1 class=post-title>Nginx安装</h1><div class=post-meta><style>i[id*=post_meta_style]{display:flex;align-items:center;margin:0 0 10px}.parent-post-meta{display:flex;flex-wrap:wrap;opacity:.8}</style><span class=parent-post-meta><span id=post_meta_style_1><span class="fa fa-calendar-check-o"></span>
+<span>2022-07-19
+&nbsp;&nbsp;
+</span></span><span id=post_meta_style_3><span class="fa fa-file-word-o"></span>
+<span>4687字
+&nbsp;&nbsp;
+</span></span><span id=post_meta_style_4><span class="fa fa-clock-o"></span>
+<span>10分钟
+&nbsp;&nbsp;
+</span></span><span id=post_meta_style_5><span class="fa fa-user-o"></span>
+<span>wz
+&nbsp;&nbsp;
+</span></span><span id=post_meta_style_6><span class="fa fa-tags" style=opacity:.8></span>
+<span><span class=post-tags-meta><a href=https://senmer.github.io/zh/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/ style=color:var(--secondary)!important>软件安装</a>
+</span></span></span></span><span style=opacity:.8><span id=post_meta_style_7>&nbsp;&nbsp;
+<span class="fa fa-eye"></span>
+<span><span id=busuanzi_container_page_pv><span id=busuanzi_value_page_pv></span></span>
+&nbsp;&nbsp;
+</span></span><span id=post_meta_style_8><span class="fa fa-commenting-o"></span>
+<span><script src=https://cdn.staticfile.org/twikoo/1.6.16/twikoo.all.min.js></script><script>let url=document.documentURI,dnsUrl="https://senmer.github.io/",urlSplit=url.split(dnsUrl),finalUrl=urlSplit[1];finalUrl[0]!=="/"&&(finalUrl="/"+finalUrl),twikoo.getCommentsCount({envId:"https://hugo-api-khaki.vercel.app/# 填写自己的twikoo id",region:null,urls:[finalUrl],includeReply:!1}).then(function(e){let t=e[0].count;const n=document.getElementById("comment_count");n.innerText=t}).catch(function(e){console.error(e)})</script><span id=comment_count></span></span></span></span></div></header><aside id=toc-container class="toc-container wide"><div class=toc><details open><summary accesskey=c title="(Alt + C)"><span class=details>目录</span></summary><div class=inner><ul><li><a href=#nginx-%e5%ae%89%e8%a3%85 aria-label="Nginx 安装">Nginx 安装</a><ul><li><a href=#nginx%e7%89%88%e6%9c%ac%e5%92%8c%e5%ae%89%e8%a3%85%e6%96%b9%e5%bc%8f aria-label=Nginx版本和安装方式>Nginx版本和安装方式</a><ul><li><a href=#%e6%9f%a5%e7%9c%8b%e5%bd%93%e5%89%8d%e7%b3%bb%e7%bb%9f%e4%b8%ad%e7%9a%84nginx%e7%89%88%e6%9c%ac aria-label=查看当前系统中的nginx版本>查看当前系统中的nginx版本</a></li></ul></li><li><a href=#yum-%e5%ae%89%e8%a3%85nginx aria-label="yum 安装nginx">yum 安装nginx</a><ul><li><a href=#%e6%a3%80%e6%9f%a5%e5%ae%89%e8%a3%85%e7%bb%93%e6%9e%9c aria-label=检查安装结果>检查安装结果</a></li><li><a href=#%e6%9f%a5%e7%9c%8bnginx%e4%bd%bf%e7%94%a8%e5%b8%ae%e5%8a%a9 aria-label=查看nginx使用帮助>查看nginx使用帮助</a></li><li><a href=#nginx-%e8%87%aa%e5%90%af%e5%8a%a8service%e6%96%87%e4%bb%b6 aria-label="nginx 自启动service文件">nginx 自启动service文件</a></li><li><a href=#nginx-%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6 aria-label="nginx 配置文件">nginx 配置文件</a></li><li><a href=#nginx-%e5%90%af%e5%8a%a8%e7%ae%a1%e7%90%86 aria-label="nginx 启动管理">nginx 启动管理</a></li></ul></li><li><a href=#%e7%bc%96%e8%af%91%e5%ae%89%e8%a3%85-nginx aria-label="编译安装 nginx">编译安装 nginx</a><ul><li><a href=#%e4%bd%bf%e7%94%a8%e5%ae%98%e6%96%b9%e6%ba%90%e7%bc%96%e8%af%91%e5%ae%89%e8%a3%85 aria-label=使用官方源编译安装>使用官方源编译安装</a></li><li><a href=#%e9%aa%8c%e8%af%81%e7%89%88%e6%9c%ac%e5%8f%8a%e7%bc%96%e8%af%91%e5%8f%82%e6%95%b0 aria-label=验证版本及编译参数>验证版本及编译参数</a></li><li><a href=#%e9%aa%8c%e8%af%81%e5%ae%89%e8%a3%85%e7%bb%93%e6%9e%9c aria-label=验证安装结果>验证安装结果</a></li><li><a href=#%e5%88%9b%e5%bb%banginx%e7%9a%84service%e6%96%87%e4%bb%b6%e4%bb%a5%e5%ae%9e%e7%8e%b0%e5%bc%80%e6%9c%ba%e8%87%aa%e5%90%af%e5%8a%a8 aria-label=创建nginx的service文件以实现开机自启动>创建nginx的service文件以实现开机自启动</a></li></ul></li></ul></li></ul></div></details></div></aside><script>let activeElement,elements;window.addEventListener("DOMContentLoaded",function(){checkTocPosition(),elements=document.querySelectorAll("h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]"),activeElement=elements[0];const t=encodeURI(activeElement.getAttribute("id")).toLowerCase();document.querySelector(`.inner ul li a[href="#${t}"]`).classList.add("active")},!1),window.addEventListener("resize",function(){checkTocPosition()},!1),window.addEventListener("scroll",()=>{activeElement=Array.from(elements).find(e=>{if(getOffsetTop(e)-window.pageYOffset>0&&getOffsetTop(e)-window.pageYOffset<window.innerHeight/2)return e})||activeElement,elements.forEach(e=>{const t=encodeURI(e.getAttribute("id")).toLowerCase();e===activeElement?document.querySelector(`.inner ul li a[href="#${t}"]`).classList.add("active"):document.querySelector(`.inner ul li a[href="#${t}"]`).classList.remove("active")})},!1);const main=parseInt(getComputedStyle(document.body).getPropertyValue("--article-width"),10),toc=parseInt(getComputedStyle(document.body).getPropertyValue("--toc-width"),10),gap=parseInt(getComputedStyle(document.body).getPropertyValue("--gap"),10);function checkTocPosition(){const e=document.body.scrollWidth;e-main-toc*2-gap*4>0?document.getElementById("toc-container").classList.add("wide"):document.getElementById("toc-container").classList.remove("wide")}function getOffsetTop(e){if(!e.getClientRects().length)return 0;let t=e.getBoundingClientRect(),n=e.ownerDocument.defaultView;return t.top+n.pageYOffset}</script><div class=post-content><p>编译安装nginx和yum安装Nginx</p><h1 id=nginx-安装>Nginx 安装<a hidden class=anchor aria-hidden=true href=#nginx-安装>#</a></h1><h2 id=nginx版本和安装方式>Nginx版本和安装方式<a hidden class=anchor aria-hidden=true href=#nginx版本和安装方式>#</a></h2><p>Nginx版本</p><ul><li>Mainline version 主要开发版本,一般为奇数版本号,比如1.19</li><li>Stable version 当前最新稳定版,一般为偶数版本,如:1.20</li><li>Legacy versions 旧的稳定版,一般为偶数版本,如:1.18</li></ul><p>Nginx安装可以使用yum或源码安装，但是推荐使用源码编译安装，原因如下：</p><ul><li>yum的版本比较旧</li><li>编译安装可以更方便自定义相关路径</li><li>使用源码编译可以自定义相关功能，更方便业务的上的使用</li></ul><h3 id=查看当前系统中的nginx版本>查看当前系统中的nginx版本<a hidden class=anchor aria-hidden=true href=#查看当前系统中的nginx版本>#</a></h3><p>范例：查看系统镜像源和epel源的nginx版本</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># centos7 已将nginx集成在系统镜像源</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e>#dnf info nginx</span>
+</span></span><span style=display:flex><span>Last metadata expiration check: 0:53:10 ago on Tue <span style=color:#ae81ff>22</span> Sep <span style=color:#ae81ff>2020</span> 11:01:33 AM CST.
+</span></span><span style=display:flex><span>Available Packages
+</span></span><span style=display:flex><span>Name         : nginx
+</span></span><span style=display:flex><span>Epoch       : <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>Version     : 1.14.1  		 <span style=color:#75715e>#版本较老</span>
+</span></span><span style=display:flex><span>Release     : 9.module_el8.0.0+184+e34fea82
+</span></span><span style=display:flex><span>Architecture : x86_64
+</span></span><span style=display:flex><span>Size         : <span style=color:#ae81ff>570</span> k
+</span></span><span style=display:flex><span>Source       : nginx-1.14.1-9.module_el8.0.0+184+e34fea82.src.rpm
+</span></span><span style=display:flex><span>Repository   : AppStream  	 <span style=color:#75715e>#系统镜像源</span>
+</span></span><span style=display:flex><span>Summary     : A high performance web server and reverse proxy server
+</span></span><span style=display:flex><span>URL         : http://nginx.org/
+</span></span><span style=display:flex><span>License     : BSD
+</span></span><span style=display:flex><span>Description : Nginx is a web server and a reverse proxy server <span style=color:#66d9ef>for</span> HTTP, SMTP, 
+</span></span><span style=display:flex><span>POP3 and
+</span></span><span style=display:flex><span>             : IMAP protocols, with a strong focus on high concurrency, 
+</span></span><span style=display:flex><span>performance and low
+</span></span><span style=display:flex><span>             : memory usage.
+</span></span></code></pre></div><h2 id=yum-安装nginx>yum 安装nginx<a hidden class=anchor aria-hidden=true href=#yum-安装nginx>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#CentOS7 需提前配置epel源  # yum install -y epel-release</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># yum info nginx</span>
+</span></span><span style=display:flex><span>Loaded plugins: fastestmirror
+</span></span><span style=display:flex><span>Loading mirror speeds from cached hostfile
+</span></span><span style=display:flex><span> * base: mirrors.aliyun.com
+</span></span><span style=display:flex><span> * epel: mirrors.bfsu.edu.cn
+</span></span><span style=display:flex><span> * extras: mirrors.aliyun.com
+</span></span><span style=display:flex><span> * updates: mirrors.aliyun.com
+</span></span><span style=display:flex><span>Available Packages
+</span></span><span style=display:flex><span>Name        : nginx
+</span></span><span style=display:flex><span>Arch        : x86_64
+</span></span><span style=display:flex><span>Epoch       : <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>Version     : 1.20.1		<span style=color:#75715e>#版本较新</span>
+</span></span><span style=display:flex><span>Release     : 9.el7
+</span></span><span style=display:flex><span>Size        : <span style=color:#ae81ff>587</span> k
+</span></span><span style=display:flex><span>Repo        : epel/x86_64	<span style=color:#75715e>#epel源</span>
+</span></span><span style=display:flex><span>Summary     : A high performance web server and reverse proxy server
+</span></span><span style=display:flex><span>URL         : https://nginx.org
+</span></span><span style=display:flex><span>License     : BSD
+</span></span><span style=display:flex><span>Description : Nginx is a web server and a reverse proxy server <span style=color:#66d9ef>for</span> HTTP, SMTP, POP3 and
+</span></span><span style=display:flex><span>            : IMAP protocols, with a strong focus on high concurrency, performance and low
+</span></span><span style=display:flex><span>            : memory usage.
+</span></span></code></pre></div><p>官方包下载地址： <a href=http://nginx.org/en/linux_packages.html>http://nginx.org/en/linux_packages.html</a></p><p>官方yum源：http://nginx.org/en/linux_packages.html#RHEL-CentOS</p><p>范例：通过官方yum源安装nginx</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#配置yum源</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># cat &gt; /etc/yum.repos.d/nginx.repo &lt;&lt;EOF</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>nginx-stable<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>name<span style=color:#f92672>=</span>nginx stable repo
+</span></span><span style=display:flex><span>baseurl<span style=color:#f92672>=</span>http://nginx.org/packages/centos/<span style=color:#ae81ff>\$</span>releasever/<span style=color:#ae81ff>\$</span>basearch/
+</span></span><span style=display:flex><span>gpgcheck<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>enabled<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>gpgkey<span style=color:#f92672>=</span>https://nginx.org/keys/nginx_signing.key
+</span></span><span style=display:flex><span>module_hotfixes<span style=color:#f92672>=</span>true
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>nginx-mainline<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>name<span style=color:#f92672>=</span>nginx mainline repo
+</span></span><span style=display:flex><span>baseurl<span style=color:#f92672>=</span>http://nginx.org/packages/mainline/centos/<span style=color:#ae81ff>\$</span>releasever/<span style=color:#ae81ff>\$</span>basearch/
+</span></span><span style=display:flex><span>gpgcheck<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>enabled<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>gpgkey<span style=color:#f92672>=</span>https://nginx.org/keys/nginx_signing.key
+</span></span><span style=display:flex><span>module_hotfixes<span style=color:#f92672>=</span>true
+</span></span><span style=display:flex><span>EOF
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#查看所有nginx版本</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># yum list nginx --showduplicates</span>
+</span></span><span style=display:flex><span>Loaded plugins: fastestmirror
+</span></span><span style=display:flex><span>Loading mirror speeds from cached hostfile
+</span></span><span style=display:flex><span> * base: mirrors.aliyun.com
+</span></span><span style=display:flex><span> * epel: hkg.mirror.rackspace.com
+</span></span><span style=display:flex><span> * extras: mirrors.aliyun.com
+</span></span><span style=display:flex><span> * updates: mirrors.aliyun.com
+</span></span><span style=display:flex><span>Available Packages
+</span></span><span style=display:flex><span>nginx.x86_64                                        1:1.16.1-1.el7.ngx                                          nginx-stable
+</span></span><span style=display:flex><span>nginx.x86_64                                        1:1.18.0-1.el7.ngx                                          nginx-stable
+</span></span><span style=display:flex><span>nginx.x86_64                                        1:1.18.0-2.el7.ngx                                          nginx-stable
+</span></span><span style=display:flex><span>nginx.x86_64                                        1:1.20.0-1.el7.ngx                                          nginx-stable
+</span></span><span style=display:flex><span>nginx.x86_64                                        1:1.20.1-1.el7.ngx                                          nginx-stable
+</span></span><span style=display:flex><span>nginx.x86_64                                        1:1.20.1-9.el7                                              epel      
+</span></span><span style=display:flex><span>nginx.x86_64                                        1:1.20.2-1.el7.ngx                                          nginx-stable
+</span></span><span style=display:flex><span>nginx.x86_64                                        1:1.22.0-1.el7.ngx                                          nginx-stable
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#查看版本信息（默认查看最新版本）</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># yum info nginx</span>
+</span></span><span style=display:flex><span>Loaded plugins: fastestmirror
+</span></span><span style=display:flex><span>Loading mirror speeds from cached hostfile
+</span></span><span style=display:flex><span> * base: mirrors.aliyun.com
+</span></span><span style=display:flex><span> * epel: hkg.mirror.rackspace.com
+</span></span><span style=display:flex><span> * extras: mirrors.aliyun.com
+</span></span><span style=display:flex><span> * updates: mirrors.aliyun.com
+</span></span><span style=display:flex><span>Available Packages
+</span></span><span style=display:flex><span>Name        : nginx
+</span></span><span style=display:flex><span>Arch        : x86_64
+</span></span><span style=display:flex><span>Epoch       : <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>Version     : 1.22.0
+</span></span><span style=display:flex><span>Release     : 1.el7.ngx
+</span></span><span style=display:flex><span>Size        : <span style=color:#ae81ff>796</span> k
+</span></span><span style=display:flex><span>Repo        : nginx-stable
+</span></span><span style=display:flex><span>Summary     : High performance web server
+</span></span><span style=display:flex><span>URL         : https://nginx.org/
+</span></span><span style=display:flex><span>License     : 2-clause BSD-like license
+</span></span><span style=display:flex><span>Description : nginx <span style=color:#f92672>[</span>engine x<span style=color:#f92672>]</span> is an HTTP and reverse proxy server, as well as
+</span></span><span style=display:flex><span>            : a mail proxy server.
+</span></span><span style=display:flex><span><span style=color:#75715e>#安装nginx</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># yum install -y nginx</span>
+</span></span></code></pre></div><h3 id=检查安装结果>检查安装结果<a hidden class=anchor aria-hidden=true href=#检查安装结果>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># rpm -q nginx</span>
+</span></span><span style=display:flex><span>nginx-1.22.0-1.el7.ngx.x86_64
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#查看日志轮转配置文件路径</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># rpm -ql nginx |grep log</span>
+</span></span><span style=display:flex><span>/etc/logrotate.d/nginx
+</span></span><span style=display:flex><span>/var/log/nginx
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#默认已配置日志轮转功能</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># cat /etc/logrotate.d/nginx </span>
+</span></span><span style=display:flex><span>/var/log/nginx/*.log <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        daily
+</span></span><span style=display:flex><span>        missingok
+</span></span><span style=display:flex><span>        rotate <span style=color:#ae81ff>52</span>
+</span></span><span style=display:flex><span>        compress
+</span></span><span style=display:flex><span>        delaycompress
+</span></span><span style=display:flex><span>        notifempty
+</span></span><span style=display:flex><span>        create <span style=color:#ae81ff>640</span> nginx adm
+</span></span><span style=display:flex><span>        sharedscripts
+</span></span><span style=display:flex><span>        postrotate
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> -f /var/run/nginx.pid <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>                        kill -USR1 <span style=color:#e6db74>`</span>cat /var/run/nginx.pid<span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span>        endscript
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h3 id=查看nginx使用帮助>查看nginx使用帮助<a hidden class=anchor aria-hidden=true href=#查看nginx使用帮助>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># nginx -h</span>
+</span></span><span style=display:flex><span>nginx version: nginx/1.22.0
+</span></span><span style=display:flex><span>Usage: nginx <span style=color:#f92672>[</span>-?hvVtTq<span style=color:#f92672>]</span> <span style=color:#f92672>[</span>-s signal<span style=color:#f92672>]</span> <span style=color:#f92672>[</span>-p prefix<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>             <span style=color:#f92672>[</span>-e filename<span style=color:#f92672>]</span> <span style=color:#f92672>[</span>-c filename<span style=color:#f92672>]</span> <span style=color:#f92672>[</span>-g directives<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Options:
+</span></span><span style=display:flex><span>  -?,-h         : this help
+</span></span><span style=display:flex><span>  -v            : show version and exit
+</span></span><span style=display:flex><span>  -V            : show version and configure options <span style=color:#66d9ef>then</span> exit  <span style=color:#75715e>#显示详细版本信息和编译参数</span>
+</span></span><span style=display:flex><span>  -t            : test configuration and exit  <span style=color:#75715e>#检测配置文件是否有语法错误</span>
+</span></span><span style=display:flex><span>  -T            : test configuration, dump it and exit  <span style=color:#75715e>#检测配置文件语法并打印结果</span>
+</span></span><span style=display:flex><span>  -q            : suppress non-error messages during configuration testing  
+</span></span><span style=display:flex><span>  -s signal     : send signal to a master process: stop, quit, reopen, reload <span style=color:#75715e>#向nginx发送相关信号</span>
+</span></span><span style=display:flex><span>  -p prefix     : set prefix path <span style=color:#f92672>(</span>default: /etc/nginx/<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>  -e filename   : set error log file <span style=color:#f92672>(</span>default: /var/log/nginx/error.log<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>  -c filename   : set configuration file <span style=color:#f92672>(</span>default: /etc/nginx/nginx.conf<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>  -g directives : set global directives out of configuration file#设置全局指令,注意和配置文件不要同时配置,否则冲突
+</span></span></code></pre></div><p>范例：nginx命令的使用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># nginx -g &#34;worker_processes 6;&#34;  # 启动并配置nginx进程数，与配置文件冲突</span>
+</span></span><span style=display:flex><span>nginx: <span style=color:#f92672>[</span>emerg<span style=color:#f92672>]</span> <span style=color:#e6db74>&#34;worker_processes&#34;</span> directive is duplicate in /etc/nginx/nginx.conf:3
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># cat /etc/nginx/nginx.conf |grep processes  #配置文件中已有配置项</span>
+</span></span><span style=display:flex><span>worker_processes  auto;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># cat /etc/nginx/nginx.conf |grep processes  #注释此配置项</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#worker_processes  auto;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># nginx -g &#34;worker_processes 6;&#34;  #启动nginx，开启6个worker进程。默认后台执行</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># ps aux | grep nginx  #验证结果</span>
+</span></span><span style=display:flex><span>root       <span style=color:#ae81ff>2233</span>  0.0  0.1  <span style=color:#ae81ff>49056</span>  <span style=color:#ae81ff>1156</span> ?        Ss   17:23   0:00 nginx: master process nginx -g worker_processes 6;
+</span></span><span style=display:flex><span>nginx      <span style=color:#ae81ff>2234</span>  0.0  0.1  <span style=color:#ae81ff>49444</span>  <span style=color:#ae81ff>1896</span> ?        S    17:23   0:00 nginx: worker process
+</span></span><span style=display:flex><span>nginx      <span style=color:#ae81ff>2235</span>  0.0  0.1  <span style=color:#ae81ff>49444</span>  <span style=color:#ae81ff>1896</span> ?        S    17:23   0:00 nginx: worker process
+</span></span><span style=display:flex><span>nginx      <span style=color:#ae81ff>2236</span>  0.0  0.1  <span style=color:#ae81ff>49444</span>  <span style=color:#ae81ff>1896</span> ?        S    17:23   0:00 nginx: worker process
+</span></span><span style=display:flex><span>nginx      <span style=color:#ae81ff>2237</span>  0.0  0.1  <span style=color:#ae81ff>49444</span>  <span style=color:#ae81ff>1896</span> ?        S    17:23   0:00 nginx: worker process
+</span></span><span style=display:flex><span>nginx      <span style=color:#ae81ff>2238</span>  0.0  0.1  <span style=color:#ae81ff>49444</span>  <span style=color:#ae81ff>1896</span> ?        S    17:23   0:00 nginx: worker process
+</span></span><span style=display:flex><span>nginx      <span style=color:#ae81ff>2239</span>  0.0  0.1  <span style=color:#ae81ff>49444</span>  <span style=color:#ae81ff>1896</span> ?        S    17:23   0:00 nginx: worker process
+</span></span><span style=display:flex><span>root       <span style=color:#ae81ff>2242</span>  0.0  0.0 <span style=color:#ae81ff>112812</span>   <span style=color:#ae81ff>980</span> pts/1    R+   17:24   0:00 grep --color<span style=color:#f92672>=</span>auto nginx
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># nginx -s quit  #关闭nginx（进程结束当前任务后自动关闭）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># ps aux | grep nginx  </span>
+</span></span><span style=display:flex><span>root       <span style=color:#ae81ff>2246</span>  0.0  0.0 <span style=color:#ae81ff>112812</span>   <span style=color:#ae81ff>980</span> pts/1    R+   17:26   0:00 grep --color<span style=color:#f92672>=</span>auto nginx
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># nginx -g &#39;daemon off;&#39;  #前台启动nginx，在docker中启动时有用。</span>
+</span></span><span style=display:flex><span>^C<span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># nginx -t  #nginx语法检查成功</span>
+</span></span><span style=display:flex><span>nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+</span></span><span style=display:flex><span>nginx: configuration file /etc/nginx/nginx.conf test is successful
+</span></span></code></pre></div><h3 id=nginx-自启动service文件>nginx 自启动service文件<a hidden class=anchor aria-hidden=true href=#nginx-自启动service文件>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># rpm -ql nginx | grep service</span>
+</span></span><span style=display:flex><span>/usr/lib/systemd/system/nginx-debug.service
+</span></span><span style=display:flex><span>/usr/lib/systemd/system/nginx.service
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># cat /usr/lib/systemd/system/nginx.service </span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Unit<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Description<span style=color:#f92672>=</span>nginx - high performance web server
+</span></span><span style=display:flex><span>Documentation<span style=color:#f92672>=</span>http://nginx.org/en/docs/
+</span></span><span style=display:flex><span>After<span style=color:#f92672>=</span>network-online.target remote-fs.target nss-lookup.target
+</span></span><span style=display:flex><span>Wants<span style=color:#f92672>=</span>network-online.target
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Service<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Type<span style=color:#f92672>=</span>forking
+</span></span><span style=display:flex><span>PIDFile<span style=color:#f92672>=</span>/var/run/nginx.pid
+</span></span><span style=display:flex><span>ExecStart<span style=color:#f92672>=</span>/usr/sbin/nginx -c /etc/nginx/nginx.conf
+</span></span><span style=display:flex><span>ExecReload<span style=color:#f92672>=</span>/bin/sh -c <span style=color:#e6db74>&#34;/bin/kill -s HUP </span><span style=color:#66d9ef>$(</span>/bin/cat /var/run/nginx.pid<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>ExecStop<span style=color:#f92672>=</span>/bin/sh -c <span style=color:#e6db74>&#34;/bin/kill -s TERM </span><span style=color:#66d9ef>$(</span>/bin/cat /var/run/nginx.pid<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Install<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>WantedBy<span style=color:#f92672>=</span>multi-user.target
+</span></span></code></pre></div><h3 id=nginx-配置文件>nginx 配置文件<a hidden class=anchor aria-hidden=true href=#nginx-配置文件>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># rpm -qc nginx</span>
+</span></span><span style=display:flex><span>/etc/logrotate.d/nginx
+</span></span><span style=display:flex><span>/etc/nginx/conf.d/default.conf
+</span></span><span style=display:flex><span>/etc/nginx/fastcgi_params
+</span></span><span style=display:flex><span>/etc/nginx/mime.types
+</span></span><span style=display:flex><span>/etc/nginx/nginx.conf
+</span></span><span style=display:flex><span>/etc/nginx/scgi_params
+</span></span><span style=display:flex><span>/etc/nginx/uwsgi_params
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#nginx安装目录结果</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># tree /etc/nginx/</span>
+</span></span><span style=display:flex><span>/etc/nginx/
+</span></span><span style=display:flex><span>├── conf.d
+</span></span><span style=display:flex><span>│   └── default.conf
+</span></span><span style=display:flex><span>├── fastcgi_params
+</span></span><span style=display:flex><span>├── mime.types
+</span></span><span style=display:flex><span>├── modules -&gt; ../../usr/lib64/nginx/modules
+</span></span><span style=display:flex><span>├── nginx.conf
+</span></span><span style=display:flex><span>├── scgi_params
+</span></span><span style=display:flex><span>└── uwsgi_params
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span> directories, <span style=color:#ae81ff>6</span> files
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#nginx默认配置</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># egrep -v &#34;^ *#|^$&#34; /etc/nginx/nginx.conf </span>
+</span></span><span style=display:flex><span>user  nginx;
+</span></span><span style=display:flex><span>error_log  /var/log/nginx/error.log notice;
+</span></span><span style=display:flex><span>pid        /var/run/nginx.pid;
+</span></span><span style=display:flex><span>events <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    worker_connections  1024;
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>http <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    include       /etc/nginx/mime.types;
+</span></span><span style=display:flex><span>    default_type  application/octet-stream;
+</span></span><span style=display:flex><span>    log_format  main  <span style=color:#e6db74>&#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;</span>
+</span></span><span style=display:flex><span>                      <span style=color:#e6db74>&#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;</span>
+</span></span><span style=display:flex><span>                      <span style=color:#e6db74>&#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;</span>;
+</span></span><span style=display:flex><span>    access_log  /var/log/nginx/access.log  main;
+</span></span><span style=display:flex><span>    sendfile        on;
+</span></span><span style=display:flex><span>    keepalive_timeout  65;
+</span></span><span style=display:flex><span>    include /etc/nginx/conf.d/*.conf;
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h3 id=nginx-启动管理>nginx 启动管理<a hidden class=anchor aria-hidden=true href=#nginx-启动管理>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># systemctl enable --now nginx #启动nginx并设置开机自启动 --利用service文件管理</span>
+</span></span><span style=display:flex><span>Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service to /usr/lib/systemd/system/nginx.service.
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># systemctl status nginx  #nginx成功运行</span>
+</span></span><span style=display:flex><span>● nginx.service - nginx - high performance web server
+</span></span><span style=display:flex><span>   Loaded: loaded <span style=color:#f92672>(</span>/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>   Active: active <span style=color:#f92672>(</span>running<span style=color:#f92672>)</span> since Wed 2022-07-20 17:42:56 CST; 7s ago
+</span></span><span style=display:flex><span>     Docs: http://nginx.org/en/docs/
+</span></span><span style=display:flex><span>  Process: <span style=color:#ae81ff>2327</span> ExecStart<span style=color:#f92672>=</span>/usr/sbin/nginx -c /etc/nginx/nginx.conf <span style=color:#f92672>(</span>code<span style=color:#f92672>=</span>exited, status<span style=color:#f92672>=</span>0/SUCCESS<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span> Main PID: <span style=color:#ae81ff>2328</span> <span style=color:#f92672>(</span>nginx<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>   CGroup: /system.slice/nginx.service
+</span></span><span style=display:flex><span>           ├─2328 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+</span></span><span style=display:flex><span>           └─2329 nginx: worker process
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:42:56 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Starting nginx - high performance web server...
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:42:56 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Failed to parse PID from file /var/run/nginx.pid: Invalid argument
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:42:56 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Started nginx - high performance web server.
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># nginx -s quit   #使用nginx命令关闭</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># ps aux | grep nginx  #关闭成功</span>
+</span></span><span style=display:flex><span>root       <span style=color:#ae81ff>2338</span>  0.0  0.0 <span style=color:#ae81ff>112812</span>   <span style=color:#ae81ff>980</span> pts/1    R+   17:43   0:00 grep --color<span style=color:#f92672>=</span>auto nginx
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># systemctl status nginx  #nginx状态为 failed</span>
+</span></span><span style=display:flex><span>● nginx.service - nginx - high performance web server
+</span></span><span style=display:flex><span>   Loaded: loaded <span style=color:#f92672>(</span>/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>   Active: failed <span style=color:#f92672>(</span>Result: exit-code<span style=color:#f92672>)</span> since Wed 2022-07-20 17:43:12 CST; 24s ago
+</span></span><span style=display:flex><span>     Docs: http://nginx.org/en/docs/
+</span></span><span style=display:flex><span>  Process: <span style=color:#ae81ff>2333</span> ExecStop<span style=color:#f92672>=</span>/bin/sh -c /bin/kill -s TERM <span style=color:#66d9ef>$(</span>/bin/cat /var/run/nginx.pid<span style=color:#66d9ef>)</span> <span style=color:#f92672>(</span>code<span style=color:#f92672>=</span>exited, status<span style=color:#f92672>=</span>1/FAILURE<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>  Process: <span style=color:#ae81ff>2327</span> ExecStart<span style=color:#f92672>=</span>/usr/sbin/nginx -c /etc/nginx/nginx.conf <span style=color:#f92672>(</span>code<span style=color:#f92672>=</span>exited, status<span style=color:#f92672>=</span>0/SUCCESS<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span> Main PID: <span style=color:#ae81ff>2328</span> <span style=color:#f92672>(</span>code<span style=color:#f92672>=</span>exited, status<span style=color:#f92672>=</span>0/SUCCESS<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:12 centos7 sh<span style=color:#f92672>[</span>2333<span style=color:#f92672>]</span>: -s, --signal &lt;sig&gt;     send specified signal
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:12 centos7 sh<span style=color:#f92672>[</span>2333<span style=color:#f92672>]</span>: -q, --queue &lt;sig&gt;      use sigqueue<span style=color:#f92672>(</span>2<span style=color:#f92672>)</span> rather than kill<span style=color:#f92672>(</span>2<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:12 centos7 sh<span style=color:#f92672>[</span>2333<span style=color:#f92672>]</span>: -p, --pid              print pids without signaling them
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:12 centos7 sh<span style=color:#f92672>[</span>2333<span style=color:#f92672>]</span>: -l, --list <span style=color:#f92672>[=</span>&lt;signal&gt;<span style=color:#f92672>]</span> list signal names, or convert one to a name
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:12 centos7 sh<span style=color:#f92672>[</span>2333<span style=color:#f92672>]</span>: -L, --table            list signal names and numbers
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:12 centos7 sh<span style=color:#f92672>[</span>2333<span style=color:#f92672>]</span>: -h, --help     display this help and exit
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:12 centos7 sh<span style=color:#f92672>[</span>2333<span style=color:#f92672>]</span>: -V, --version  output version information and exit
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:12 centos7 sh<span style=color:#f92672>[</span>2333<span style=color:#f92672>]</span>: For more details see kill<span style=color:#f92672>(</span>1<span style=color:#f92672>)</span>.
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:12 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Unit nginx.service entered failed state.
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:12 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: nginx.service failed.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># systemctl stop nginx  #使用systemctl 关闭nginx</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># systemctl status nginx</span>
+</span></span><span style=display:flex><span>● nginx.service - nginx - high performance web server
+</span></span><span style=display:flex><span>   Loaded: loaded <span style=color:#f92672>(</span>/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>   Active: inactive <span style=color:#f92672>(</span>dead<span style=color:#f92672>)</span> since Wed 2022-07-20 17:47:47 CST; 1min 28s ago
+</span></span><span style=display:flex><span>     Docs: http://nginx.org/en/docs/
+</span></span><span style=display:flex><span>  Process: <span style=color:#ae81ff>2378</span> ExecStop<span style=color:#f92672>=</span>/bin/sh -c /bin/kill -s TERM <span style=color:#66d9ef>$(</span>/bin/cat /var/run/nginx.pid<span style=color:#66d9ef>)</span> <span style=color:#f92672>(</span>code<span style=color:#f92672>=</span>exited, status<span style=color:#f92672>=</span>0/SUCCESS<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>  Process: <span style=color:#ae81ff>2361</span> ExecStart<span style=color:#f92672>=</span>/usr/sbin/nginx -c /etc/nginx/nginx.conf <span style=color:#f92672>(</span>code<span style=color:#f92672>=</span>exited, status<span style=color:#f92672>=</span>0/SUCCESS<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span> Main PID: <span style=color:#ae81ff>2362</span> <span style=color:#f92672>(</span>code<span style=color:#f92672>=</span>exited, status<span style=color:#f92672>=</span>0/SUCCESS<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:51 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Starting nginx - high performance web server...
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:51 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Can<span style=color:#e6db74>&#39;t open PID file /var/run/nginx.pid (yet?) after start: No such file or directory
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>Jul 20 17:43:51 centos7 systemd[1]: Started nginx - high performance web server.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>Jul 20 17:47:47 centos7 systemd[1]: Stopping nginx - high performance web server...
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>Jul 20 17:47:47 centos7 systemd[1]: Stopped nginx - high performance web server.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>[root@centos7 ~]# nginx  #启动nginx
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>[root@centos7 ~]# ps -ef|grep nginx   #查看nginx进程已启动
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>root       2403      1  0 17:49 ?        00:00:00 nginx: master process nginx
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>nginx      2404   2403  0 17:49 ?        00:00:00 nginx: worker process
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>root       2407   2204  0 17:49 pts/1    00:00:00 grep --color=auto nginx
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>[root@centos7 ~]# systemctl stop nginx #使用systemctl停止nginx
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>[root@centos7 ~]# ps -ef|grep nginx    #发现并未成功停止nginx进程
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>root       2403      1  0 17:49 ?        00:00:00 nginx: master process nginx
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>nginx      2404   2403  0 17:49 ?        00:00:00 nginx: worker process
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>root       2416   2204  0 17:49 pts/1    00:00:00 grep --color=auto nginx
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>[root@centos7 ~]# systemctl status nginx #systemctl显示nginx进程并未启动
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>● nginx.service - nginx - high performance web server
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>   Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>   Active: inactive (dead) since Wed 2022-07-20 17:47:47 CST; 2min 15s ago
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>     Docs: http://nginx.org/en/docs/
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  Process: 2378 ExecStop=/bin/sh -c /bin/kill -s TERM $(/bin/cat /var/run/nginx.pid) (code=exited, status=0/SUCCESS)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  Process: 2361 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74> Main PID: 2362 (code=exited, status=0/SUCCESS)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>Jul 20 17:43:51 centos7 systemd[1]: Starting nginx - high performance web server...
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>Jul 20 17:43:51 centos7 systemd[1]: Can&#39;</span>t open PID file /var/run/nginx.pid <span style=color:#f92672>(</span>yet?<span style=color:#f92672>)</span> after start: No such file or directory
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:43:51 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Started nginx - high performance web server.
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:47:47 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Stopping nginx - high performance web server...
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 17:47:47 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Stopped nginx - high performance web server.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># curl localhost #访问nginx成功，nginx是正常运行状态</span>
+</span></span><span style=display:flex><span>&lt;!DOCTYPE html&gt;
+</span></span><span style=display:flex><span>&lt;html&gt;
+</span></span><span style=display:flex><span>&lt;head&gt;
+</span></span><span style=display:flex><span>&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+</span></span><span style=display:flex><span>&lt;style&gt;
+</span></span><span style=display:flex><span>html <span style=color:#f92672>{</span> color-scheme: light dark; <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>body <span style=color:#f92672>{</span> width: 35em; margin: <span style=color:#ae81ff>0</span> auto;
+</span></span><span style=display:flex><span>font-family: Tahoma, Verdana, Arial, sans-serif; <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>&lt;/style&gt;
+</span></span><span style=display:flex><span>&lt;/head&gt;
+</span></span><span style=display:flex><span>&lt;body&gt;
+</span></span><span style=display:flex><span>&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+</span></span><span style=display:flex><span>&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+</span></span><span style=display:flex><span>working. Further configuration is required.&lt;/p&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;p&gt;For online documentation and support please refer to
+</span></span><span style=display:flex><span>&lt;a href<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;http://nginx.org/&#34;</span>&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+</span></span><span style=display:flex><span>Commercial support is available at
+</span></span><span style=display:flex><span>&lt;a href<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;http://nginx.com/&#34;</span>&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;p&gt;&lt;em&gt;Thank you <span style=color:#66d9ef>for</span> using nginx.&lt;/em&gt;&lt;/p&gt;
+</span></span><span style=display:flex><span>&lt;/body&gt;
+</span></span><span style=display:flex><span>&lt;/html&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#原因分析</span>
+</span></span><span style=display:flex><span>systemctl 使用service文件管理nginx进程。当执行systemctl start nginx时，会将nginx进程的pid记录并存放在指定路径下的pid文件中（具体由service文件定义）。当执行systemctl stop nginx时，通过pid文件向对应的nginx进程发送信号使nginx进程中止运行。如果并未通过执行systemctl start nginx启动nginx，那么systemctl stop nginx命令是无法关闭nginx进程的。因此上文执行nginx命令启动了nginx进程，是无法通过systemctl stop 关闭nginx进程的。
+</span></span></code></pre></div><h2 id=编译安装-nginx>编译安装 nginx<a hidden class=anchor aria-hidden=true href=#编译安装-nginx>#</a></h2><p><strong>编译器介绍</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-tex data-lang=tex><span style=display:flex><span>源码安装需要提前准备标准的编译器，GCC的全称是（GNU Compiler collection），其有GNU开发，并以GPL即LGPL许可，是自由的类UNIX即苹果电脑Mac OS X操作系统的标准编译器，因为GCC原本只能处理C语言，所以原名为GNU C语言编译器，后来得到快速发展，可以处理C++,Fortran，pascal，objectiveC，java以及Ada等其他语言，此外还需要Automake工具，以完成自动创建Makefile的工作，Nginx的一些模块需要依赖第三方库，比如: pcre（支持rewrite），zlib（支持gzip模块）和openssl（支持ssl模块）等。
+</span></span></code></pre></div><h3 id=使用官方源编译安装>使用官方源编译安装<a hidden class=anchor aria-hidden=true href=#使用官方源编译安装>#</a></h3><p>官方源码包地址：https://nginx.org/en/download.html</p><p>范例：编译安装nginx</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e>#yum -y install gcc pcre-devel openssl-devel zlib-devel  #安装工具包和依赖</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e>#useradd -s /sbin/nologin nginx   #添加nginx账号并配置不可登录</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e>#cd /usr/local/src/</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 src<span style=color:#f92672>]</span><span style=color:#75715e>#wget http://nginx.org/download/nginx-1.18.0.tar.gz #下载源码包</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 src<span style=color:#f92672>]</span><span style=color:#75715e>#tar xf nginx-1.18.0.tar.gz </span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 src<span style=color:#f92672>]</span><span style=color:#75715e>#cd nginx-1.18.0/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#配置编译参数并检查环境依赖（如上文提到的gcc，pcre等依赖未安装则会报错）</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 nginx-1.18.0<span style=color:#f92672>]</span><span style=color:#75715e>#./configure --prefix=/apps/nginx \</span>
+</span></span><span style=display:flex><span>--user<span style=color:#f92672>=</span>nginx <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--group<span style=color:#f92672>=</span>nginx <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--with-http_ssl_module <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--with-http_v2_module <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--with-http_realip_module <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--with-http_stub_status_module <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--with-http_gzip_static_module <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--with-pcre <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--with-stream <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--with-stream_ssl_module <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--with-stream_realip_module
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 nginx-1.18.0<span style=color:#f92672>]</span><span style=color:#75715e>#make &amp;&amp; make install</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 nginx-1.18.0<span style=color:#f92672>]</span><span style=color:#75715e>#chown -R nginx.nginx /apps/nginx</span>
+</span></span></code></pre></div><p>nginx安装完成后，有四个主要目录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-tex data-lang=tex><span style=display:flex><span>[root@centos7 ~]# tree /apps/nginx/
+</span></span><span style=display:flex><span>/apps/nginx/
+</span></span><span style=display:flex><span>├── conf
+</span></span><span style=display:flex><span>│   ├── fastcgi.conf
+</span></span><span style=display:flex><span>│   ├── fastcgi.conf.default
+</span></span><span style=display:flex><span>│   ├── fastcgi_params
+</span></span><span style=display:flex><span>│   ├── fastcgi_params.default
+</span></span><span style=display:flex><span>│   ├── koi-utf
+</span></span><span style=display:flex><span>│   ├── koi-win
+</span></span><span style=display:flex><span>│   ├── mime.types
+</span></span><span style=display:flex><span>│   ├── mime.types.default
+</span></span><span style=display:flex><span>│   ├── nginx.conf
+</span></span><span style=display:flex><span>│   ├── nginx.conf.default
+</span></span><span style=display:flex><span>│   ├── scgi_params
+</span></span><span style=display:flex><span>│   ├── scgi_params.default
+</span></span><span style=display:flex><span>│   ├── uwsgi_params
+</span></span><span style=display:flex><span>│   ├── uwsgi_params.default
+</span></span><span style=display:flex><span>│   └── win-utf
+</span></span><span style=display:flex><span>├── html
+</span></span><span style=display:flex><span>│   ├── 50x.html
+</span></span><span style=display:flex><span>│   └── index.html
+</span></span><span style=display:flex><span>├── logs
+</span></span><span style=display:flex><span>└── sbin
+</span></span><span style=display:flex><span>    └── nginx
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>conf：保存nginx所有的配置文件，其中nginx.conf是nginx服务器的最核心最主要的配置文件，其他的.conf则是用来配置nginx相关的功能的，例如fastcgi功能使用的是fastcgi.conf和fastcgi_params两个文件，配置文件一般都有个模板配置文件，是文件名.default结尾，使用的时候将其复制为并将后缀default去掉即可。
+</span></span><span style=display:flex><span>html目录中保存了nginx服务器的web文件，但是可以更改为其他目录保存web文件,另外还有一个50x的web文件是默认的错误页面提示页面。
+</span></span><span style=display:flex><span>logs：用来保存nginx服务器的访问日志错误日志等日志，logs目录可以放在其他路径，比如/var/logs/nginx里面。
+</span></span><span style=display:flex><span>sbin：保存nginx二进制启动脚本，可以接受不同的参数以实现不同的功能。
+</span></span></code></pre></div><h3 id=验证版本及编译参数>验证版本及编译参数<a hidden class=anchor aria-hidden=true href=#验证版本及编译参数>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># ls /apps/nginx/sbin/  #nginx二进制程序路径</span>
+</span></span><span style=display:flex><span>nginx
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># ln -s /apps/nginx/sbin/nginx /usr/sbin/  #创建软链接到PATH路径</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>ln: failed to create symbolic link ‘/usr/sbin/nginx’: File exists  <span style=color:#75715e>#注意之前yum安装nginx已生成该文件，因此软连接创建失败</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># nginx -v    #查看到的是yum安装的版本</span>
+</span></span><span style=display:flex><span>nginx version: nginx/1.22.0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#使用绝对路径查看源码安装的nginx版本（如果要使用相对路径，可自行配置环境变量PATH）</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># /apps/nginx/sbin/nginx -v</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>nginx version: nginx/1.18.0
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># /apps/nginx/sbin/nginx -V</span>
+</span></span><span style=display:flex><span>nginx version: nginx/1.18.0
+</span></span><span style=display:flex><span>built by gcc 4.8.5 <span style=color:#ae81ff>20150623</span> <span style=color:#f92672>(</span>Red Hat 4.8.5-44<span style=color:#f92672>)</span> <span style=color:#f92672>(</span>GCC<span style=color:#f92672>)</span> 
+</span></span><span style=display:flex><span>built with OpenSSL 1.0.2k-fips  <span style=color:#ae81ff>26</span> Jan <span style=color:#ae81ff>2017</span>
+</span></span><span style=display:flex><span>TLS SNI support enabled
+</span></span><span style=display:flex><span>configure arguments: --prefix<span style=color:#f92672>=</span>/apps/nginx --user<span style=color:#f92672>=</span>nginx --group<span style=color:#f92672>=</span>nginx --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_stub_status_module --with-http_gzip_static_module --with-pcre --with-stream --with-stream_ssl_module --with-stream_realip_module
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># echo $PATH</span>
+</span></span><span style=display:flex><span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#重新创建软连接到PATH变量指向的路径下（越靠左，优先级越高）</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># ln -s /apps/nginx/sbin/nginx /usr/local/sbin/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># exec bash  #重新加载bash程序（目的是删除上文执行nginx命令后生成的缓存）</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># nginx -v   #观察到已经是源码安装的nginx版本</span>
+</span></span><span style=display:flex><span>nginx version: nginx/1.18.0
+</span></span></code></pre></div><h3 id=验证安装结果>验证安装结果<a hidden class=anchor aria-hidden=true href=#验证安装结果>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># nginx  #启动nginx</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># ps -ef|grep nginx  #进程已启动</span>
+</span></span><span style=display:flex><span>root       <span style=color:#ae81ff>5692</span>      <span style=color:#ae81ff>1</span>  <span style=color:#ae81ff>0</span> 19:08 ?        00:00:00 nginx: master process nginx
+</span></span><span style=display:flex><span>nginx      <span style=color:#ae81ff>5693</span>   <span style=color:#ae81ff>5692</span>  <span style=color:#ae81ff>0</span> 19:08 ?        00:00:00 nginx: worker process
+</span></span><span style=display:flex><span>root       <span style=color:#ae81ff>5695</span>   <span style=color:#ae81ff>2204</span>  <span style=color:#ae81ff>0</span> 19:08 pts/1    00:00:00 grep --color<span style=color:#f92672>=</span>auto nginx
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># curl localhost     #访问测试</span>
+</span></span><span style=display:flex><span>&lt;!DOCTYPE html&gt;
+</span></span><span style=display:flex><span>&lt;html&gt;
+</span></span><span style=display:flex><span>&lt;head&gt;
+</span></span><span style=display:flex><span>&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+</span></span><span style=display:flex><span>&lt;style&gt;
+</span></span><span style=display:flex><span>    body <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        width: 35em;
+</span></span><span style=display:flex><span>        margin: <span style=color:#ae81ff>0</span> auto;
+</span></span><span style=display:flex><span>        font-family: Tahoma, Verdana, Arial, sans-serif;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>&lt;/style&gt;
+</span></span><span style=display:flex><span>&lt;/head&gt;
+</span></span><span style=display:flex><span>&lt;body&gt;
+</span></span><span style=display:flex><span>&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+</span></span><span style=display:flex><span>&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+</span></span><span style=display:flex><span>working. Further configuration is required.&lt;/p&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;p&gt;For online documentation and support please refer to
+</span></span><span style=display:flex><span>&lt;a href<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;http://nginx.org/&#34;</span>&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+</span></span><span style=display:flex><span>Commercial support is available at
+</span></span><span style=display:flex><span>&lt;a href<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;http://nginx.com/&#34;</span>&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;p&gt;&lt;em&gt;Thank you <span style=color:#66d9ef>for</span> using nginx.&lt;/em&gt;&lt;/p&gt;
+</span></span><span style=display:flex><span>&lt;/body&gt;
+</span></span><span style=display:flex><span>&lt;/html&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#关闭nginx</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># nginx -s stop</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># ps -ef|grep nginx</span>
+</span></span><span style=display:flex><span>root       <span style=color:#ae81ff>5701</span>   <span style=color:#ae81ff>2204</span>  <span style=color:#ae81ff>0</span> 19:10 pts/1    00:00:00 grep --color<span style=color:#f92672>=</span>auto nginx
+</span></span></code></pre></div><h3 id=创建nginx的service文件以实现开机自启动>创建nginx的service文件以实现开机自启动<a hidden class=anchor aria-hidden=true href=#创建nginx的service文件以实现开机自启动>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#注意ExecStart和ExecReload的路径要和实际安装路径匹配</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># cat &gt; /usr/lib/systemd/system/nginx.service &lt;&lt;EOF</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Unit<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Description<span style=color:#f92672>=</span>nginx - high performance web server
+</span></span><span style=display:flex><span>Documentation<span style=color:#f92672>=</span>http://nginx.org/en/docs/
+</span></span><span style=display:flex><span>After<span style=color:#f92672>=</span>network-online.target remote-fs.target nss-lookup.target
+</span></span><span style=display:flex><span>Wants<span style=color:#f92672>=</span>network-online.target
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Service<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Type<span style=color:#f92672>=</span>forking
+</span></span><span style=display:flex><span>PIDFile<span style=color:#f92672>=</span>/apps/nginx/run/nginx.pid
+</span></span><span style=display:flex><span>ExecStart<span style=color:#f92672>=</span>/apps/nginx/sbin/nginx -c /apps/nginx/conf/nginx.conf
+</span></span><span style=display:flex><span>ExecReload<span style=color:#f92672>=</span>/bin/kill -s HUP <span style=color:#ae81ff>\$</span>MAINPID
+</span></span><span style=display:flex><span>ExecStop<span style=color:#f92672>=</span>/bin/kill -s TERM <span style=color:#ae81ff>\$</span>MAINPID
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Install<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>WantedBy<span style=color:#f92672>=</span>multi-user.target
+</span></span><span style=display:flex><span>EOF
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#创建缺少的目录</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># mkdir /apps/nginx/run </span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#修改pid文件指向的路径</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># cat /apps/nginx/conf/nginx.conf | grep pid</span>
+</span></span><span style=display:flex><span>pid        run/nginx.pid;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#重新加载service文件配置</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># systemctl daemon-reload</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#成功使用service文件管理nginx进程</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># systemctl start nginx</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>root@centos7 ~<span style=color:#f92672>]</span><span style=color:#75715e># systemctl status  nginx</span>
+</span></span><span style=display:flex><span>● nginx.service - nginx - high performance web server
+</span></span><span style=display:flex><span>   Loaded: loaded <span style=color:#f92672>(</span>/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>   Active: active <span style=color:#f92672>(</span>running<span style=color:#f92672>)</span> since Wed 2022-07-20 19:22:30 CST; 1min 10s ago
+</span></span><span style=display:flex><span>     Docs: http://nginx.org/en/docs/
+</span></span><span style=display:flex><span> Main PID: <span style=color:#ae81ff>5769</span> <span style=color:#f92672>(</span>nginx<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>   CGroup: /system.slice/nginx.service
+</span></span><span style=display:flex><span>           ├─5769 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+</span></span><span style=display:flex><span>           └─5770 nginx: worker process
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 19:22:30 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Starting nginx - high performance web server...
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 19:22:30 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Can<span style=color:#960050;background-color:#1e0010>&#39;</span>t open PID file /var/run/nginx.pid <span style=color:#f92672>(</span>yet?<span style=color:#f92672>)</span> after start: No such file or directory   <span style=color:#75715e>#此报错可能是nginx自身的bug造成的，服务本身正常。</span>
+</span></span><span style=display:flex><span>Jul <span style=color:#ae81ff>20</span> 19:22:30 centos7 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Started nginx - high performance web server.
+</span></span></code></pre></div><p>nginx服务正常，但查看状态报错：Can&rsquo;t open PID file /var/run/nginx.pid (yet?) after start: No such file or directory</p><p>参考链接：https://blog.csdn.net/XY0918ZWQ/article/details/114165979</p></div><div class=post-reward><div style=padding:0;margin:0;width:100%;font-size:16px;text-align:center><div id=QR style=opacity:0><div id=wechat style=display:inline-block><a class=fancybox rel=group><img id=wechat_qr src=https://senmer.github.io/img/wechat_pay.png alt=wechat_pay></a><p>微信</p></div><div id=alipay style=display:inline-block><a class=fancybox rel=group><img id=alipay_qr src=https://senmer.github.io/img/alipay.png alt=alipay></a><p>支付宝</p></div></div><button id=rewardButton onclick='var qr=document.getElementById("QR");qr.style.opacity==="0"?qr.style.opacity="1":qr.style.opacity="0"'>
+<span>🧧 鼓励</span></button></div></div><footer class=post-footer><nav class=paginav><a class=prev href=https://senmer.github.io/zh/posts/tech/nginx/nginx%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/><span class=title>« 上一页</span><br><span>Nginx安装脚本</span>
+</a><a class=next href=https://senmer.github.io/zh/posts/tech/nginx/nginx%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/><span class=title>下一页 »</span><br><span>Nginx架构简介</span></a></nav><div class=share-buttons><a target=_blank rel="noopener noreferrer" aria-label="share Nginx安装 on twitter" href="https://twitter.com/intent/tweet/?text=Nginx%e5%ae%89%e8%a3%85&amp;url=https%3a%2f%2fsenmer.github.io%2fzh%2fposts%2ftech%2fnginx%2fnginx%25E5%25AE%2589%25E8%25A3%2585%2f&amp;hashtags=%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Nginx安装 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fsenmer.github.io%2fzh%2fposts%2ftech%2fnginx%2fnginx%25E5%25AE%2589%25E8%25A3%2585%2f&amp;title=Nginx%e5%ae%89%e8%a3%85&amp;summary=Nginx%e5%ae%89%e8%a3%85&amp;source=https%3a%2f%2fsenmer.github.io%2fzh%2fposts%2ftech%2fnginx%2fnginx%25E5%25AE%2589%25E8%25A3%2585%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Nginx安装 on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fsenmer.github.io%2fzh%2fposts%2ftech%2fnginx%2fnginx%25E5%25AE%2589%25E8%25A3%2585%2f&title=Nginx%e5%ae%89%e8%a3%85"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Nginx安装 on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fsenmer.github.io%2fzh%2fposts%2ftech%2fnginx%2fnginx%25E5%25AE%2589%25E8%25A3%2585%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Nginx安装 on whatsapp" href="https://api.whatsapp.com/send?text=Nginx%e5%ae%89%e8%a3%85%20-%20https%3a%2f%2fsenmer.github.io%2fzh%2fposts%2ftech%2fnginx%2fnginx%25E5%25AE%2589%25E8%25A3%2585%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Nginx安装 on telegram" href="https://telegram.me/share/url?text=Nginx%e5%ae%89%e8%a3%85&amp;url=https%3a%2f%2fsenmer.github.io%2fzh%2fposts%2ftech%2fnginx%2fnginx%25E5%25AE%2589%25E8%25A3%2585%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></div></footer></div><style>.comments_details summary::marker{font-size:20px;content:'👉展开评论';color:var(--content)}.comments_details[open] summary::marker{font-size:20px;content:'👇关闭评论';color:var(--content)}</style><div><details class=comments_details open><summary style=display:none></summary><div id=tcomment></div></details><script src=https://cdn.staticfile.org/twikoo/1.6.16/twikoo.all.min.js></script><script>twikoo.init({envId:"https://hugo-api-khaki.vercel.app/# 填写自己的twikoo id",el:"#tcomment",lang:"zh-CN",region:null,path:window.TWIKOO_MAGIC_PATH||window.location.pathname})</script></div></article></main><footer class=footer><span>Copyright
+&copy;
+2020-2023
+<a href=https://senmer.github.io/zh/ style=color:#939393>WZ's Blog</a>
+All Rights Reserved
+</span><a href=https://beian.miit.gov.cn/ target=_blank style=color:#939393></a>&nbsp;
+<span><a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=null" style=display:inline-block;text-decoration:none;height:20px;color:#939393><img src style="float:left;margin:0 5px 0 0">
+</a></span><span id=busuanzi_container><span class="fa fa-user"></span> <span id=busuanzi_value_site_uv></span>
+<span class="fa fa-eye"></span> <span id=busuanzi_value_site_pv></span></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><span class=topInner><svg class="topSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg><span id=read_progress></span>
+</span></a><script>document.addEventListener("scroll",function(){const t=document.getElementById("read_progress"),n=document.documentElement.scrollHeight,s=document.documentElement.clientHeight,o=document.documentElement.scrollTop||document.body.scrollTop;t.innerText=((o/(n-s)).toFixed(2)*100).toFixed(0)})</script><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>let mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>200||document.documentElement.scrollTop>200?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{(function(){document.cookie="change-themes="+escape("false")})(),document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.body.addEventListener("copy",function(e){if(window.getSelection().toString()&&window.getSelection().toString().length>50){let t=e.clipboardData||window.clipboardData;if(t){e.preventDefault();let n=window.getSelection().toString(),s=window.getSelection().toString();t.setData("text/html",n),t.setData("text/plain",s)}}})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const s=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerText="复制";function i(){t.innerText="已复制！",setTimeout(()=>{t.innerText="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){let t=e.textContent;navigator.clipboard.writeText(t),i();return}const n=document.createRange();n.selectNodeContents(e);const s=window.getSelection();s.removeAllRanges(),s.addRange(n);try{document.execCommand("copy"),i()}catch{}s.removeRange(n)});let l=e.className.replaceAll("language-",""),n=document.createElement("div"),a=document.createElement("div"),r=document.createElement("div"),c=document.createElement("div"),o=document.createElement("div");o.innerText=l,n.setAttribute("class","mac-tool"),a.setAttribute("class","mac bb1"),r.setAttribute("class","mac bb2"),c.setAttribute("class","mac bb3"),o.setAttribute("class","language-type"),n.appendChild(a),n.appendChild(r),n.appendChild(c),n.appendChild(o),s.classList.contains("highlight")?(s.appendChild(t),s.appendChild(n)):s.parentNode.firstChild==s||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?(e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t),s.appendChild(n)):(e.parentNode.appendChild(t),s.appendChild(n)))})</script></body></html>
